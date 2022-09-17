@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import CustomButton from '../customButton/CustomButton';
 import mainSvg from '../../assets/image/MainIllustration.svg'
 import styles from './herosection.module.css';
@@ -11,7 +12,8 @@ const Herosection = () => {
         <CustomButton text={'Explore More'} />
       </div>
       <div className={styles.imageContainer}>
-        <img src={mainSvg.src} alt="" />
+        <Image src={mainSvg} />
+        {/* <img src={mainSvg.src} alt="" /> */}
       </div>
     </section>
   )

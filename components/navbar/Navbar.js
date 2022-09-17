@@ -9,9 +9,18 @@ const Navbar = () => {
 
   const matches = useMediaQuery("(max-width: 900px)");
 
+  const [mobileView, setMobileView] = useState(true)
+
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    window.innerWidth > 900 ? setMobileView(false) : setMobileView(true)
+
+    window.addEventListener('resize', () => {
+      window.innerWidth > 900 ? setMobileView(false) : setMobileView(true)
+    })
+
+
     window.addEventListener('scroll', () => {
       window.scrollY > 30 ? setIsScrolled(true) : setIsScrolled(false)
     })
@@ -24,8 +33,10 @@ const Navbar = () => {
           <Link href="/">LOGO</Link>
         </h1>
         {
-          !matches ?
+          mobileView ?
             (
+              <></>
+            ) : (
               <div className={styles.navRight}>
                 <Link href="/funds">Funds</Link>
                 <Link href="/about">About</Link>
@@ -33,7 +44,7 @@ const Navbar = () => {
                 <Button text={'Login'} secondary />
                 <Button text={'Signup'} primary />
               </div>
-            ) : <></>
+            )
         }
       </nav>
     </header>
