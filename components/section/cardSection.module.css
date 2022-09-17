@@ -20,6 +20,9 @@
 }
 
 @media screen and (max-width: 900px) {
+  .wrapper {
+    padding-top: 2rem;
+  }
   .cardContainer {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }

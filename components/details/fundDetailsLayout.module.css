@@ -1,5 +1,5 @@
 .wrapper {
-  padding-bottom: 6rem;
+  padding-bottom: 3rem;
 }
 
 .fundHeading {
@@ -8,7 +8,6 @@
   max-height: 116px;
   font-weight: 500;
   font-size: 1.75rem;
-  line-height: 42px;
   color: var(--black);
 }
 
@@ -22,6 +21,7 @@
 .leftSection {
   max-width: 750px; /* chage to max-width */
   overflow: hidden;
+  padding-bottom: 1rem;
 }
 .imageContainer {
   width: 100%;
@@ -42,20 +42,22 @@
 .detailsContent {
   width: 100%;
   margin-top: 1rem;
-  background-color: var(--primary-10);
-  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 7px rgb(0 0 0 / 8%);
+  padding: 1rem 0.25rem 1rem 1rem;
   border-radius: 8px;
-  max-height: 300px;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 .detailsContent p {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+  max-height: 300px;
+  overflow-y: auto;
   color: var(--black);
 }
 
-.detailsContent::-webkit-scrollbar {
+.detailsContent p::-webkit-scrollbar {
   width: 6px;
 }
 
@@ -107,7 +109,7 @@
 }
 
 .progressContainer {
-  padding: 2.25rem 0;
+  padding: 2.25rem 0 0;
 }
 
 .progressBottom {
@@ -130,13 +132,33 @@
 }
 
 @media screen and (max-width: 900px) {
+  .wrapper {
+    padding-bottom: 2rem;
+  }
+  .fundHeading {
+    font-size: 1.5rem;
+  }
+  .detailsContent {
+    margin-top: 0.875rem;
+    padding: 0.75rem 0 0.75rem 0.75rem;
+  }
+  .detailsContent p {
+    font-size: 0.875rem;
+  }
+  .progressContainer {
+    padding: 2rem 0 0;
+  }
+
   .mainContainer {
     flex-direction: column;
   }
   .leftSection,
   .rightSection {
     margin: 0 auto;
-    padding: 0;
     width: 100%;
+  }
+  .rightSectionScrolled {
+    background-color: transparent;
+    box-shadow: none;
   }
 }

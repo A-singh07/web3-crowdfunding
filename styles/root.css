@@ -40,6 +40,6 @@ section,
 
 @media screen and (max-width: 900px) {
   :root {
-    --spacing-normal: 1.5rem;
+    --spacing-normal: 1rem;
   }
 }
