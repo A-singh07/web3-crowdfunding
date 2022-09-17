@@ -1,0 +1,39 @@
+.wrapper {
+  background: var(--grey-lightest);
+  border-radius: 8px;
+  max-width: 320px; /* change to max-width */
+  width: 100%;
+  height: max-content;
+  overflow: hidden;
+  /* border: 1px solid var(--grey); */
+  box-shadow: 0 2px 7px rgb(0 0 0 / 8%);
+}
+
+.header {
+  width: 100%;
+  padding: 10px 1rem;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 21px;
+  background-color: var(--primary-30);
+}
+
+.contentField {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--grey);
+}
+
+.contentField:last-of-type {
+  border-bottom: none;
+}
+
+.contentField p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--grey-darker);
+}

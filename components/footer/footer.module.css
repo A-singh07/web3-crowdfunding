@@ -1,0 +1,67 @@
+.wrapper {
+  width: 100%;
+  background-color: var(--primary-dark);
+  padding: 7rem 0;
+  color: #ffffff;
+}
+
+.section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.leftSection {
+  max-width: 400px;
+}
+
+.leftSection .logoContainer {
+  font-size: 2rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+}
+
+.leftSection .socialContainer {
+  padding-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  border-top: 1px solid #ffffff;
+  width: max-content;
+}
+.leftSection .social {
+  width: 24px;
+  height: 24px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.address {
+  min-width: 200px;
+}
+.address h4 {
+  padding-bottom: 0.875rem;
+  font-size: 1.25rem;
+}
+
+.rightSection {
+  display: flex;
+  gap: 4rem;
+}
+
+.listContainer h4 {
+  padding-bottom: 0.875rem;
+  font-size: 1.25rem;
+}
+
+.listContainer p {
+  padding-bottom: 0.425rem;
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 900px) {
+  .section {
+    flex-direction: column;
+  }
+}

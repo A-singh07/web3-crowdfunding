@@ -1,0 +1,42 @@
+.details {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.subDetails {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.detailsHeading {
+  color: var(--grey-dark);
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 15px;
+}
+
+.detailsAmount {
+  color: var(--black);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 18px;
+}
+
+.progressBarContainer {
+  width: 100%;
+  border-radius: 6px;
+  background-color: var(--grey-light);
+  margin-top: 0.875rem;
+  margin-bottom: 0.875rem;
+  overflow: hidden;
+}
+
+.progressBarContainer .progress {
+  /* width: 25%; */
+  height: 100%;
+  border-radius: 6px;
+  background-color: var(--primary);
+}

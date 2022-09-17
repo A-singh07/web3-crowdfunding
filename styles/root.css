@@ -1,0 +1,45 @@
+/* ----- Define all root variables here ----- */
+:root {
+  /* Fonts */
+  --font-family-1: "Poppins", sans-serif;
+
+  /* Colors */
+  --primary-dark: #26998d;
+  --primary: #3aab9f;
+  --primary-70: #72c1b8;
+  --primary-50: #97cfc9;
+  --primary-30: #bbddda;
+  --primary-10: #e0eceb;
+
+  --black: #08090a;
+  --grey-darker: #6d747a;
+  --grey-dark: #939ca3;
+  --grey: #ced4da;
+  --grey-light: #ebedf0;
+  --grey-lighter: #f3f3f3;
+  --grey-lightest: #f8f9fa;
+
+  --state-info: #598bed;
+  --state-success: #3aab9f;
+  --state-warning: #e2b93b;
+  --state-error: #e35e5e;
+
+  /* layout width */
+  --spacing-normal: 2rem;
+  --main-layout-width: calc(1240px + (2 * var(--spacing-normal)));
+}
+
+section,
+.mainLayout {
+  max-width: var(--main-layout-width);
+  padding-left: var(--spacing-normal);
+  padding-right: var(--spacing-normal);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 900px) {
+  :root {
+    --spacing-normal: 1.5rem;
+  }
+}

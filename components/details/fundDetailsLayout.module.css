@@ -1,0 +1,142 @@
+.wrapper {
+  padding-bottom: 6rem;
+}
+
+.fundHeading {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  max-height: 116px;
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: 42px;
+  color: var(--black);
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.leftSection {
+  max-width: 750px; /* chage to max-width */
+  overflow: hidden;
+}
+.imageContainer {
+  width: 100%;
+  height: 364px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--primary-30);
+}
+.fundDetailsContainer {
+  margin-top: 2rem;
+}
+.detailsHeading {
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--grey-darker);
+}
+.detailsContent {
+  width: 100%;
+  margin-top: 1rem;
+  background-color: var(--primary-10);
+  padding: 1rem;
+  border-radius: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.detailsContent p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--black);
+}
+
+.detailsContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.rightSection {
+  width: 350px;
+  max-width: 350px;
+  height: max-content;
+  border-radius: 10px;
+  /* background-color: lightgray; */
+  position: sticky;
+  top: calc(80px + 58px);
+  z-index: 50;
+  padding: 1rem 1rem;
+  transition: 0.2s ease;
+}
+
+.rightSectionScrolled {
+  background-color: #ffffff;
+  box-shadow: 0 2px 7px rgb(0 0 0 / 5%);
+}
+
+.deadlineContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 0.5rem;
+}
+
+.deadlineHeading {
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--grey-dark);
+}
+
+.deadlineDate {
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--black);
+}
+
+.daysLeft {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.progressContainer {
+  padding: 2.25rem 0;
+}
+
+.progressBottom {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.supportersHeading {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--grey-darker);
+}
+
+.cardWrapper {
+  margin: 2rem auto 0;
+}
+
+@media screen and (max-width: 900px) {
+  .mainContainer {
+    flex-direction: column;
+  }
+  .leftSection,
+  .rightSection {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+  }
+}
