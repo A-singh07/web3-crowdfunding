@@ -1,0 +1,12 @@
+.listContainer {
+  padding: 0;
+}
+.listItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--grey);
+  padding: 0.875rem 1rem;
+  font-family: var(--font-family-1);
+  color: var(--black);
+}

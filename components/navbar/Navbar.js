@@ -58,7 +58,7 @@ const Navbar = () => {
                   anchor="top"
                   isOpen={isOpen}
                   setIsOpen={setIsOpen}
-                  style={{ top: '65px' }}
+                  style={{ top: '69px' }}
                 />
               </div>
             ) : (
