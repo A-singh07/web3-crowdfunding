@@ -12,7 +12,6 @@ const CategoriesSection = ({ data }) => {
   }
 
   return (
-
     <section>
       <div className={styles.wrapper}>
         {

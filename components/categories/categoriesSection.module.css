@@ -4,7 +4,10 @@
   gap: 1rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  padding-left: 0.2rem;
   user-select: none;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .cardContainer {
@@ -15,6 +18,7 @@
   align-items: center;
   padding: 1rem 1.5rem;
   min-width: 120px;
+  width: max-content;
   gap: 10px;
   background: #ffffff;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
@@ -52,4 +56,10 @@
   font-size: 0.875rem;
   text-align: center;
   color: var(--black);
+}
+
+@media screen and (max-width: 900px) {
+  .categoryName {
+    font-size: 0.75rem;
+  }
 }

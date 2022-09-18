@@ -24,7 +24,7 @@ const CardSection = ({ heading, fundsData, style }) => {
               />
             ) :
             <div className={styles.noFundMessage}>
-              No funds in this category :(
+              No funds to show here
             </div>
         }
       </div>
