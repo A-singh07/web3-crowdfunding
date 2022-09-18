@@ -8,13 +8,13 @@ import styles from './customButton.module.css';
 const CustomButton = ({ text, primary, secondary, style }) => {
 
   return (
-    <Button
+    <button
       className={styles.buttonWrapper +
         ` ${secondary ? styles.secondaryBtn : styles.primaryBtn}`}
       style={style}
     >
       {text}
-    </Button>
+    </button>
   );
 }
 
