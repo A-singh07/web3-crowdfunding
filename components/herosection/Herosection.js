@@ -9,7 +9,7 @@ const Herosection = () => {
     <section className={styles.wrapper}>
       <div className={styles.sectionLeft}>
         <h1>Let’s help those who are more in need</h1>
-        <CustomButton text={'Explore More'} />
+        <CustomButton text={'Explore Funds'} link={'/funds'} />
       </div>
       <div className={styles.imageContainer}>
         <Image src={mainSvg} />

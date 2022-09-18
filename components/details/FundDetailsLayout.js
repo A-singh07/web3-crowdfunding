@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import { useRouter } from 'next/router';
 import CustomButton from '../customButton/CustomButton';
 import Progressbar from '../progressbar/Progressbar';
 import InfoCard from '../card/InfoCard';
@@ -8,6 +8,9 @@ import styles from './fundDetailsLayout.module.css';
 
 const FundDetailsLayout = ({ fundDetails }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const router = useRouter()
+  const { id } = router.query
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -19,7 +22,7 @@ const FundDetailsLayout = ({ fundDetails }) => {
     <>
       <section className={styles.wrapper}>
         <h2 className={styles.fundHeading}>
-          {fundDetails.name}
+          FundId: {id} {fundDetails.name}
         </h2>
         <div className={styles.mainContainer}>
           <div className={styles.leftSection}>

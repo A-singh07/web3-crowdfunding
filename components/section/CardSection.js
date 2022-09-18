@@ -12,6 +12,7 @@ const CardSection = ({ heading, fundsData }) => {
           fundsData && fundsData.map((data, i) =>
             i < 3 &&
             <FundCard
+              id={data.id}
               category={data.category}
               heading={data.heading}
               description={data.description}
