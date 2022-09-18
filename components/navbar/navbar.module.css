@@ -2,7 +2,7 @@
   position: sticky;
   left: 0;
   top: 0;
-  z-index: 100;
+  z-index: 1500;
   width: 100%;
   /* transition: 0.1s linear; */
 }
@@ -46,4 +46,10 @@
 .navScroll {
   background: #ffffff;
   box-shadow: 0 2px 7px rgb(0 0 0 / 5%);
+}
+
+@media screen and (max-width: 900px) {
+  .navbarMain {
+    background-color: #ffffff;
+  }
 }
