@@ -1,6 +1,6 @@
 .wrapper {
-  padding-top: 6rem;
-  padding-bottom: 8rem;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
 }
 
 .heading {
@@ -17,6 +17,11 @@
   max-height: 460px;
   overflow: hidden;
   padding: 0 0.2rem 1rem; /* to make card's box shadows visible */
+}
+
+.noFundMessage {
+  font-size: 0.875rem;
+  color: var(--grey-dark);
 }
 
 @media screen and (max-width: 900px) {
