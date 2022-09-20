@@ -1,0 +1,36 @@
+.wrapper,
+.wrapperPaper {
+  border-radius: 8px;
+  min-width: 500px;
+}
+.wrapper .heading {
+  font-family: var(--font-family-1);
+  font-size: 1.25rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--grey);
+}
+
+.wrapper .contentContainer {
+  padding: 1rem 1.5rem;
+}
+.wrapper .contentContainer * {
+  font-family: var(--font-family-1);
+}
+
+.wrapper .actionsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--grey);
+}
+
+@media screen and (max-width: 556px) {
+  .wrapper,
+  .wrapperPaper {
+    min-width: 95%;
+  }
+  .wrapper .heading {
+    font-size: 1rem;
+  }
+}

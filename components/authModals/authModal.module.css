@@ -1,0 +1,9 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.fields {
+  max-width: 300px;
+  margin-top: 1rem;
+}
