@@ -1,12 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import Link from 'next/link';
 
 import Button from '../customButton/CustomButton';
 import CustomDrawer from '../customDrawer/CustomDrawer';
 import LoginModal from '../authModals/LoginModal';
+import SignupModal from '../authModals/SignupModal';
 
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import styles from './navbar.module.css';
+
+// const LoginModal = lazy(() => import('../authModals/LoginModal'));
+// const SignupModal = lazy(() => import('../authModals/SignupModal'));
 
 const Navbar = () => {
 
@@ -84,16 +88,29 @@ const Navbar = () => {
                   <Button
                     text={'Signup'}
                     primary
+                    onClick={() => setOpenSignup(true)}
                   />
                 </div>
               )
           }
         </nav>
       </header>
-      <LoginModal
-        open={openLogin}
-        setOpen={setOpenLogin}
-      />
+
+      {/* To avoid unnecessary rendering of modals in the DOM */}
+      {
+        openLogin &&
+        <LoginModal
+          open={openLogin}
+          setOpen={setOpenLogin}
+        />
+      }
+      {
+        openSignup &&
+        <SignupModal
+          open={openSignup}
+          setOpen={setOpenSignup}
+        />
+      }
     </>
   )
 }

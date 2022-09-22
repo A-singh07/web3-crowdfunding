@@ -45,23 +45,19 @@ const LoginModal = ({ open, setOpen }) => {
       customFunction={userLogin}
     >
       <form className={styles.formContainer}>
-        <FormControl
+        <TextField
           className={styles.fields}
+          id="email"
+          name="email"
+          type={'email'}
+          label={'Email'}
+          value={values.email}
+          onChange={handleChange}
           variant="standard"
           error={error}
-        >
-          <InputLabel htmlFor="email">Email address</InputLabel>
-          <Input
-            id="email"
-            name="email"
-            type={'email'}
-            value={values.email}
-            onChange={handleChange}
-            autoFocus
-          />
-          <FormHelperText id="email-helper-text">{error && `Incorrect email`}</FormHelperText>
-        </FormControl>
-
+          helperText={error && `Incorrect email`}
+          autoFocus
+        />
 
         <FormControl
           className={styles.fields}
