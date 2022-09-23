@@ -26,6 +26,12 @@
   font-size: 2rem;
 }
 
+.mobNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .navRight {
   max-height: 50px;
   height: max-content;

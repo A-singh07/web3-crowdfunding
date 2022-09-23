@@ -19,13 +19,28 @@
   padding-bottom: 2rem;
 }
 
-.imageContainer {
+.sectionLeftSmall {
+  max-width: 600px;
+}
+.sectionLeftSmall h2 {
+  font-weight: 600;
+  font-size: 3rem;
+  padding-bottom: 2rem;
+}
+.sectionLeftSmall p {
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+
+.imageContainer,
+.aboutImageContainer {
   max-width: 555px;
   overflow: hidden;
   margin-left: auto;
 }
 
-.imageContainer img {
+.imageContainer img,
+.aboutImageContainer img {
   max-height: 100%;
   max-width: 100%;
 }
@@ -33,6 +48,9 @@
 @media screen and (max-width: 1200px) {
   .sectionLeft h1 {
     font-size: 3rem;
+  }
+  .sectionLeftSmall {
+    max-width: 500px;
   }
   .wrapper {
     padding-bottom: 6rem;
@@ -45,14 +63,26 @@
     grid-template-columns: 1fr;
     padding-top: 3rem;
   }
-  .sectionLeft {
+  .sectionLeft,
+  .sectionLeftSmall {
     order: 1;
     margin: auto;
   }
+  .sectionLeftSmall h2 {
+    font-size: 2.25rem;
+    padding-bottom: 1rem;
+  }
+  .sectionLeftSmall p {
+    font-size: 0.875rem;
+  }
+
   .imageContainer {
     width: 100%;
     margin-left: 50%;
     transform: translateX(-60%);
+  }
+  .aboutImageContainer {
+    margin: auto;
   }
 }
 

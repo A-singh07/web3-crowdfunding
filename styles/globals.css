@@ -7,7 +7,6 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
   font-family: "Poppins", sans-serif;
   color: var(--black);
-  background-color: var(--grey-lightest);
 }
 
 a {
@@ -31,7 +30,6 @@ button {
 
 .webWrapper {
   position: relative;
-  z-index: 2;
   max-width: 3000px;
   margin: auto;
 }
