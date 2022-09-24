@@ -53,6 +53,23 @@ const Navbar = () => {
     }
   ]
 
+  const authButtons = [
+    <Button
+      text={'Login'}
+      secondary
+      onClick={() => setOpenLogin(true)}
+      style={!mobileView ? { padding: '0.75rem 1.5rem' } : {}}
+      key={0}
+    />,
+    <Button
+      text={'Signup'}
+      primary
+      onClick={() => setOpenSignup(true)}
+      key={1}
+      style={!mobileView ? { padding: '0.75rem 1.5rem' } : {}}
+    />
+  ]
+
   return (
     <>
       <header className={styles.navbarMain + ` ${isScrolled ? styles.navScroll : ''}`}>
@@ -70,7 +87,8 @@ const Navbar = () => {
                     anchor="top"
                     isOpen={isOpen}
                     setIsOpen={setIsOpen}
-                    style={{ top: '69px' }}
+                    style={{ top: '68.5px' }} // Use ref to get the height of Header
+                    buttonProps={authButtons}
                   />
                 </div>
               ) : (
@@ -80,18 +98,9 @@ const Navbar = () => {
                       <Link href={item.link} key={i}>{item.name}</Link>
                     )
                   }
-                  <Button
-                    text={'Login'}
-                    secondary
-                    onClick={() => setOpenLogin(true)}
-                    style={{ padding: '0.75rem 1.5rem' }}
-                  />
-                  <Button
-                    text={'Signup'}
-                    primary
-                    onClick={() => setOpenSignup(true)}
-                    style={{ padding: '0.75rem 1.5rem' }}
-                  />
+                  {
+                    authButtons.map(button => button)
+                  }
                 </div>
               )
           }

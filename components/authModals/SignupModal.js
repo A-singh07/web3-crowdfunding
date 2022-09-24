@@ -86,7 +86,7 @@ const SignupModal = ({ open, setOpen }) => {
               </InputAdornment>
             }
           />
-          <FormHelperText id="email-helper-text">{error && `Incorrect password`}</FormHelperText>
+          <FormHelperText id="helper-text-pass">{error && `Incorrect password`}</FormHelperText>
         </FormControl>
 
         <FormControl
@@ -95,9 +95,9 @@ const SignupModal = ({ open, setOpen }) => {
           variant="standard"
           error={error}
         >
-          <InputLabel htmlFor="login-password">Confirm Password</InputLabel>
+          <InputLabel htmlFor="confirm-password">Confirm Password</InputLabel>
           <Input
-            id="login-password"
+            id="confirm-password"
             name="password"
             type={values.showConfirmPassword ? 'text' : 'password'}
             value={values.consfirmPassword}
@@ -113,7 +113,7 @@ const SignupModal = ({ open, setOpen }) => {
               </InputAdornment>
             }
           />
-          <FormHelperText id="email-helper-text">{error && `Incorrect password`}</FormHelperText>
+          <FormHelperText id="helper-text-cnfPass">{error && `Incorrect password`}</FormHelperText>
         </FormControl>
 
       </form>

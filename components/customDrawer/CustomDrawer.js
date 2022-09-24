@@ -3,19 +3,17 @@ import Link from 'next/link';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import CustomButtom from '../customButton/CustomButton';
 
 import styles from './customDrawer.module.css'
 
 // type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
-const CustomsDrawer = ({ list, anchor, style, isOpen, setIsOpen }) => {
+const CustomsDrawer = ({ list, anchor, style, isOpen, setIsOpen, buttonProps }) => {
 
   return (
     <Drawer
@@ -48,7 +46,14 @@ const CustomsDrawer = ({ list, anchor, style, isOpen, setIsOpen }) => {
             )
           }
         </List>
-        <Divider />
+        {
+          buttonProps &&
+          <div className={styles.buttonContainer}>
+            {
+              buttonProps.map(button => button)
+            }
+          </div>
+        }
       </Box>
     </Drawer >
   )
