@@ -2,6 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import CustomButton from '../customButton/CustomButton';
 import mainSvg from '../../assets/image/MainIllustration.svg'
+import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+
 import styles from './herosection.module.css';
 
 const Herosection = () => {
@@ -9,7 +11,11 @@ const Herosection = () => {
     <section className={styles.wrapper}>
       <div className={styles.sectionLeft}>
         <h1>Let’s help those who are more in need</h1>
-        <CustomButton text={'Explore Funds'} link={'/funds'} />
+        <CustomButton
+          text={'Explore Funds'}
+          link={'/funds'}
+          rightIcon={<ArrowForwardIosRoundedIcon />}
+        />
       </div>
       <div className={styles.imageContainer}>
         <Image src={mainSvg} />

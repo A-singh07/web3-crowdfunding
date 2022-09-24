@@ -11,6 +11,8 @@ const CustomButton = ({
   primary,
   secondary,
   style,
+  leftIcon,
+  rightIcon,
   link,
   onClick,
   type
@@ -32,7 +34,15 @@ const CustomButton = ({
       style={style}
       type={type ? type : 'button'}
     >
-      {text}
+      {
+        leftIcon &&
+        <div className={styles.iconContainer}>{leftIcon}</div>
+      }
+      <p className={styles.text}>{text}</p>
+      {
+        rightIcon &&
+        <div className={styles.iconContainer}>{rightIcon}</div>
+      }
     </button>
   );
 }

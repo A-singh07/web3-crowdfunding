@@ -1,6 +1,8 @@
 import React from 'react';
 import CustomButtom from '../customButton/CustomButton';
 import Progressbar from '../progressbar/Progressbar';
+import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+
 import styles from './fundCard.module.css';
 
 const FundCard = ({
@@ -31,7 +33,8 @@ const FundCard = ({
         <CustomButtom
           text={'View More'}
           link={`/funds/${id}`}
-          style={{ width: '100%' }}
+          style={{ width: '100%', padding: '0.75rem 1.5rem' }}
+          rightIcon={<ArrowForwardIosRoundedIcon />}
         />
       </div>
     </div>

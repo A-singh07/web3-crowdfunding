@@ -1,6 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
+
 import CustomButton from '../customButton/CustomButton';
+import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+
 import styles from './themeSection.module.css';
 
 const ThemeSection = ({ data }) => {
@@ -18,6 +21,7 @@ const ThemeSection = ({ data }) => {
             primary
             text={btnText}
             link={btnLink}
+            rightIcon={<ArrowForwardIosRoundedIcon />}
           />
         </div>
         <div className={styles.imageContainer}>

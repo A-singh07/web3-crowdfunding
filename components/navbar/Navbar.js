@@ -84,11 +84,13 @@ const Navbar = () => {
                     text={'Login'}
                     secondary
                     onClick={() => setOpenLogin(true)}
+                    style={{ padding: '0.75rem 1.5rem' }}
                   />
                   <Button
                     text={'Signup'}
                     primary
                     onClick={() => setOpenSignup(true)}
+                    style={{ padding: '0.75rem 1.5rem' }}
                   />
                 </div>
               )

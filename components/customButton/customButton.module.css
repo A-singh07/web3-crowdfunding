@@ -11,6 +11,10 @@
   text-align: center;
   text-transform: initial;
   transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 .primaryBtn {
@@ -28,4 +32,17 @@
 
 .secondaryBtn:hover {
   background-color: var(--primary-30);
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  height: 20px;
+}
+
+.iconContainer,
+.iconContainer * {
+  width: 20;
+  height: 20px;
+  /* margin-top: 0.5px; */
 }

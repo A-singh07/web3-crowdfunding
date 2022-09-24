@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import CustomButton from '../customButton/CustomButton';
 import Progressbar from '../progressbar/Progressbar';
 import InfoCard from '../card/InfoCard';
+import PaymentsRoundedIcon from '@mui/icons-material/PaymentsRounded';
 
 import styles from './fundDetailsLayout.module.css';
 
@@ -42,6 +43,7 @@ const FundDetailsLayout = ({ fundDetails }) => {
               primary
               text={'Contribute Now'}
               style={{ width: '100%' }}
+              leftIcon={<PaymentsRoundedIcon />}
             />
             <div className={styles.deadlineContainer}>
               <p className={styles.deadlineHeading}>Deadline:</p>
