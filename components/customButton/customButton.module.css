@@ -44,7 +44,7 @@
 .iconContainer * {
   width: 20;
   height: 20px;
-  /* margin-top: 0.5px; */
+  /* margin-top: -0.5px; */
 }
 
 @media screen and (max-width: 900px) {

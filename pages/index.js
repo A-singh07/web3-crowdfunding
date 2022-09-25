@@ -1,9 +1,10 @@
 import Herosection from '../components/herosection/Herosection';
 import CardSection from '../components/section/CardSection';
 import ThemeSection from '../components/section/ThemeSection';
+import TestimonySection from '../components/testimonySection/TestimonySection';
 // data
 import { fundsData } from '../data/fundDetails';
-import { landingThemeSection } from '../data/landingData';
+import { landingThemeSection, fundThemeSection, testimonyData } from '../data/landingData';
 
 export default function Home() {
   return (
@@ -16,6 +17,13 @@ export default function Home() {
       />
       <ThemeSection
         data={landingThemeSection}
+      />
+      <TestimonySection
+        heading={'Hear it from them'}
+        cardData={testimonyData}
+      />
+      <ThemeSection
+        data={fundThemeSection}
       />
     </main>
   )
