@@ -15,7 +15,7 @@ const TestimonyCard = ({ data }) => {
         </div>
       </div>
       <p className={styles.reviewContainer}>
-        "{review}"
+        &quot;{review}&quot;
       </p>
     </div>
   )
