@@ -9,6 +9,9 @@
   font-weight: 500;
   border-bottom: 1px solid var(--grey);
 }
+.dialogContent {
+  margin-bottom: 0.5rem;
+}
 
 .wrapper .contentContainer {
   padding: 1rem 1.5rem;

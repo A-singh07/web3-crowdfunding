@@ -21,7 +21,7 @@ const CustomDialog = ({ heading, body, open, setOpen, customFunction, children }
     >
       <DialogTitle className={styles.heading}>{heading}</DialogTitle>
       <DialogContent className={styles.contentContainer}>
-        <DialogContentText>{body}</DialogContentText>
+        <DialogContentText className={styles.dialogContent}>{body}</DialogContentText>
         {children}
       </DialogContent>
       <DialogActions className={styles.actionsContainer}>
