@@ -53,26 +53,25 @@ const LoginModal = ({ open, setOpen }) => {
           label={'Email'}
           value={values.email}
           onChange={handleChange}
-          variant="standard"
+          variant="outlined"
           error={error}
           helperText={error && `Incorrect email`}
           autoFocus
         />
 
-        <FormControl
+        <TextField
           className={styles.fields}
-          margin="normal"
-          variant="standard"
+          id="password"
+          name="password"
+          type={values.showPassword ? 'text' : 'password'}
+          label={'Password'}
+          value={values.password}
+          onChange={handleChange}
+          variant="outlined"
           error={error}
-        >
-          <InputLabel htmlFor="login-password">Password</InputLabel>
-          <Input
-            id="login-password"
-            name="password"
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
-            onChange={(e) => handleChange(e)}
-            endAdornment={
+          helperText={error && `Incorrect password`}
+          InputProps={{
+            endAdornment:
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
@@ -81,11 +80,8 @@ const LoginModal = ({ open, setOpen }) => {
                   {values.showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
-            }
-          />
-          <FormHelperText id="email-helper-text">{error && `Incorrect password`}</FormHelperText>
-        </FormControl>
-
+          }}
+        />
       </form>
     </CustomDialog>
   )

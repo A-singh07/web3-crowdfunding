@@ -21,7 +21,8 @@
   background-color: var(--primary);
   color: #ffffff;
 }
-.primaryBtn:hover {
+.primaryBtn:hover,
+.primaryBtn:focus {
   background-color: var(--primary-dark);
 }
 
@@ -30,7 +31,8 @@
   color: var(--primary);
 }
 
-.secondaryBtn:hover {
+.secondaryBtn:hover,
+.secondaryBtn:focus {
   background-color: var(--primary-30);
 }
 

@@ -19,7 +19,7 @@ const SignupModal = ({ open, setOpen }) => {
   const [values, setValues] = useState({
     email: '',
     password: '',
-    consfirmPassword: '',
+    confirmPassword: '',
     showPassword: false,
     showConfirmPassword: false
   });
@@ -56,26 +56,25 @@ const SignupModal = ({ open, setOpen }) => {
           label={'Email'}
           value={values.email}
           onChange={handleChange}
-          variant="standard"
+          variant="outlined"
           error={error}
           helperText={error && `Incorrect email`}
           autoFocus
         />
 
-        <FormControl
+        <TextField
           className={styles.fields}
-          margin="normal"
-          variant="standard"
+          id="password"
+          name="password"
+          type={values.showPassword ? 'text' : 'password'}
+          label={'Password'}
+          value={values.password}
+          onChange={handleChange}
+          variant="outlined"
           error={error}
-        >
-          <InputLabel htmlFor="login-password">Password</InputLabel>
-          <Input
-            id="login-password"
-            name="password"
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
-            onChange={(e) => handleChange(e)}
-            endAdornment={
+          helperText={error && `Incorrect password`}
+          InputProps={{
+            endAdornment:
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
@@ -84,38 +83,32 @@ const SignupModal = ({ open, setOpen }) => {
                   {values.showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
-            }
-          />
-          <FormHelperText id="helper-text-pass">{error && `Incorrect password`}</FormHelperText>
-        </FormControl>
+          }}
+        />
 
-        <FormControl
+        <TextField
           className={styles.fields}
-          margin="normal"
-          variant="standard"
+          id="confirmPassword"
+          name="confirmPassword"
+          type={values.showConfirmPassword ? 'text' : 'password'}
+          label={'Confirm Password'}
+          value={values.confirmPassword}
+          onChange={handleChange}
+          variant="outlined"
           error={error}
-        >
-          <InputLabel htmlFor="confirm-password">Confirm Password</InputLabel>
-          <Input
-            id="confirm-password"
-            name="password"
-            type={values.showConfirmPassword ? 'text' : 'password'}
-            value={values.consfirmPassword}
-            onChange={(e) => handleChange(e)}
-            endAdornment={
+          helperText={error && `Passwords did not match`}
+          InputProps={{
+            endAdornment:
               <InputAdornment position="end">
                 <IconButton
-                  aria-label="toggle password visibility"
+                  aria-label="toggle cnf password visibility"
                   onClick={() => setValues({ ...values, showConfirmPassword: !values.showConfirmPassword })}
                 >
                   {values.showConfirmPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
               </InputAdornment>
-            }
-          />
-          <FormHelperText id="helper-text-cnfPass">{error && `Incorrect password`}</FormHelperText>
-        </FormControl>
-
+          }}
+        />
       </form>
     </CustomDialog>
   )
