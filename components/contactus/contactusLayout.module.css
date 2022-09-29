@@ -6,6 +6,32 @@
   gap: 2rem;
 }
 
+.leftSection {
+  max-width: 562px;
+}
+
+.socialsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+}
+
+.social {
+  width: max-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.social .text {
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--grey-dark);
+}
+
 .rightSection {
   max-width: 365px;
   min-width: 250px;
@@ -33,6 +59,10 @@
 
 .fieldContainer {
   width: 100%;
+}
+
+.fieldContainer * {
+  transition: all 0.2s ease;
 }
 
 .label {

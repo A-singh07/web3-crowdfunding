@@ -9,9 +9,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 2rem;
-  max-height: 320px;
+  max-height: 350px;
   overflow: hidden;
-  padding: 0 0.2rem 1rem; /* to make card's box shadows visible */
+  padding: 0.5rem 0.2rem; /* to make card's box shadows visible */
 }
 
 @media screen and (max-width: 500px) {

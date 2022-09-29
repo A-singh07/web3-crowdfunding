@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import CustomButtom from '../customButton/CustomButton';
 
 import contactImage from '../../assets/image/contactus.svg';
+import { contactData } from '../../data/contactData';
+
 import styles from './contactusLayout.module.css';
 
 const ContactusLayout = () => {
@@ -31,6 +34,21 @@ const ContactusLayout = () => {
     <section className={styles.wrapper}>
       <div className={styles.leftSection}>
         <Image src={contactImage} />
+        <div className={styles.socialsContainer}>
+          {
+            contactData.map((contact, i) =>
+              <Link
+                href={contact.link}
+                key={i}
+              >
+                <div className={styles.social}>
+                  <Image src={contact.icon} />
+                  <p className={styles.text}>{contact.text}</p>
+                </div>
+              </Link>
+            )
+          }
+        </div>
       </div>
       <div className={styles.rightSection}>
         <h3 className={styles.heading}>Leave a message</h3>
