@@ -54,6 +54,7 @@ const LoginModal = ({ open, setOpen }) => {
           value={values.email}
           onChange={handleChange}
           variant="outlined"
+          margin="normal"
           error={error}
           helperText={error && `Incorrect email`}
           autoFocus
@@ -68,6 +69,7 @@ const LoginModal = ({ open, setOpen }) => {
           value={values.password}
           onChange={handleChange}
           variant="outlined"
+          margin="normal"
           error={error}
           helperText={error && `Incorrect password`}
           InputProps={{

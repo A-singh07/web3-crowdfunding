@@ -57,6 +57,7 @@ const SignupModal = ({ open, setOpen }) => {
           value={values.email}
           onChange={handleChange}
           variant="outlined"
+          margin="normal"
           error={error}
           helperText={error && `Incorrect email`}
           autoFocus
@@ -71,6 +72,7 @@ const SignupModal = ({ open, setOpen }) => {
           value={values.password}
           onChange={handleChange}
           variant="outlined"
+          margin="normal"
           error={error}
           helperText={error && `Incorrect password`}
           InputProps={{
@@ -95,6 +97,7 @@ const SignupModal = ({ open, setOpen }) => {
           value={values.confirmPassword}
           onChange={handleChange}
           variant="outlined"
+          margin="normal"
           error={error}
           helperText={error && `Passwords did not match`}
           InputProps={{
