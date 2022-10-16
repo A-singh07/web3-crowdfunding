@@ -1,0 +1,68 @@
+.container {
+  max-width: 600px;
+  margin: 2rem auto 5rem;
+}
+
+.stepLabel {
+  cursor: pointer;
+}
+.stepLabel * {
+  font-family: var(--font-family-1);
+}
+
+.stepsForm {
+  width: 100%;
+  padding: 2rem;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0;
+}
+
+/* Form styles */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fieldContainer {
+  width: 100%;
+}
+
+.fieldContainer * {
+  transition: all 0.2s ease;
+}
+
+.label {
+  color: var(--black);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.field {
+  background-color: rgb(255, 255, 255, 0.55);
+}
+
+.message {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 15px;
+  color: var(--grey-dark);
+}
+
+.walletContainer {
+  text-align: center;
+  margin: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+  .stepsForm {
+    padding: 2rem 0;
+  }
+}

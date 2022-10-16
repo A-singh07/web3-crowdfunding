@@ -40,6 +40,10 @@ const Navbar = () => {
 
   const navItems = [
     {
+      name: 'Start a fundraiser',
+      link: '/registerfund'
+    },
+    {
       name: 'Funds',
       link: '/funds'
     },

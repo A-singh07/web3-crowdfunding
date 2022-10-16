@@ -1,9 +1,10 @@
 .buttonWrapper {
   height: max-content;
   font-family: var(--font-family-1);
+  font-style: normal;
   font-size: 1rem;
   font-weight: 600;
-  line-height: 0.875rem;
+  line-height: 18px;
   padding: 1rem 1.5rem;
   border: 1px solid var(--primary);
   border-radius: 0.5rem;
@@ -28,6 +29,7 @@
 
 .secondaryBtn {
   background-color: transparent;
+  border: 1px solid var(--primary);
   color: var(--primary);
 }
 

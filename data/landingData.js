@@ -14,7 +14,7 @@ export const fundThemeSection = {
   heading: 'Looking for crowd support ? We got you.',
   body: 'We’ve helped over a million people to achieve what they truly need with help of our crowd. Start a fundraiser now.',
   btnText: 'Start a fundraiser',
-  btnLink: '/',
+  btnLink: '/registerfund',
   image: riseHelpImg,
   order: 0
 }
