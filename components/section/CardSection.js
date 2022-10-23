@@ -2,7 +2,7 @@ import React from 'react';
 import FundCard from '../card/FundCard';
 import styles from './cardSection.module.css';
 
-const CardSection = ({ heading, fundsData, style }) => {
+const CardSection = ({ heading, fundsData, baseUrl, style }) => {
 
   return (
     <section className={styles.wrapper} style={style}>
@@ -21,6 +21,7 @@ const CardSection = ({ heading, fundsData, style }) => {
                 raisedAmount={data.raisedAmount}
                 targetAmount={data.targetAmount}
                 progress={data.progress}
+                baseUrl={baseUrl}
               />
             ) :
             <div className={styles.noFundMessage}>

@@ -7,7 +7,9 @@ import PaymentsRoundedIcon from '@mui/icons-material/PaymentsRounded';
 
 import styles from './fundDetailsLayout.module.css';
 
-const FundDetailsLayout = ({ fundDetails }) => {
+const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
+  // TODO: isAdmin prop to be removed. Get this from AuthContext
+
   const [isScrolled, setIsScrolled] = useState(false);
 
   const router = useRouter()
@@ -17,7 +19,17 @@ const FundDetailsLayout = ({ fundDetails }) => {
     window.addEventListener('scroll', () => {
       window.scrollY > 0 ? setIsScrolled(true) : setIsScrolled(false)
     })
-  }, [])
+  }, []);
+
+  // TODO: onClick function for admin (Approve now)
+  const approveFund = () => {
+    alert('Fund has been approved')
+  }
+
+  // TODO: onClick function for user (Contribute now)
+  const donateFund = () => {
+
+  }
 
   return (
     <>
@@ -41,9 +53,10 @@ const FundDetailsLayout = ({ fundDetails }) => {
           <div className={styles.rightSection + ` ${isScrolled ? styles.rightSectionScrolled : ''}`}>
             <CustomButton
               primary
-              text={'Contribute Now'}
+              text={isAdmin ? 'Approve Now' : 'Contribute Now'}
               style={{ width: '100%' }}
-              leftIcon={<PaymentsRoundedIcon />}
+              onClick={isAdmin ? approveFund : donateFund}
+            // leftIcon={<PaymentsRoundedIcon />}
             />
             <div className={styles.deadlineContainer}>
               <p className={styles.deadlineHeading}>Deadline:</p>

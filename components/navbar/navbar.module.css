@@ -51,7 +51,7 @@
 
 .navScroll {
   background: #ffffff;
-  box-shadow: 0 2px 7px rgb(0 0 0 / 5%);
+  box-shadow: var(--box-shadow-1);
 }
 
 @media screen and (max-width: 900px) {

@@ -12,7 +12,8 @@ const FundCard = ({
   description,
   raisedAmount,
   targetAmount,
-  progress
+  progress,
+  baseUrl
 }) => {
 
   return (
@@ -32,7 +33,7 @@ const FundCard = ({
         />
         <CustomButtom
           text={'View More'}
-          link={`/funds/${id}`}
+          link={baseUrl + `${id}`}
           style={{ width: '100%', padding: '0.75rem 1.5rem' }}
           rightIcon={<ArrowForwardIosRoundedIcon />}
         />

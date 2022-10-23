@@ -25,6 +25,9 @@
   --state-warning: #e2b93b;
   --state-error: #e35e5e;
 
+  /* box-shadow */
+  --box-shadow-1: 0 2px 7px rgb(0 0 0 / 5%);
+
   /* layout width */
   --spacing-normal: 2rem;
   --main-layout-width: calc(1240px + (2 * var(--spacing-normal)));
