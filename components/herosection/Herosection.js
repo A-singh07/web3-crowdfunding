@@ -14,7 +14,6 @@ const Herosection = () => {
         <CustomButton
           text={'Explore Funds'}
           link={'/funds'}
-          rightIcon={<ArrowForwardIosRoundedIcon />}
         />
       </div>
       <div className={styles.imageContainer}>

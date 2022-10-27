@@ -39,9 +39,7 @@
 }
 
 .text {
-  display: flex;
-  align-items: center;
-  height: 20px;
+  font-size: inherit;
 }
 
 .iconContainer,

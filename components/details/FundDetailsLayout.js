@@ -56,7 +56,6 @@ const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
               text={isAdmin ? 'Approve Now' : 'Contribute Now'}
               style={{ width: '100%' }}
               onClick={isAdmin ? approveFund : donateFund}
-            // leftIcon={<PaymentsRoundedIcon />}
             />
             <div className={styles.deadlineContainer}>
               <p className={styles.deadlineHeading}>Deadline:</p>

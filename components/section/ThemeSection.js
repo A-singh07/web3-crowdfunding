@@ -21,7 +21,6 @@ const ThemeSection = ({ data }) => {
             primary
             text={btnText}
             link={btnLink}
-            rightIcon={<ArrowForwardIosRoundedIcon />}
           />
         </div>
         <div className={styles.imageContainer}>

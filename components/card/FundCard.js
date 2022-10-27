@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomButtom from '../customButton/CustomButton';
+import CustomButton from '../customButton/CustomButton';
 import Progressbar from '../progressbar/Progressbar';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 
@@ -31,11 +31,10 @@ const FundCard = ({
           targetAmount={targetAmount}
           progress={progress}
         />
-        <CustomButtom
+        <CustomButton
           text={'View More'}
           link={baseUrl + `${id}`}
           style={{ width: '100%', padding: '0.75rem 1.5rem' }}
-          rightIcon={<ArrowForwardIosRoundedIcon />}
         />
       </div>
     </div>

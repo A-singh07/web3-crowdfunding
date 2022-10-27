@@ -44,7 +44,7 @@ const Navbar = () => {
       link: '/registerfund'
     },
     {
-      name: 'Funds',
+      name: 'View Funds',
       link: '/funds'
     },
     {
