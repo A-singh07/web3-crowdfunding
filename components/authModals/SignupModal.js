@@ -46,6 +46,7 @@ const SignupModal = ({ open, setOpen }) => {
       open={open}
       setOpen={setOpen}
       customFunction={userSignup}
+      btnText="Login"
     >
       <form className={styles.formContainer}>
         <TextField

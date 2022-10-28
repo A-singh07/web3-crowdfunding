@@ -43,6 +43,7 @@ const LoginModal = ({ open, setOpen }) => {
       open={open}
       setOpen={setOpen}
       customFunction={userLogin}
+      btnText="Login"
     >
       <form className={styles.formContainer}>
         <TextField

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import CustomButton from '../customButton/CustomButton';
 import Progressbar from '../progressbar/Progressbar';
 import InfoCard from '../card/InfoCard';
-import PaymentsRoundedIcon from '@mui/icons-material/PaymentsRounded';
+import DonateModal from '../confirmModal/DonateModal';
 
 import styles from './fundDetailsLayout.module.css';
 
@@ -11,6 +11,7 @@ const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
   // TODO: isAdmin prop to be removed. Get this from AuthContext
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const [openDonate, setOpenDonate] = useState(false);
 
   const router = useRouter()
   const { id } = router.query
@@ -21,14 +22,14 @@ const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
     })
   }, []);
 
-  // TODO: onClick function for admin (Approve now)
+  // onClick function for admin (Approve now)
   const approveFund = () => {
     alert('Fund has been approved')
   }
 
-  // TODO: onClick function for user (Contribute now)
+  // onClick function for user (Contribute now)
   const donateFund = () => {
-
+    setOpenDonate(true)
   }
 
   return (
@@ -44,7 +45,7 @@ const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
               <h4 className={styles.detailsHeading}>About</h4>
               <div className={styles.detailsContent}>
                 <p>
-                  {fundDetails.about}
+                  {fundDetails.description}
                 </p>
               </div>
             </article>
@@ -88,6 +89,14 @@ const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
           </div>
         </div>
       </section>
+
+      <DonateModal
+        open={openDonate}
+        setOpen={setOpenDonate}
+        fundId={fundDetails.id}
+        minAmount={fundDetails.minAmount}
+        fundName={fundDetails.name}
+      />
     </>
   )
 }

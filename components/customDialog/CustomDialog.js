@@ -8,7 +8,15 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import styles from './customDialog.module.css';
 
-const CustomDialog = ({ heading, body, open, setOpen, customFunction, children }) => {
+const CustomDialog = ({
+  heading,
+  body,
+  open,
+  setOpen,
+  btnText,
+  customFunction,
+  children
+}) => {
 
   return (
     <Dialog
@@ -33,7 +41,7 @@ const CustomDialog = ({ heading, body, open, setOpen, customFunction, children }
         />
         <CustomButton
           primary
-          text={'Login'}
+          text={btnText}
           onClick={customFunction}
           style={{ padding: '0.75rem 1.125rem' }}
           type={"submit"}
