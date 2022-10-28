@@ -11,6 +11,8 @@
 }
 .dialogContent {
   margin-bottom: 0.5rem;
+  white-space: pre-wrap;
+  line-break: strict;
 }
 
 .wrapper .contentContainer {

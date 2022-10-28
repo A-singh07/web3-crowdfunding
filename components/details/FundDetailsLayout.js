@@ -4,6 +4,7 @@ import CustomButton from '../customButton/CustomButton';
 import Progressbar from '../progressbar/Progressbar';
 import InfoCard from '../card/InfoCard';
 import DonateModal from '../confirmModal/DonateModal';
+import ApproveModal from '../confirmModal/ApproveModal';
 
 import styles from './fundDetailsLayout.module.css';
 
@@ -11,7 +12,9 @@ const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
   // TODO: isAdmin prop to be removed. Get this from AuthContext
 
   const [isScrolled, setIsScrolled] = useState(false);
+
   const [openDonate, setOpenDonate] = useState(false);
+  const [openApprove, setOpenApprove] = useState(false);
 
   const router = useRouter()
   const { id } = router.query
@@ -24,7 +27,7 @@ const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
 
   // onClick function for admin (Approve now)
   const approveFund = () => {
-    alert('Fund has been approved')
+    setOpenApprove(true)
   }
 
   // onClick function for user (Contribute now)
@@ -90,13 +93,22 @@ const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
         </div>
       </section>
 
-      <DonateModal
-        open={openDonate}
-        setOpen={setOpenDonate}
-        fundId={fundDetails.id}
-        minAmount={fundDetails.minAmount}
-        fundName={fundDetails.name}
-      />
+      {
+        isAdmin ?
+          <ApproveModal
+            open={openApprove}
+            setOpen={setOpenApprove}
+            fundId={fundDetails.id}
+            fundName={fundDetails.name}
+          />
+          : <DonateModal
+            open={openDonate}
+            setOpen={setOpenDonate}
+            fundId={fundDetails.id}
+            minAmount={fundDetails.minAmount}
+            fundName={fundDetails.name}
+          />
+      }
     </>
   )
 }

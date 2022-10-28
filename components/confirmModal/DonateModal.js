@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import CustomDialog from '../customDialog/CustomDialog';
 
@@ -16,17 +16,24 @@ const DonateModal = ({ open, setOpen, fundId, minAmount, fundName }) => {
 
   const handleChange = (e) => {
     const validInput = new RegExp(/^\d*\.?\d*$/);
-    validInput.test(e.target.value)
-      && setFundDetails({ ...fundDetails, amount: e.target.value })
-
-    !fundDetails.amount && setError('')
+    validInput.test(e.target.value) && setFundDetails({ ...fundDetails, amount: e.target.value })
   }
+
+  useEffect(() => {
+    !fundDetails.amount || fundDetails.amount >= minAmount && setError('')
+  }, [fundDetails])
 
   // Request call for donation
   const donateFunc = () => {
-    fundDetails.amount >= minAmount
-      ? alert(`${fundDetails.amount} donated to fund: ${fundName}`)
-      : setError(`Entered amount should be greater than or equal to ${minAmount}`)
+
+    // TODO: Check for login status
+
+    if (fundDetails.amount >= minAmount) {
+      alert(`${fundDetails.amount} donated to fund: ${fundName}`)
+      setOpen(false)
+    } else {
+      setError(`Entered amount should be greater than or equal to ${minAmount}`)
+    }
   }
 
   return (
