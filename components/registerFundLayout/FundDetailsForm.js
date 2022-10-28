@@ -2,13 +2,31 @@ import { useState } from 'react';
 
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+import { fundCategories } from '../../data/fundDetails';
 
 import styles from './registerFundLayout.module.css';
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 const FundDetailsForm = () => {
 
   const [formData, setFormData] = useState({
     fundName: '',
+    category: '',
     description: '',
     targetAmount: '',
     deadline: ''
@@ -35,6 +53,34 @@ const FundDetailsForm = () => {
           fullWidth
           placeholder="Enter fund name"
         />
+      </div>
+
+      {/* CATEGORY */}
+      <div className={styles.fieldContainer}>
+        <InputLabel className={styles.label}>Category</InputLabel>
+        <Select
+          fullWidth
+          displayEmpty
+          name={'category'}
+          value={formData.category}
+          onChange={handleChange}
+          input={<OutlinedInput />}
+          MenuProps={MenuProps}
+          placeholder="Category"
+        >
+          <MenuItem disabled value="">
+            <em>Category</em>
+          </MenuItem>
+          {fundCategories.map((cat) => (
+            <MenuItem
+              key={cat.categoryId}
+              value={cat.categoryName}
+            // style={getStyles(name, personName, theme)}
+            >
+              {cat.categoryName}
+            </MenuItem>
+          ))}
+        </Select>
       </div>
 
       <div className={styles.fieldContainer}>

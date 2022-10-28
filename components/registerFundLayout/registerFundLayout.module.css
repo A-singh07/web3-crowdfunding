@@ -37,6 +37,11 @@
   transition: all 0.2s ease;
 }
 
+.fieldContainer em {
+  color: var(--grey-dark);
+  font-weight: 500;
+}
+
 .label {
   color: var(--black);
   margin-bottom: 0.5rem;
