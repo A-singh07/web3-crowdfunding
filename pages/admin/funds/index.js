@@ -1,54 +1,11 @@
-import { useState, useEffect } from 'react';
-import { FundsContext } from '../../../context/FundsContext';
-
-import CategoriesSection from '../../../components/categories/CategoriesSection';
-import CardSection from '../../../components/section/CardSection';
-import Header from '../../../components/header/Header';
-
-// Data
-import { fundsPageData, fundCategories } from '../../../data/fundDetails';
-
+import React from 'react';
+import AdminFunds from '../../../components/adminFundsLayout/AdminFunds';
 
 const Funds = () => {
-
-  const [activeCat, setActiveCat] = useState('');
-  const [fundsData, setFundsData] = useState([])
-
-  // TODO: Fetch all unapproved funds.
-
-  useEffect(() => {
-    !activeCat ? setFundsData(fundsPageData) :
-      setFundsData(fundsPageData.filter((fund) => fund.categoryId === activeCat))
-  }, [activeCat])
-
-
   return (
-    <FundsContext.Provider value={{ setActiveCat, activeCat }}>
-      <main>
-        <Header heading={'Review Funds'} />
-        <CategoriesSection
-          data={fundCategories}
-        />
-        {
-          fundsData.map(data =>
-            activeCat && data.funds.length === 0 ?
-              <CardSection
-                key={data.categoryId}
-                heading={data.categoryName}
-                fundsData={data.funds}
-                baseUrl={'/admin/funds/'}
-              /> :
-              data.funds.length !== 0 &&
-              <CardSection
-                key={data.categoryId}
-                heading={data.categoryName}
-                fundsData={data.funds}
-                baseUrl={'/admin/funds/'}
-              />
-          )
-        }
-      </main>
-    </FundsContext.Provider>
+    <section>
+      <AdminFunds />
+    </section>
   )
 }
 

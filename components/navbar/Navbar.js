@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 
 import Button from '../customButton/CustomButton';
@@ -6,13 +6,15 @@ import CustomDrawer from '../customDrawer/CustomDrawer';
 import LoginModal from '../authModals/LoginModal';
 import SignupModal from '../authModals/SignupModal';
 
+import { AuthContext } from '../../context/AuthContext';
+
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import styles from './navbar.module.css';
 
-// const LoginModal = lazy(() => import('../authModals/LoginModal'));
-// const SignupModal = lazy(() => import('../authModals/SignupModal'));
-
 const Navbar = () => {
+
+  // Auth Context
+  const { authUser } = useContext(AuthContext);
 
   const [mobileView, setMobileView] = useState(true)
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,7 +39,7 @@ const Navbar = () => {
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
 
-
+  // Nav links for general user
   const navItems = [
     {
       name: 'Start a fundraiser',
@@ -47,6 +49,23 @@ const Navbar = () => {
       name: 'View Funds',
       link: '/funds'
     },
+    {
+      name: 'About',
+      link: '/about'
+    },
+    {
+      name: 'Contact Us',
+      link: '/contactus'
+    }
+  ];
+
+  // Nav links for admin user
+  const adminNavItems = [
+    {
+      name: 'Review funds',
+      link: '/admin/funds'
+    },
+    // about and contact us not req for admin.
     {
       name: 'About',
       link: '/about'
@@ -87,7 +106,7 @@ const Navbar = () => {
                 <div className={styles.mobNav}>
                   <MenuRoundedIcon onClick={() => setIsOpen(!isOpen)} />
                   <CustomDrawer
-                    list={navItems}
+                    list={!authUser.isAdmin ? navItems : adminNavItems}
                     anchor="top"
                     isOpen={isOpen}
                     setIsOpen={setIsOpen}
@@ -98,9 +117,13 @@ const Navbar = () => {
               ) : (
                 <div className={styles.navRight}>
                   {
-                    navItems.map((item, i) =>
-                      <Link href={item.link} key={i}>{item.name}</Link>
-                    )
+                    !authUser.isAdmin ?
+                      navItems.map((item, i) =>
+                        <Link href={item.link} key={i}>{item.name}</Link>
+                      ) :
+                      adminNavItems.map((item, i) =>
+                        <Link href={item.link} key={i}>{item.name}</Link>
+                      )
                   }
                   {
                     authButtons.map(button => button)

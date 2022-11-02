@@ -61,6 +61,7 @@ const FundDetailsForm = () => {
         <Select
           fullWidth
           displayEmpty
+          className={styles.field}
           name={'category'}
           value={formData.category}
           onChange={handleChange}
@@ -69,7 +70,7 @@ const FundDetailsForm = () => {
           placeholder="Category"
         >
           <MenuItem disabled value="">
-            <em>Category</em>
+            <p>Category</p>
           </MenuItem>
           {fundCategories.map((cat) => (
             <MenuItem
