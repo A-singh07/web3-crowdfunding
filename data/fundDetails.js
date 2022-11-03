@@ -48,6 +48,7 @@ export const fundsData = [
   {
     id: 12345,
     category: "Medical",
+    status: "Pending",
     heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
     raisedAmount: `25000`,
@@ -57,6 +58,7 @@ export const fundsData = [
   {
     id: 12346,
     category: "Charity",
+    status: "Approved",
     heading: "cajnsjc na soci charity servie cporicna s o",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
     raisedAmount: `10000`,
@@ -66,6 +68,7 @@ export const fundsData = [
   {
     id: 12347,
     category: "Medical",
+    status: "In-Process",
     heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
     raisedAmount: `25000`,
@@ -75,6 +78,7 @@ export const fundsData = [
   {
     id: 12348,
     category: "Medical",
+    status: "Rejected",
     heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
     raisedAmount: `25000`,
@@ -84,6 +88,7 @@ export const fundsData = [
   {
     id: 12349,
     category: "Medical",
+    status: "Approved",
     heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
     raisedAmount: `25000`,
@@ -93,6 +98,7 @@ export const fundsData = [
   {
     id: 12340,
     category: "Medical",
+    status: "Pending",
     heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
     raisedAmount: `25000`,

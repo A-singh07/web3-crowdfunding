@@ -18,6 +18,9 @@
   overflow: hidden;
   padding: 0 0.2rem 1rem; /* to make card's box shadows visible */
 }
+.wrapper .cardContainerShowAll {
+  max-height: max-content;
+}
 
 .noFundMessage {
   font-size: 0.875rem;

@@ -8,13 +8,12 @@ import Header from '../../../components/header/Header';
 // Data
 import { fundsPageData, fundCategories } from '../../../data/fundDetails';
 
-// Page for all the approved funds only
 const Funds = () => {
 
   const [activeCat, setActiveCat] = useState('');
   const [fundsData, setFundsData] = useState([])
 
-  // TODO: Fetch all unapproved funds.
+  // TODO: Fetch all funds.
 
   useEffect(() => {
     !activeCat ? setFundsData(fundsPageData) :

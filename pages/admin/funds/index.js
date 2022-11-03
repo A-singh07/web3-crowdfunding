@@ -1,9 +1,10 @@
 import React from 'react';
-import AdminFunds from '../../../components/adminFundsLayout/AdminFunds';
+import FundsListLayout from '../../../components/fundsListLayout/FundsListLayout';
 
+// List of all funds for admin
 const Funds = () => {
   return (
-    <AdminFunds />
+    <FundsListLayout isAdmin={true} />
   )
 }
 

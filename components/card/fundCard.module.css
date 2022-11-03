@@ -17,11 +17,17 @@
   padding: 1rem 1.5rem;
 }
 
-.category {
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 18px;
+.subContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 0.75rem;
+}
+
+.category {
+  font-weight: 400;
+  font-size: 0.85rem;
+  line-height: 18px;
   color: var(--grey-dark);
 }
 

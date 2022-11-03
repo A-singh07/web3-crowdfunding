@@ -1,6 +1,7 @@
 import React from 'react';
 import CustomButton from '../customButton/CustomButton';
 import Progressbar from '../progressbar/Progressbar';
+import Chip from '@mui/material/Chip';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 
 import styles from './fundCard.module.css';
@@ -8,13 +9,51 @@ import styles from './fundCard.module.css';
 const FundCard = ({
   id,
   category,
+  status,
   heading,
   description,
   raisedAmount,
   targetAmount,
   progress,
-  baseUrl
+  baseUrl,
+  isCampaigner
 }) => {
+
+  // Different Chip's style for different status
+  const getChipProps = (status) => {
+    if (status === "In-process") {
+      return {
+        label: status,
+        style: {
+          borderColor: "#e2b93b",
+          color: "#e2b93b"
+        }
+      }
+    } else if (status === "Approved") {
+      return {
+        label: status,
+        style: {
+          borderColor: "#3aab9f",
+          color: "#3aab9f"
+        }
+      }
+    } else if (status === "Rejected") {
+      return {
+        label: status,
+        style: {
+          borderColor: "#e35e5e",
+          color: "#e35e5e"
+        }
+      }
+    } else {
+      return {
+        label: status,
+        style: {
+          borderColor: "#939ca3"
+        }
+      }
+    }
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -22,7 +61,17 @@ const FundCard = ({
 
       </div>
       <div className={styles.cardContent}>
-        <p className={styles.category}>{category}</p>
+        <div className={styles.subContainer}>
+          <p className={styles.category}>{category}</p>
+          {
+            isCampaigner &&
+            <Chip
+              variant="outlined"
+              size="small"
+              {...getChipProps(status)}
+            />
+          }
+        </div>
         <p className={styles.cardHeading}>FundID: {id} {heading}</p>
         <p className={styles.cardDesc}>{description}</p>
         <Progressbar

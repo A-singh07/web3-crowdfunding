@@ -5,7 +5,9 @@ import Chip from '@mui/material/Chip'
 // data
 import { allFundsList } from '../../data/adminFundsData';
 
-const AdminFunds = () => {
+import styles from './fundsListLayout.module.css';
+
+const FundsListLayout = ({ isAdmin }) => {
 
   const getChipProps = (params) => {
     if (params.value === "In-process") {
@@ -86,14 +88,19 @@ const AdminFunds = () => {
 
   return (
     <section>
-      <h3 style={{ padding: '2rem 0 1rem' }}>All Funds</h3>
-      <CustomTable
-        tableColumns={colData}
-        tableRows={rowData}
-        baseUrl={'/admin/funds'}
-      />
+      {
+        isAdmin &&
+        <h3 className={styles.heading}>All Funds</h3>
+      }
+      <div className={styles.tableContainer}>
+        <CustomTable
+          tableColumns={colData}
+          tableRows={rowData}
+          baseUrl={'/admin/funds'}
+        />
+      </div>
     </section>
   )
 }
 
-export default AdminFunds
+export default FundsListLayout
