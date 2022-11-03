@@ -42,8 +42,8 @@ const LoginModal = ({ open, setOpen }) => {
       body={'Please log into your account!'}
       open={open}
       setOpen={setOpen}
-      customFunction={userLogin}
-      btnText="Login"
+      primaryBtnClick={userLogin}
+      primaryBtnText="Login"
     >
       <form className={styles.formContainer}>
         <TextField

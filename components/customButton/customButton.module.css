@@ -39,6 +39,19 @@
   background-color: var(--primary-30);
 }
 
+.errorBtn {
+  background-color: transparent;
+  border-color: var(--state-error);
+  color: var(--state-error);
+}
+
+.errorBtn:hover,
+.errorBtn:focus {
+  background-color: var(--state-error);
+  border-color: var(--state-error);
+  color: #fff;
+}
+
 .text {
   font-size: inherit;
 }

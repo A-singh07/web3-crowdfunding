@@ -11,20 +11,36 @@ const ApproveModal = ({ open, setOpen, fundId, fundName }) => {
     message: '',
   });
 
+  const [error, setError] = useState('');
+
   const handleChange = (e) => {
+    fundDetails.message !== '' && setError('')
+
     setFundDetails({
       ...fundDetails,
-      amount: e.target.value
+      message: e.target.value
     })
   }
 
   // Request call to approve fund
-  const approveFunc = () => {
+  const approveFund = () => {
 
     // TODO: Check for login status
 
     alert(`"${fundName}" is approved`)
     setOpen(false)
+  }
+
+  // Request call to approve fund
+  const rejectFund = () => {
+    // TODO: Check for login status
+
+    if (fundDetails.message) {
+      alert(`"${fundName}" is rejected`)
+      setOpen(false)
+    } else {
+      setError("Reject with a message");
+    }
   }
 
   return (
@@ -33,8 +49,10 @@ const ApproveModal = ({ open, setOpen, fundId, fundName }) => {
       body={`Fund: ${fundName}`}
       open={open}
       setOpen={setOpen}
-      customFunction={approveFunc}
-      btnText={"Approve"}
+      primaryBtnClick={approveFund}
+      primaryBtnText={"Approve"}
+      secondaryBtnText={"Reject"}
+      secondaryBtnClick={rejectFund}
     >
       <TextField
         className={styles.fields}
@@ -46,6 +64,8 @@ const ApproveModal = ({ open, setOpen, fundId, fundName }) => {
         variant="outlined"
         margin="normal"
         autoFocus
+        error={error ? true : false}
+        helperText={error}
       />
     </CustomDialog>
   )

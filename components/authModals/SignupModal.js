@@ -45,8 +45,8 @@ const SignupModal = ({ open, setOpen }) => {
       body={`Please create an account if you haven't already!`}
       open={open}
       setOpen={setOpen}
-      customFunction={userSignup}
-      btnText="Login"
+      primaryBtnClick={userSignup}
+      primaryBtnText="Login"
     >
       <form className={styles.formContainer}>
         <TextField

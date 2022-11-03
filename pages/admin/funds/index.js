@@ -3,9 +3,7 @@ import AdminFunds from '../../../components/adminFundsLayout/AdminFunds';
 
 const Funds = () => {
   return (
-    <section>
-      <AdminFunds />
-    </section>
+    <AdminFunds />
   )
 }
 

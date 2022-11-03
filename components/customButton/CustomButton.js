@@ -10,6 +10,7 @@ const CustomButton = ({
   text,
   primary,
   secondary,
+  errorBtn,
   style,
   leftIcon,
   rightIcon,
@@ -29,7 +30,7 @@ const CustomButton = ({
   return (
     <button
       className={styles.buttonWrapper +
-        ` ${secondary ? styles.secondaryBtn : styles.primaryBtn}`}
+        ` ${secondary ? styles.secondaryBtn : errorBtn ? styles.errorBtn : styles.primaryBtn}`}
       onClick={handleClick}
       style={style}
       type={type ? type : 'button'}

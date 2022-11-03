@@ -49,14 +49,19 @@ const AdminFunds = () => {
       width: 90
     },
     {
+      field: 'category',
+      headerName: 'Category',
+      width: 150
+    },
+    {
       field: 'name',
       headerName: 'Name',
-      width: 400
+      width: 300
     },
     {
       field: 'targetAmount',
       headerName: 'Target',
-      width: 200
+      width: 180
     },
     {
       field: 'deadline',
@@ -80,12 +85,14 @@ const AdminFunds = () => {
   }, [allFundsList])
 
   return (
-    <div>
+    <section>
+      <h3 style={{ padding: '2rem 0 1rem' }}>All Funds</h3>
       <CustomTable
         tableColumns={colData}
         tableRows={rowData}
+        baseUrl={'/admin/funds'}
       />
-    </div>
+    </section>
   )
 }
 

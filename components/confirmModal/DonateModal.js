@@ -42,8 +42,8 @@ const DonateModal = ({ open, setOpen, fundId, minAmount, fundName }) => {
       body={`Min. Amount: ${minAmount}`}
       open={open}
       setOpen={setOpen}
-      customFunction={donateFunc}
-      btnText={"Donate"}
+      primaryBtnClick={donateFunc}
+      primaryBtnText={"Donate"}
     >
       <TextField
         className={styles.fields}

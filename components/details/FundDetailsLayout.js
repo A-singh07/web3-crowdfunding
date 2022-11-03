@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import CustomButton from '../customButton/CustomButton';
 import Progressbar from '../progressbar/Progressbar';
@@ -6,10 +6,14 @@ import InfoCard from '../card/InfoCard';
 import DonateModal from '../confirmModal/DonateModal';
 import ApproveModal from '../confirmModal/ApproveModal';
 
+import { AuthContext } from '../../context/AuthContext';
+
 import styles from './fundDetailsLayout.module.css';
 
 const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
-  // TODO: isAdmin prop to be removed. Get this from AuthContext
+  // TODO: remove isAdmin prop, get this from authContext
+
+  // const { authUser } = useContext(AuthContext)
 
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -18,6 +22,8 @@ const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
 
   const router = useRouter()
   const { id } = router.query
+
+  // TODO: Fetch fund details based on id
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
