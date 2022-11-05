@@ -68,7 +68,7 @@ export const fundsData = [
   {
     id: 12347,
     category: "Medical",
-    status: "In-Process",
+    status: "In-process",
     heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
     raisedAmount: `25000`,
