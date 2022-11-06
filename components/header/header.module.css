@@ -1,13 +1,7 @@
-.wrapper {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  position: sticky;
-  top: 78px;
-  box-shadow: var(--box-shadow-1);
-  background-color: var(--grey-lightest);
-  border: 1px solid var(--primary);
-  border-radius: 10px;
-}
-
 .heading {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--grey-darker);
+  padding-bottom: 2rem;
+  padding-top: 2rem;
 }

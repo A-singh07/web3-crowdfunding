@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
 
-import { RegisterFundContext } from '../../context/RegisterFundContext';
-
+import CustomInput from '../customInput/CustomInput';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+import { RegisterFundContext } from '../../context/RegisterFundContext';
 
 import { fundCategories } from '../../data/fundDetails';
 
@@ -37,10 +37,17 @@ const FundDetailsForm = () => {
   })
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
+
+    // To allow only numbers as input. (Decimal allowed)
+    const validAmount = new RegExp(/^\d*\.?\d*$/);
+
+    if (!e.target.name === 'targetAmount') {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value
+      })
+    }
+    validAmount.test(e.target.value) && setFormData({ ...formData, targetAmount: e.target.value })
   }
 
   useEffect(() => {
@@ -55,19 +62,13 @@ const FundDetailsForm = () => {
 
   return (
     <form className={styles.formContainer}>
-      <div className={styles.fieldContainer}>
-        <InputLabel className={styles.label}>Fund Name</InputLabel>
-        <TextField
-          className={styles.field}
-          id="fundName"
-          name="fundName"
-          variant="outlined"
-          value={formData.fundName}
-          onChange={handleChange}
-          fullWidth
-          placeholder="Enter fund name"
-        />
-      </div>
+      <CustomInput
+        label={'Fund Name'}
+        placeholder="Enter fund name"
+        name="fundName"
+        value={formData.fundName}
+        onChange={handleChange}
+      />
 
       {/* CATEGORY */}
       <div className={styles.fieldContainer}>
@@ -98,51 +99,31 @@ const FundDetailsForm = () => {
         </Select>
       </div>
 
-      <div className={styles.fieldContainer}>
-        <InputLabel className={styles.label}>Description</InputLabel>
-        <TextField
-          className={styles.field}
-          id="description"
-          name="description"
-          variant="outlined"
-          value={formData.description}
-          onChange={handleChange}
-          fullWidth
-          placeholder="Enter description"
-          multiline
-          rows='12'
-        />
-      </div>
+      <CustomInput
+        label={'Description'}
+        placeholder="Enter description"
+        name="description"
+        rows="10"
+        value={formData.description}
+        onChange={handleChange}
+      />
 
-      <div className={styles.fieldContainer}>
-        <InputLabel className={styles.label}>Target Amount</InputLabel>
-        <TextField
-          className={styles.field}
-          // type="number"
-          id="targetAmount"
-          name="targetAmount"
-          variant="outlined"
-          value={formData.targetAmount}
-          onChange={handleChange}
-          fullWidth
-          placeholder="Enter target amount"
-        />
-      </div>
+      <CustomInput
+        label={'Target Amount'}
+        placeholder="Enter amount"
+        name="targetAmount"
+        value={formData.targetAmount}
+        onChange={handleChange}
+      />
 
-      <div className={styles.fieldContainer}>
-        <InputLabel className={styles.label}>Deadline</InputLabel>
-        <TextField
-          className={styles.field}
-          type="date"
-          id="deadline"
-          name="deadline"
-          variant="outlined"
-          value={formData.deadline}
-          onChange={handleChange}
-          fullWidth
-          placeholder="Enter deadline"
-        />
-      </div>
+      <CustomInput
+        label={'Deadline'}
+        placeholder="Enter deadline"
+        name="deadline"
+        type={'date'}
+        value={formData.deadline}
+        onChange={handleChange}
+      />
     </form>
   )
 }

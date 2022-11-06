@@ -1,4 +1,5 @@
 import React from 'react';
+import HeadingLight from '../header/HeaderLight';
 import FundCard from '../card/FundCard';
 import styles from './cardSection.module.css';
 
@@ -6,7 +7,7 @@ const CardSection = ({ heading, fundsData, baseUrl, showAll, style }) => {
 
   return (
     <section className={styles.wrapper} style={style}>
-      <h4 className={styles.heading}>{heading}</h4>
+      <HeadingLight heading={heading} />
       <div className={styles.cardContainer + ` ${showAll && styles.cardContainerShowAll}`}>
         {
           fundsData && fundsData.length !== 0 ?

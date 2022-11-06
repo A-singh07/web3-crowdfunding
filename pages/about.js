@@ -9,7 +9,7 @@ import { heroSection, missionData, nextGenSection, aboutThemeSection } from '../
 const About = () => {
 
   return (
-    <main>
+    <>
       <HerosectionAbout
         data={heroSection}
       />
@@ -22,7 +22,7 @@ const About = () => {
       <ThemeSection
         data={aboutThemeSection}
       />
-    </main>
+    </>
   )
 }
 

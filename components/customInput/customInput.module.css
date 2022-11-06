@@ -1,0 +1,23 @@
+.fieldContainer {
+  width: 100%;
+}
+
+.fieldContainer * {
+  transition: all 0.2s ease;
+}
+
+.fieldContainer p {
+  color: var(--grey-dark);
+  font-weight: 400;
+}
+
+.label {
+  color: var(--black);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.field {
+  background-color: rgb(255, 255, 255, 0.65);
+}

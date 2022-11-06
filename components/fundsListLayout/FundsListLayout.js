@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import HeaderLight from '../header/HeaderLight';
 import CustomTable from '../customTable/CustomTable';
 import Chip from '@mui/material/Chip'
 
@@ -88,17 +89,12 @@ const FundsListLayout = ({ isAdmin }) => {
 
   return (
     <section>
-      {
-        isAdmin &&
-        <h3 className={styles.heading}>All Funds</h3>
-      }
-      <div className={styles.tableContainer}>
-        <CustomTable
-          tableColumns={colData}
-          tableRows={rowData}
-          baseUrl={'/admin/funds'}
-        />
-      </div>
+      <HeaderLight heading="All funds" />
+      <CustomTable
+        tableColumns={colData}
+        tableRows={rowData}
+        baseUrl={'/admin/funds'}
+      />
     </section>
   )
 }

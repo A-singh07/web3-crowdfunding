@@ -6,11 +6,11 @@ const Admin = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('/admin/funds')
+    router.replace('/admin/funds')
   }, [])
 
   return (
-    <div>
+    <div style={{ height: '50vh' }}>
 
     </div>
   )

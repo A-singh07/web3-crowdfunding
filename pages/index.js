@@ -8,7 +8,7 @@ import { landingThemeSection, fundThemeSection, testimonyData } from '../data/la
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Herosection />
       <CardSection
         heading={'Featured Funds'}
@@ -25,6 +25,6 @@ export default function Home() {
       <ThemeSection
         data={fundThemeSection}
       />
-    </main>
+    </>
   )
 }
