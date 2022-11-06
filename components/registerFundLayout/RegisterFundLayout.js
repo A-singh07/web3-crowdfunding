@@ -1,4 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+
+import { RegisterFundContext } from '../../context/RegisterFundContext';
+
 import CustomButton from '../customButton/CustomButton';
 import FundDetailsForm from './FundDetailsForm';
 import UploadDocumentsForm from './UploadDocumentsForm';
@@ -18,8 +22,11 @@ const steps = [
 
 const RegisterFundLayout = () => {
 
+  const router = useRouter();
+
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState([]);
+  const [editFundData, setEditFundData] = useState({})
 
   // Make this a custom hook
   const scrollToTop = () => {
@@ -48,56 +55,61 @@ const RegisterFundLayout = () => {
     scrollToTop();
   }
 
-  return (
-    <section>
-      {/* TODO: MUI Stepper */}
-      <div className={styles.container}>
-        <Stepper nonLinear alternativeLabel activeStep={activeStep}>
-          {
-            steps.map((label, index) => (
-              <Step key={label} completed={completed[index]} className={styles.step}>
-                <StepLabel className={styles.stepLabel} onClick={handleStep(index)}>
-                  {label}
-                </StepLabel>
-              </Step>
-            ))
-          }
-        </Stepper>
-        <div className={styles.stepsForm}>
-          {
-            activeStep == 0
-              ? <FundDetailsForm />
-              : activeStep == 1
-                ? <UploadDocumentsForm />
-                : <LinkWallet />
+  useEffect(() => {
+    router.query.id && setEditFundData(router.query);
+  }, [router])
 
-          }
-          <div className={styles.buttonContainer}>
+  return (
+    <RegisterFundContext.Provider value={{ setEditFundData, editFundData }}>
+      <section>
+        <div className={styles.container}>
+          <Stepper nonLinear alternativeLabel activeStep={activeStep}>
             {
-              activeStep > 0 &&
+              steps.map((label, index) => (
+                <Step key={label} completed={completed[index]} className={styles.step}>
+                  <StepLabel className={styles.stepLabel} onClick={handleStep(index)}>
+                    {label}
+                  </StepLabel>
+                </Step>
+              ))
+            }
+          </Stepper>
+          <div className={styles.stepsForm}>
+            {
+              activeStep == 0
+                ? <FundDetailsForm />
+                : activeStep == 1
+                  ? <UploadDocumentsForm />
+                  : <LinkWallet />
+
+            }
+            <div className={styles.buttonContainer}>
+              {
+                activeStep > 0 &&
+                <CustomButton
+                  text={"Back"}
+                  secondary
+                  style={{
+                    padding: '0.75rem 1.5rem',
+                  }}
+                  onClick={handleBack}
+                />
+              }
               <CustomButton
-                text={"Back"}
-                secondary
+                text={activeStep === (steps.length - 1) ? "Submit" : "Next"}
+                primary
                 style={{
                   padding: '0.75rem 1.5rem',
+                  marginLeft: 'auto'
                 }}
-                onClick={handleBack}
+                onClick={activeStep < (steps.length - 1) ? handleComplete : () => { }}
               />
-            }
-            <CustomButton
-              text={activeStep === (steps.length - 1) ? "Submit" : "Next"}
-              primary
-              style={{
-                padding: '0.75rem 1.5rem',
-                marginLeft: 'auto'
-              }}
-              onClick={activeStep < (steps.length - 1) ? handleComplete : () => { }}
-            />
+            </div>
           </div>
-        </div>
 
-      </div>
-    </section>
+        </div>
+      </section>
+    </RegisterFundContext.Provider>
   )
 }
 

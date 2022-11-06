@@ -15,7 +15,7 @@ const FundDetetails = () => {
   return (
     <main>
       {/* TODO: Change this to Register fund layout, and pre-fill this fund's data. */}
-      <FundDetailsLayout fundDetails={fundDetails} isAdmin={false} />
+      <FundDetailsLayout fundDetails={fundDetails} isCampaigner={true} />
     </main>
   )
 }

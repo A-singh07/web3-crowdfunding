@@ -10,7 +10,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 import styles from './fundDetailsLayout.module.css';
 
-const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
+const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
   // TODO: remove isAdmin prop, get this from authContext
 
   // const { authUser } = useContext(AuthContext)
@@ -31,14 +31,22 @@ const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
     })
   }, []);
 
-  // onClick function for admin (Approve now)
+  // Approve now (for admin)
   const approveFund = () => {
     setOpenApprove(true)
   }
 
-  // onClick function for user (Contribute now)
+  // Contribute now (for Gen. User)
   const donateFund = () => {
     setOpenDonate(true)
+  }
+
+  // Edit fund (for Campaigner)
+  const editFund = () => {
+    router.push({
+      pathname: '/registerfund',
+      query: fundDetails,
+    }, '/registerfund');
   }
 
   return (
@@ -63,9 +71,9 @@ const FundDetailsLayout = ({ fundDetails, isAdmin }) => {
           <div className={styles.rightSection + ` ${isScrolled ? styles.rightSectionScrolled : ''}`}>
             <CustomButton
               primary
-              text={isAdmin ? 'Approve Now' : 'Contribute Now'}
+              text={isAdmin ? 'Approve Now' : isCampaigner ? 'Edit Fund' : 'Contribute Now'}
               style={{ width: '100%' }}
-              onClick={isAdmin ? approveFund : donateFund}
+              onClick={isAdmin ? approveFund : isCampaigner ? editFund : donateFund}
             />
             <div className={styles.deadlineContainer}>
               <p className={styles.deadlineHeading}>Deadline:</p>

@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
+
+import { RegisterFundContext } from '../../context/RegisterFundContext';
 
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
@@ -24,6 +26,8 @@ const MenuProps = {
 
 const FundDetailsForm = () => {
 
+  const { editFundData } = useContext(RegisterFundContext);
+
   const [formData, setFormData] = useState({
     fundName: '',
     category: '',
@@ -38,6 +42,16 @@ const FundDetailsForm = () => {
       [e.target.name]: e.target.value
     })
   }
+
+  useEffect(() => {
+    editFundData.id && setFormData({
+      fundName: editFundData.name ? editFundData.name : '',
+      category: editFundData.category ? editFundData.category : '',
+      description: editFundData.description ? editFundData.description : '',
+      targetAmount: editFundData.targetAmount ? editFundData.targetAmount : '',
+      deadline: editFundData.deadline ? editFundData.deadline : ''
+    })
+  }, [editFundData])
 
   return (
     <form className={styles.formContainer}>
@@ -96,7 +110,7 @@ const FundDetailsForm = () => {
           fullWidth
           placeholder="Enter description"
           multiline
-          rows='5'
+          rows='12'
         />
       </div>
 

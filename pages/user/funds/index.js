@@ -20,7 +20,7 @@ const Funds = () => {
         showAll
         heading={"Registered Funds"}
         fundsData={fundsData}
-        baseUrl={'/funds/'}
+        baseUrl={'/user/funds/'}
       // TODO: 
       // change route to '/user/funds/' that should lead to register fund flow, 
       // but pre-filled with this fund's data
