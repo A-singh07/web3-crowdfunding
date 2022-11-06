@@ -5,10 +5,12 @@
   padding: 2rem;
 }
 
-.leftContainer {
+.leftSection {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 3rem;
+  min-width: 250px;
+  max-width: 300px;
 }
 
 .infoContainer {
@@ -22,5 +24,45 @@
 .avatar {
   width: 200px;
   height: 200px;
-  margin: auto;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1000px) {
+  .mainContainer {
+    gap: 5rem;
+  }
+  .avatar {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media screen and (max-width: 786px) {
+  .mainContainer {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .leftSection {
+    width: max-content;
+    margin: auto;
+    gap: 2rem;
+  }
+
+  .infoContainer {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mainContainer {
+    padding: 1.5rem 0;
+  }
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+  .leftSection {
+    gap: 1.5rem;
+    width: 100%;
+  }
 }

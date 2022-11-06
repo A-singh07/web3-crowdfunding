@@ -41,8 +41,6 @@ const ProfileLayout = ({ data }) => {
             link={'/user/funds'}
             style={{
               padding: '0.75rem 1.5rem',
-              marginLeft: 'auto',
-              marginTop: '3rem'
             }}
           />
         </div>
