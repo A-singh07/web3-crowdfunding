@@ -1,20 +1,25 @@
 import { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import Button from '../customButton/CustomButton';
 import CustomDrawer from '../customDrawer/CustomDrawer';
+import CustomMenu from '../customMenu/CustomMenu';
 import LoginModal from '../authModals/LoginModal';
 import SignupModal from '../authModals/SignupModal';
 
 import { AuthContext } from '../../context/AllContext';
 
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import userAvatarIcon from '../../assets/icons/user-avatar.svg';
+import downArrowIcon from '../../assets/icons/green-down-arrow.svg';
+
 import styles from './navbar.module.css';
 
 const Navbar = () => {
 
   // Auth Context
-  const { authUser } = useContext(AuthContext);
+  const { authUser, setAuthUser } = useContext(AuthContext);
 
   const [mobileView, setMobileView] = useState(true)
   const [isScrolled, setIsScrolled] = useState(false);
@@ -38,6 +43,42 @@ const Navbar = () => {
   // Auth modals
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
+
+  // Profile Menu
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openMenu = Boolean(anchorEl);
+
+  const handleOpenMenu = (e) => {
+    setAnchorEl(e.currentTarget)
+  }
+
+  // Logout
+  const logoutUser = () => {
+    sessionStorage.removeItem("user");
+    setAuthUser({
+      name: "",
+      id: "",
+      token: "",
+      isAdmin: false,
+    });
+  }
+
+  // User Profile Menu
+  const menuItems = [
+    {
+      name: 'Profile',
+      link: `${!authUser.isAdmin ? '/user' : '/admin'}`
+    },
+    {
+      name: `${!authUser.isAdmin ? 'Fundraiser History' : 'Review Funds'}`,
+      link: `${!authUser.isAdmin ? '/user/funds' : '/admin/funds'}`
+    },
+    {
+      name: 'Logout',
+      link: '/',
+      onClick: logoutUser
+    }
+  ];
 
   // Nav links for general user
   const navItems = [
@@ -76,6 +117,7 @@ const Navbar = () => {
     }
   ]
 
+  // login-signup buttons
   const authButtons = [
     <Button
       text={'Login'}
@@ -126,7 +168,16 @@ const Navbar = () => {
                       )
                   }
                   {
-                    authButtons.map(button => button)
+                    authUser.token ?
+                      <div className={styles.dropdownButton} onClick={handleOpenMenu}>
+                        <div className={styles.menuLeft}>
+                          <Image src={userAvatarIcon.src} width={30} height={30} />
+                          <p className={styles.userName}>{authUser.name}</p>
+                        </div>
+
+                        <Image src={downArrowIcon.src} width={10} height={5} />
+                      </div>
+                      : authButtons.map(button => button)
                   }
                 </div>
               )
@@ -147,6 +198,15 @@ const Navbar = () => {
         <SignupModal
           open={openSignup}
           setOpen={setOpenSignup}
+        />
+      }
+      {
+        openMenu &&
+        <CustomMenu
+          open={openMenu}
+          anchorEl={anchorEl}
+          setAnchorEl={setAnchorEl}
+          menuItems={menuItems}
         />
       }
     </>

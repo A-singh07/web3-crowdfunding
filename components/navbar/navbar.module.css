@@ -4,7 +4,7 @@
   top: 0;
   z-index: 1300;
   width: 100%;
-  /* transition: 0.1s linear; */
+  transition: 0.1s ease-out;
 }
 
 .wrapper {
@@ -33,8 +33,7 @@
 }
 
 .navRight {
-  max-height: 50px;
-  height: max-content;
+  height: 46px; /* Don't change */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,6 +41,7 @@
   gap: 32px;
   color: var(--grey-darker);
 }
+
 .navRight > a {
   font-weight: 400;
   font-size: 1rem;
@@ -52,6 +52,35 @@
 .navScroll {
   background: #ffffff;
   box-shadow: var(--box-shadow-1);
+}
+
+.dropdownButton {
+  width: 232px; /* Don't change */
+  height: 100%;
+  background: var(--primary-30);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.dropdownButton .menuLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dropdownButton .userName {
+  max-width: 150px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 14px;
+  color: var(--grey-darker);
 }
 
 @media screen and (max-width: 900px) {

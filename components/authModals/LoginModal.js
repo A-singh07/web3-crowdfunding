@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useRouter } from 'next/router';
 import CustomDialog from '../customDialog/CustomDialog';
+
+import { AuthContext } from '../../context/AllContext';
 
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
@@ -15,6 +18,9 @@ import styles from './authModal.module.css';
 
 
 const LoginModal = ({ open, setOpen }) => {
+
+  const { setAuthUser } = useContext(AuthContext);
+  const router = useRouter();
 
   const [values, setValues] = useState({
     email: '',
@@ -33,7 +39,33 @@ const LoginModal = ({ open, setOpen }) => {
 
   const userLogin = () => {
     // Login api call
-    console.log(values)
+    // console.log(values)
+
+    // Dummy User login
+    if (values.email === "user@gmail.com" && values.password === '123') {
+      const userData = {
+        name: "General User 001",
+        id: "GU001",
+        token: "qwerty0123456789",
+        isAdmin: false
+      }
+      sessionStorage.setItem("user", JSON.stringify(userData))
+      setAuthUser(userData);
+      setOpen(false);
+      router.push('/funds')
+
+    } else if (values.email === "admin@gmail.com" && values.password === '123') {
+      const userData = {
+        name: "Admin 001",
+        id: "A001",
+        token: "qwerty0123456789",
+        isAdmin: true
+      }
+      sessionStorage.setItem("user", JSON.stringify(userData))
+      setAuthUser(userData);
+      setOpen(false);
+      router.push('/admin/funds');
+    }
   }
 
   return (

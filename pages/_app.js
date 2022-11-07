@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import '../styles/globals.css';
 import '../styles/root.css';
@@ -26,8 +26,15 @@ function MyApp({ Component, pageProps }) {
   const [authUser, setAuthUser] = useState({
     name: "",
     id: "",
+    token: "",
     isAdmin: false,
   })
+
+  // Get user data from session in case of reload
+  useEffect(() => {
+    JSON.parse(sessionStorage.getItem("user")).token &&
+      setAuthUser(JSON.parse(sessionStorage.getItem("user")))
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
