@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { FundsContext } from '../../context/FundsContext';
+import { FundsContext } from '../../context/AllContext';
 import CategoryCard from './CategoryCard';
 import styles from './categoriesSection.module.css';
 

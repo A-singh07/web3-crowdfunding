@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import { RegisterFundContext } from '../../context/RegisterFundContext';
+import { RegisterFundContext } from '../../context/AllContext';
 
 import CustomButton from '../customButton/CustomButton';
 import FundDetailsForm from './FundDetailsForm';

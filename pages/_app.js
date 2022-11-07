@@ -6,7 +6,7 @@ import '../styles/root.css';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material';
 
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AllContext';
 
 import Navbar from '../components/navbar/Navbar';
 import Footer from '../components/footer/Footer';

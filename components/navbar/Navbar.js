@@ -6,7 +6,7 @@ import CustomDrawer from '../customDrawer/CustomDrawer';
 import LoginModal from '../authModals/LoginModal';
 import SignupModal from '../authModals/SignupModal';
 
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../context/AllContext';
 
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import styles from './navbar.module.css';

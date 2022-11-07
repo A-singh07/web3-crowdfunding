@@ -6,7 +6,7 @@ import InfoCard from '../card/InfoCard';
 import DonateModal from '../confirmModal/DonateModal';
 import ApproveModal from '../confirmModal/ApproveModal';
 
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../context/AllContext';
 
 import styles from './fundDetailsLayout.module.css';
 

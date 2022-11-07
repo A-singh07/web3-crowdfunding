@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FundsContext } from '../../context/FundsContext';
+import { FundsContext } from '../../context/AllContext';
 // Data
 import { fundsPageData, fundCategories } from '../../data/fundDetails';
 

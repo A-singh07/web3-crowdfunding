@@ -7,7 +7,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-import { RegisterFundContext } from '../../context/RegisterFundContext';
+import { RegisterFundContext } from '../../context/AllContext';
 
 import { fundCategories } from '../../data/fundDetails';
 

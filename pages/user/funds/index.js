@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FundsContext } from '../../../context/FundsContext';
+import { FundsContext } from '../../../context/AllContext';
 
 // import FundsListLayout from '../../../components/fundsListLayout/FundsListLayout';
 import CardSection from '../../../components/section/CardSection';
