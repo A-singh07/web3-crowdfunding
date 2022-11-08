@@ -106,11 +106,6 @@ const Navbar = () => {
       name: 'Review funds',
       link: '/admin/funds'
     },
-    // about and contact us not req for admin.
-    {
-      name: 'About',
-      link: '/about'
-    },
     {
       name: 'Contact Us',
       link: '/contactus'

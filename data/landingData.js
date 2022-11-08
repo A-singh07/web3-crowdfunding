@@ -35,4 +35,14 @@ export const testimonyData = [
     days: '2 months ago',
     review: "I Express my heartfelt gratitude towards you all for saving my son, Vedant's life! He was suffering from CLD Budd Chiari Syndrome, and a liver transplant was his only hope at survival, but we couldn't afford it. We would've lost him had it not been for your generosity and prayers.Thank you for lighting up our lives.He is doing better than ever post his liver transplant.It was all because of you that today he's alive and healthy. Thank you."
   },
+  {
+    name: 'Tejasvi Sharma',
+    days: '2 months ago',
+    review: "I Express my heartfelt gratitude towards you all for saving my son, Vedant's life! He was suffering from CLD Budd Chiari Syndrome, and a liver transplant was his only hope at survival, but we couldn't afford it. We would've lost him had it not been for your generosity and prayers.Thank you for lighting up our lives.He is doing better than ever post his liver transplant.It was all because of you that today he's alive and healthy. Thank you."
+  },
+  {
+    name: 'Anshul Kumar',
+    days: '2 months ago',
+    review: "I Express my heartfelt gratitude towards you all for saving my son, Vedant's life! He was suffering from CLD Budd Chiari Syndrome, and a liver transplant was his only hope at survival, but we couldn't afford it. We would've lost him had it not been for your generosity and prayers.Thank you for lighting up our lives.He is doing better than ever post his liver transplant.It was all because of you that today he's alive and healthy. Thank you."
+  },
 ]

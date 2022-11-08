@@ -6,7 +6,7 @@ import { fundDetails, fundsData } from '../../data/fundDetails';
 import CardSection from '../../components/section/CardSection';
 import FundDetailsLayout from '../../components/details/FundDetailsLayout';
 
-const FundDetetails = () => {
+const FundDetails = () => {
 
   const router = useRouter()
   const { id } = router.query
@@ -16,9 +16,9 @@ const FundDetetails = () => {
   return (
     <main>
       <FundDetailsLayout fundDetails={fundDetails} />
-      <CardSection heading={'Related Funds'} fundsData={fundsData} />
+      <CardSection heading={'Related Funds'} fundsData={fundsData} baseUrl={'/funds'} />
     </main>
   )
 }
 
-export default FundDetetails
+export default FundDetails

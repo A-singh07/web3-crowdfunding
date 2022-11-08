@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
 
   // Get user data from session in case of reload
   useEffect(() => {
-    JSON.parse(sessionStorage.getItem("user")).token &&
+    JSON.parse(sessionStorage.getItem("user")) &&
       setAuthUser(JSON.parse(sessionStorage.getItem("user")))
   }, [])
 

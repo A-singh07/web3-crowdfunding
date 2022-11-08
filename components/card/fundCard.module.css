@@ -51,10 +51,10 @@
   color: var(--grey-dark);
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 600px) {
   .wrapper {
-    max-width: 400px;
-    width: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

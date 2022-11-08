@@ -6,18 +6,19 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 
 import styles from './fundCard.module.css';
 
-const FundCard = ({
-  id,
-  category,
-  status,
-  heading,
-  description,
-  raisedAmount,
-  targetAmount,
-  progress,
-  baseUrl,
-  isCampaigner
-}) => {
+const FundCard = ({ data, baseUrl }) => {
+
+  const {
+    id,
+    category,
+    status,
+    heading,
+    description,
+    raisedAmount,
+    targetAmount,
+    progress,
+    isCampaigner
+  } = data
 
   // Different Chip's style for different status
   const getChipProps = (status) => {
@@ -82,7 +83,7 @@ const FundCard = ({
         />
         <CustomButton
           text={'View More'}
-          link={baseUrl + `${id}`}
+          link={baseUrl + `/${id}`}
           style={{ width: '100%', padding: '0.75rem 1.5rem' }}
         />
       </div>

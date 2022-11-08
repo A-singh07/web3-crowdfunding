@@ -34,14 +34,14 @@ const Funds = () => {
                 key={data.categoryId}
                 heading={data.categoryName}
                 fundsData={data.funds}
-                baseUrl={'/admin/funds/'}
+                baseUrl={'/admin/funds'}
               /> :
               data.funds.length !== 0 &&
               <CardSection
                 key={data.categoryId}
                 heading={data.categoryName}
                 fundsData={data.funds}
-                baseUrl={'/admin/funds/'}
+                baseUrl={'/admin/funds'}
               />
           )
         }

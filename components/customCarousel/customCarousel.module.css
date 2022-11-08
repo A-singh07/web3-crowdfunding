@@ -1,0 +1,17 @@
+.carouselContainer {
+  width: 100%;
+  padding: 0 0.5rem 3rem;
+  height: max-content;
+  user-select: none;
+}
+
+.dotActive {
+  opacity: 1;
+  background: var(--primary);
+}
+
+@media screen and (max-width: 600px) {
+  .carouselContainer {
+    padding: 0 0 3rem;
+  }
+}

@@ -189,7 +189,16 @@ export const fundsPageData = [
         raisedAmount: `80000`,
         targetAmount: `100000`,
         progress: '80'
-      }
+      },
+      {
+        id: 12395,
+        category: "Community",
+        heading: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
+        description: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
+        raisedAmount: `65000`,
+        targetAmount: `100000`,
+        progress: '65'
+      },
     ]
   },
   {

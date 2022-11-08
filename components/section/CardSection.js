@@ -1,49 +1,37 @@
 import React from 'react';
 import HeadingLight from '../header/HeaderLight';
 import FundCard from '../card/FundCard';
+import CustomCarousel from '../customCarousel/CustomCarousel';
 import styles from './cardSection.module.css';
 
-const CardSection = ({ heading, fundsData, baseUrl, showAll, style }) => {
+const CardSection = ({ heading, fundsData, baseUrl, showAll, autoplay, style }) => {
 
   return (
     <section className={styles.wrapper} style={style}>
       <HeadingLight heading={heading} />
-      <div className={styles.cardContainer + ` ${showAll && styles.cardContainerShowAll}`}>
-        {
-          fundsData && fundsData.length !== 0 ?
-            fundsData.map((data, i) =>
-              !showAll ?
-                i < 3 &&
-                <FundCard
-                  key={data.id}
-                  id={data.id}
-                  category={data.category}
-                  heading={data.heading}
-                  description={data.description}
-                  raisedAmount={data.raisedAmount}
-                  targetAmount={data.targetAmount}
-                  progress={data.progress}
-                  baseUrl={baseUrl}
-                /> :
-                <FundCard
-                  key={data.id}
-                  id={data.id}
-                  category={data.category}
-                  status={data.status}
-                  heading={data.heading}
-                  description={data.description}
-                  raisedAmount={data.raisedAmount}
-                  targetAmount={data.targetAmount}
-                  progress={data.progress}
-                  baseUrl={baseUrl}
-                  isCampaigner
-                />
-            ) :
-            <div className={styles.noFundMessage}>
-              No funds to show here
-            </div>
-        }
-      </div>
+      {
+        fundsData.length !== 0 ?
+          showAll ?
+            <div className={styles.cardContainer}>
+              {
+                fundsData.map(data =>
+                  <FundCard
+                    data={data}
+                    baseUrl={baseUrl}
+                  />
+                )
+              }
+            </div> :
+            <CustomCarousel
+              data={fundsData}
+              Component={FundCard}
+              baseUrl={baseUrl}
+              autoplay={autoplay}
+            /> :
+          <div className={styles.noFundMessage}>
+            No funds to show here
+          </div>
+      }
     </section>
   )
 }

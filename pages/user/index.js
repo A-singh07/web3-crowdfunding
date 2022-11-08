@@ -13,6 +13,7 @@ const Profile = () => {
         heading={'Your Contributions'}
         fundsData={fundsData}
         style={{ paddingBottom: '6rem' }}
+        baseUrl={'/funds'}
       />
     </>
   )

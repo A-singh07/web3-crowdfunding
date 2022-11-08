@@ -13,6 +13,8 @@ export default function Home() {
       <CardSection
         heading={'Featured Funds'}
         fundsData={fundsData}
+        baseUrl={'/funds'}
+        autoplay
         style={{ paddingBottom: '6rem' }}
       />
       <ThemeSection
