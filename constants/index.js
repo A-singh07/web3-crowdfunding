@@ -576,7 +576,7 @@ export const CONTRACT_ABI = [
   }
 ]
 
-export const CONTRACT_ADDRESS = "0xBe27EDA708f1a59260B9dd46373DB8c1a721f43D"
+export const CONTRACT_ADDRESS = "0x5B7c072f3cbe491918EF59164Ff48bDbeaCEEAda"
 
 
 export const CONTRACT_ABI_TEST = [
@@ -593,13 +593,8 @@ export const CONTRACT_ABI_TEST = [
         "type": "uint256"
       }
     ],
-    "name": "contacts",
+    "name": "crowdFundingList",
     "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
       {
         "internalType": "string",
         "name": "name",
@@ -607,8 +602,18 @@ export const CONTRACT_ABI_TEST = [
       },
       {
         "internalType": "string",
-        "name": "phone",
+        "name": "description",
         "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "target",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minContribution",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -617,7 +622,7 @@ export const CONTRACT_ABI_TEST = [
   },
   {
     "inputs": [],
-    "name": "count",
+    "name": "fundCount",
     "outputs": [
       {
         "internalType": "uint256",
@@ -638,15 +643,103 @@ export const CONTRACT_ABI_TEST = [
       },
       {
         "internalType": "string",
-        "name": "_phone",
+        "name": "_description",
         "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_target",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_minContribution",
+        "type": "uint256"
       }
     ],
-    "name": "createContact",
+    "name": "createFundingTemp",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllCrowdFundings",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "target",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minContribution",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct TestContract.CrowdFunding[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_index",
+        "type": "uint256"
+      }
+    ],
+    "name": "getFundDetails",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "target",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minContribution",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct TestContract.CrowdFunding",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   }
 ]
 
-export const CONTRACT_ADDRESS_TEST = "0x3E88c6B1818D83600f47DfBd4C5a40Bb33c18E12"
+export const CONTRACT_ADDRESS_TEST = "0x1bA5F48970F910abBcD29E1EC36E56D303E5697a"

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { CONTRACT_ABI, CONTRACT_ADDRESS } from '../constants';
+import { CONTRACT_ABI, CONTRACT_ADDRESS, CONTRACT_ABI_TEST, CONTRACT_ADDRESS_TEST } from '../constants';
 import Web3 from 'web3';
 
 const Web3Component = () => {
 
   const [walletAddress, setWalletAddress] = useState();
-  const [stateVariable, setStateVariable] = useState();
+  const [stateVariable, setStateVariable] = useState([]);
 
   let provider = typeof window !== "undefined" && window.ethereum;
 
@@ -16,12 +16,16 @@ const Web3Component = () => {
 
       const accounts = await provider.request({
         method: "eth_requestAccounts",
-      });
+      }).then(res => {
+        setWalletAddress(res[0])
+        console.log(res[0])
+      })
 
-      if (accounts.length) {
-        setWalletAddress(accounts[0]);
-        console.log(accounts[0])
-      }
+      // if (accounts.length) {
+      //   setWalletAddress(accounts[0]);
+      //   console.log(accounts[0])
+      // }
+
     } catch (error) {
       console.error(error);
     }
@@ -30,7 +34,8 @@ const Web3Component = () => {
   // Get the smart contract
   const getContract = () => {
     const web3 = new Web3(provider);
-    return new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+    // return new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+    return new web3.eth.Contract(CONTRACT_ABI_TEST, CONTRACT_ADDRESS_TEST);
   };
 
   // Reading data in smart contract
@@ -38,11 +43,11 @@ const Web3Component = () => {
     const contract = getContract();
 
     contract.methods
-      .ListedFunds()
+      .getAllCrowdFundings()
       .call()
       .then((res) => {
-        console.log(res);
-        // setStateVariable(res);
+        console.log("Response:", res);
+        setStateVariable(res);
       })
       .catch((err) => console.log(err));
   }
@@ -52,7 +57,7 @@ const Web3Component = () => {
     const contract = getContract();
 
     contract.methods
-      .createCrowdFunding("Fund name 123", 4000, 50)
+      .createFundingTemp("Fund 123", "123123123123", 3400, 50)
       .send({ from: walletAddress })
       .then((res) => {
         console.log(res);
@@ -78,6 +83,21 @@ const Web3Component = () => {
         <button onClick={writeData} style={{ border: '1px solid black', padding: '1rem' }}>
           Write state
         </button>
+        <br />
+        <br />
+        <br />
+        <div>Funds:</div>
+        {
+          stateVariable.length !== 0 &&
+          stateVariable.map((item, i) =>
+            <div key={i} style={{ border: '1px solid black', margin: '1rem 0' }}>
+              <p>Name: {item.name}</p>
+              <p>Description: {item.description}</p>
+              <p>target: {item.target}</p>
+              <p>Min. Contribution: {item.minContribution}</p>
+            </div>
+          )
+        }
       </div>
     </>
   )
