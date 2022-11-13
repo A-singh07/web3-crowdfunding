@@ -14,10 +14,12 @@ const CardSection = ({ heading, fundsData, baseUrl, showAll, autoplay, style }) 
           showAll ?
             <div className={styles.cardContainer}>
               {
-                fundsData.map(data =>
+                fundsData.map((data, i) =>
                   <FundCard
+                    key={i}
                     data={data}
                     baseUrl={baseUrl}
+                    isCampaigner
                   />
                 )
               }
