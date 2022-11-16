@@ -67,16 +67,18 @@ const Navbar = () => {
   const menuItems = [
     {
       name: 'Profile',
-      link: `${!authUser.isAdmin ? '/user' : '/admin'}`
+      link: `${!authUser.isAdmin ? '/user' : '/admin'}`,
+      itemOnClick: () => { }
     },
     {
       name: `${!authUser.isAdmin ? 'Fundraiser History' : 'Review Funds'}`,
-      link: `${!authUser.isAdmin ? '/user/funds' : '/admin/funds'}`
+      link: `${!authUser.isAdmin ? '/user/funds' : '/admin/funds'}`,
+      itemOnClick: () => { }
     },
     {
       name: 'Logout',
       link: '/',
-      onClick: logoutUser
+      itemOnClick: logoutUser
     }
   ];
 
@@ -107,7 +109,7 @@ const Navbar = () => {
       link: '/admin/funds'
     },
     {
-      name: 'Contact Us',
+      name: 'Help',
       link: '/contactus'
     }
   ]
@@ -166,11 +168,11 @@ const Navbar = () => {
                     authUser.token ?
                       <div className={styles.dropdownButton} onClick={handleOpenMenu}>
                         <div className={styles.menuLeft}>
-                          <Image src={userAvatarIcon.src} width={30} height={30} />
+                          <Image src={userAvatarIcon.src} width={30} height={30} alt='' />
                           <p className={styles.userName}>{authUser.name}</p>
                         </div>
 
-                        <Image src={downArrowIcon.src} width={10} height={5} />
+                        <Image src={downArrowIcon.src} width={10} height={5} alt='' />
                       </div>
                       : authButtons.map(button => button)
                   }
@@ -180,7 +182,7 @@ const Navbar = () => {
         </nav>
       </header>
 
-      {/* To avoid unnecessary rendering of modals in the DOM */}
+      {/* To avoid unnecessary rendering of modals on page load */}
       {
         openLogin &&
         <LoginModal

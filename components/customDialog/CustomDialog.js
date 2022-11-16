@@ -15,8 +15,10 @@ const CustomDialog = ({
   setOpen,
   primaryBtnText,
   primaryBtnClick,
+  primaryErrorBtn,  // error style primary btn
   secondaryBtnText,
   secondaryBtnClick,
+  secondaryErrorBtn, // error style secondary btn
   children
 }) => {
 
@@ -37,7 +39,7 @@ const CustomDialog = ({
       <DialogActions className={styles.actionsContainer}>
         <CustomButton
           secondary={!secondaryBtnText && true}
-          errorBtn={secondaryBtnText && true}
+          errorBtn={secondaryErrorBtn && true}
           text={secondaryBtnText ? secondaryBtnText : 'Cancel'}
           onClick={secondaryBtnClick ? secondaryBtnClick : () => setOpen(false)}
           style={{ padding: '0.75rem 1.125rem' }}
@@ -45,6 +47,7 @@ const CustomDialog = ({
         <CustomButton
           primary
           text={primaryBtnText}
+          errorBtn={primaryErrorBtn && true}
           onClick={primaryBtnClick}
           style={{ padding: '0.75rem 1.125rem' }}
           type={"submit"}

@@ -57,7 +57,7 @@ const Web3Component = () => {
     const contract = getContract();
 
     contract.methods
-      .createFundingTemp("Fund 123", "123123123123", 3400, 50)
+      .createFundingTemp("Medical Fund", "new dscasdriptiins c", 1200, 10)
       .send({ from: walletAddress })
       .then((res) => {
         console.log(res);

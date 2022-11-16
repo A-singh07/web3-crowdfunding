@@ -5,6 +5,7 @@ import Progressbar from '../progressbar/Progressbar';
 import InfoCard from '../card/InfoCard';
 import DonateModal from '../confirmModal/DonateModal';
 import ApproveModal from '../confirmModal/ApproveModal';
+import CustomMenu from '../customMenu/CustomMenu';
 
 import { AuthContext } from '../../context/AllContext';
 
@@ -19,6 +20,7 @@ const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
 
   const [openDonate, setOpenDonate] = useState(false);
   const [openApprove, setOpenApprove] = useState(false);
+  const [approveType, setApproveType] = useState(''); // 'approve', 'reqEdit', 'reject'
 
   const router = useRouter()
   const { id } = router.query
@@ -31,10 +33,47 @@ const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
     })
   }, []);
 
-  // Approve now (for admin)
-  const approveFund = () => {
-    setOpenApprove(true)
+
+  // Action menu
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openMenu = Boolean(anchorEl);
+
+  const handleOpenMenu = (e) => {
+    setAnchorEl(e.currentTarget)
   }
+
+  // Approve now modal (for admin)
+  const approveFund = () => {
+    setOpenApprove(true);
+    setApproveType('Approve');
+  }
+
+  const requestEdit = () => {
+    setOpenApprove(true);
+    setApproveType('Request Edit');
+  }
+
+  const rejectFund = () => {
+    setOpenApprove(true)
+    setApproveType('Reject');
+  }
+
+  // Action Menu
+  const menuItems = [
+    {
+      name: 'Approve',
+      itemOnClick: approveFund
+    },
+    {
+      name: 'Request edit',
+      itemOnClick: requestEdit
+    },
+    {
+      name: 'Reject',
+      itemOnClick: rejectFund
+    }
+  ];
+
 
   // Contribute now (for Gen. User)
   const donateFund = () => {
@@ -71,9 +110,9 @@ const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
           <div className={styles.rightSection + ` ${isScrolled ? styles.rightSectionScrolled : ''}`}>
             <CustomButton
               primary
-              text={isAdmin ? 'Approve Now' : isCampaigner ? 'Edit Fund' : 'Contribute Now'}
+              text={isAdmin ? 'Take Action' : isCampaigner ? 'Edit Fund' : 'Contribute Now'}
               style={{ width: '100%' }}
-              onClick={isAdmin ? approveFund : isCampaigner ? editFund : donateFund}
+              onClick={isAdmin ? handleOpenMenu : isCampaigner ? editFund : donateFund}
             />
             <div className={styles.deadlineContainer}>
               <p className={styles.deadlineHeading}>Deadline:</p>
@@ -84,17 +123,21 @@ const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
             </div>
 
             <div className={styles.progressContainer}>
-              <Progressbar
-                height={10}
-                raisedAmount={fundDetails.raisedAmount}
-                targetAmount={fundDetails.targetAmount}
-                progress={60}
-              />
-              <div className={styles.progressBottom}>
-                <p className={styles.supporters}>{fundDetails.supporters ? fundDetails.supporters : 0}</p>
-                <p className={styles.supportersHeading}>Supporters</p>
-              </div>
-
+              {
+                !isAdmin &&
+                <>
+                  <Progressbar
+                    height={10}
+                    raisedAmount={fundDetails.raisedAmount}
+                    targetAmount={fundDetails.targetAmount}
+                    progress={60}
+                  />
+                  <div className={styles.progressBottom}>
+                    <p className={styles.supporters}>{fundDetails.supporters ? fundDetails.supporters : 0}</p>
+                    <p className={styles.supportersHeading}>Supporters</p>
+                  </div>
+                </>
+              }
               <div className={styles.cardWrapper}>
                 <InfoCard
                   heading={'Campaigner Info'}
@@ -114,6 +157,7 @@ const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
             setOpen={setOpenApprove}
             fundId={fundDetails.id}
             fundName={fundDetails.name}
+            approveType={approveType}
           />
           : <DonateModal
             open={openDonate}
@@ -122,6 +166,15 @@ const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
             minAmount={fundDetails.minAmount}
             fundName={fundDetails.name}
           />
+      }
+      {
+        openMenu &&
+        <CustomMenu
+          open={openMenu}
+          anchorEl={anchorEl}
+          setAnchorEl={setAnchorEl}
+          menuItems={menuItems}
+        />
       }
     </>
   )

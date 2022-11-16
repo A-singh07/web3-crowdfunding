@@ -4,7 +4,7 @@ import CustomDialog from '../customDialog/CustomDialog';
 
 import styles from './donateModal.module.css';
 
-const ApproveModal = ({ open, setOpen, fundId, fundName }) => {
+const ApproveModal = ({ open, setOpen, fundId, fundName, approveType }) => {
 
   const [fundDetails, setFundDetails] = useState({
     fundId: fundId,
@@ -26,9 +26,18 @@ const ApproveModal = ({ open, setOpen, fundId, fundName }) => {
   const approveFund = () => {
 
     // TODO: Check for login status
-
     alert(`"${fundName}" is approved`)
     setOpen(false)
+  }
+
+  const requestEdit = () => {
+    // TODO: Check for login status
+    if (fundDetails.message) {
+      alert(`"${fundName}" is in process now`)
+      setOpen(false)
+    } else {
+      setError("Enter a message!");
+    }
   }
 
   // Request call to approve fund
@@ -39,7 +48,7 @@ const ApproveModal = ({ open, setOpen, fundId, fundName }) => {
       alert(`"${fundName}" is rejected`)
       setOpen(false)
     } else {
-      setError("Reject with a message");
+      setError("Reject with a message!");
     }
   }
 
@@ -49,10 +58,13 @@ const ApproveModal = ({ open, setOpen, fundId, fundName }) => {
       body={`Fund: ${fundName}`}
       open={open}
       setOpen={setOpen}
-      primaryBtnClick={approveFund}
-      primaryBtnText={"Approve"}
-      secondaryBtnText={"Reject"}
-      secondaryBtnClick={rejectFund}
+      primaryBtnClick={
+        approveType === 'Approve' ? approveFund
+          : approveType === 'Request Edit' ? requestEdit
+            : approveType === 'Reject' ? rejectFund : () => { console.log('No type selected!') }
+      }
+      primaryBtnText={approveType}
+      primaryErrorBtn={approveType === 'Reject'}
     >
       <TextField
         className={styles.fields}

@@ -1,5 +1,6 @@
 import React from 'react';
-import Link from 'next/link'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
@@ -7,12 +8,23 @@ import styles from './customMenu.module.css';
 
 const CustomMenu = ({ open, anchorEl, setAnchorEl, menuItems }) => {
 
+  // const { name, link, itemOnClick } = menuItems;
+
+  const router = useRouter();
+
   const handleClose = () => {
     setAnchorEl(null)
   }
 
+  const handleClick = (item) => {
+
+    item.itemOnClick() ? itemOnClick() : null;
+    item.link && router.push(item.link);
+    handleClose();
+  }
+
   return (
-    <div>
+    <>
       <Menu
         id="profile-menu"
         className={styles.menu}
@@ -28,18 +40,19 @@ const CustomMenu = ({ open, anchorEl, setAnchorEl, menuItems }) => {
       >
         {
           menuItems && menuItems.map((item, i) =>
-            <Link href={item.link} key={i} passHref>
-              <MenuItem
-                onClick={item.onClick ? () => { item.onClick(); handleClose(); } : handleClose}
-                className={styles.menuItems}
-              >
-                {item.name}
-              </MenuItem>
-            </Link>
+            // <Link href={item.link} key={i} passHref>
+            <MenuItem
+              key={i}
+              onClick={() => handleClick(item)}
+              className={styles.menuItems}
+            >
+              {item.name}
+            </MenuItem>
+            // </Link>
           )
         }
       </Menu>
-    </div>
+    </>
   )
 }
 

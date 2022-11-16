@@ -21,10 +21,10 @@ const CustomButton = ({
 
   const router = useRouter()
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     link
       ? router.push(link)
-      : onClick && onClick()
+      : onClick && onClick(e)
   }
 
   return (
