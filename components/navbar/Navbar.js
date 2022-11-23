@@ -9,6 +9,7 @@ import LoginModal from '../authModals/LoginModal';
 import SignupModal from '../authModals/SignupModal';
 
 import { AuthContext } from '../../context/AllContext';
+import { Web3Context } from '../../context/Web3Context';
 
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import userAvatarIcon from '../../assets/icons/user-avatar.svg';
@@ -20,6 +21,7 @@ const Navbar = () => {
 
   // Auth Context
   const { authUser, setAuthUser } = useContext(AuthContext);
+  const { connectMeta, userLogout } = useContext(Web3Context);
 
   const [mobileView, setMobileView] = useState(true)
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,6 +39,10 @@ const Navbar = () => {
     window.addEventListener('scroll', () => {
       window.scrollY > 30 ? setIsScrolled(true) : setIsScrolled(false)
     })
+
+
+    // Get metamask
+    connectMeta();
   }, [])
 
 
@@ -54,13 +60,16 @@ const Navbar = () => {
 
   // Logout
   const logoutUser = () => {
-    sessionStorage.removeItem("user");
-    setAuthUser({
-      name: "",
-      id: "",
-      token: "",
-      isAdmin: false,
-    });
+    userLogout()
+      .then(res => {
+        sessionStorage.removeItem("user")
+        setAuthUser({
+          name: "",
+          addr: "",
+          isLogIn: "",
+          isAdmin: false,
+        });
+      })
   }
 
   // User Profile Menu
@@ -165,7 +174,7 @@ const Navbar = () => {
                       )
                   }
                   {
-                    authUser.token ?
+                    authUser.isLogIn ?
                       <div className={styles.dropdownButton} onClick={handleOpenMenu}>
                         <div className={styles.menuLeft}>
                           <Image src={userAvatarIcon.src} width={30} height={30} alt='' />

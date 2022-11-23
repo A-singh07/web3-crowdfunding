@@ -11,3 +11,8 @@
 .fields * {
   transition: all 0.2s ease;
 }
+
+.inst {
+  font-size: 0.75rem;
+  color: var(--grey-darker);
+}

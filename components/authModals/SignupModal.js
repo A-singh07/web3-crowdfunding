@@ -1,13 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import CustomDialog from '../customDialog/CustomDialog';
+
+import { Web3Context } from '../../context/Web3Context';
 
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -16,8 +14,11 @@ import styles from './authModal.module.css';
 
 const SignupModal = ({ open, setOpen }) => {
 
+  const { walletAddress, registerUser } = useContext(Web3Context);
+
   const [values, setValues] = useState({
-    email: '',
+    addr: '',
+    name: '',
     password: '',
     confirmPassword: '',
     showPassword: false,
@@ -34,33 +35,55 @@ const SignupModal = ({ open, setOpen }) => {
   }
 
   const userSignup = () => {
-    // Match passwords
-    // If ok -> Signup api call
-    console.log(values)
+    if (values.password !== values.confirmPassword) {
+      setError(true);
+      return
+    }
+    setError(false)
+
+    const data = {
+      addr: walletAddress,
+      name: values.name,
+      password: values.password,
+      confirmPassword: values.confirmPassword,
+    }
+
+    registerUser(data)
+      .then(res => {
+        setOpen(false)
+        alert(`User registered successfully, please login.`)
+        // console.log(res)
+      })
+      .catch(err => {
+        alert('Something went wrong!')
+        setOpen(false)
+        console.log(err)
+      })
   }
+
 
   return (
     <CustomDialog
       heading={'Signup'}
-      body={`Please create an account if you haven't already!`}
+      body={`Selected wallet address:`}
       open={open}
       setOpen={setOpen}
       primaryBtnClick={userSignup}
-      primaryBtnText="Login"
+      primaryBtnText="Signup"
     >
-      <form className={styles.formContainer}>
+      <p className={styles.walletAdd}>{walletAddress}</p>
+      <p className={styles.inst}>Switch to desired wallet using MetaMask extension</p>
+      <div className={styles.formContainer}>
         <TextField
           className={styles.fields}
-          id="email"
-          name="email"
-          type={'email'}
-          label={'Email'}
-          value={values.email}
+          id="name"
+          name="name"
+          type={'name'}
+          label={'Name'}
+          value={values.name}
           onChange={handleChange}
           variant="outlined"
           margin="normal"
-          error={error}
-          helperText={error && `Incorrect email`}
           autoFocus
         />
 
@@ -75,7 +98,6 @@ const SignupModal = ({ open, setOpen }) => {
           variant="outlined"
           margin="normal"
           error={error}
-          helperText={error && `Incorrect password`}
           InputProps={{
             endAdornment:
               <InputAdornment position="end">
@@ -113,7 +135,7 @@ const SignupModal = ({ open, setOpen }) => {
               </InputAdornment>
           }}
         />
-      </form>
+      </div>
     </CustomDialog>
   )
 }
