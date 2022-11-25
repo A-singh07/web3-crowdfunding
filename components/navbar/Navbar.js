@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router'
 
 import Button from '../customButton/CustomButton';
 import CustomDrawer from '../customDrawer/CustomDrawer';
@@ -20,8 +21,10 @@ import styles from './navbar.module.css';
 const Navbar = () => {
 
   // Auth Context
-  const { authUser, setAuthUser } = useContext(AuthContext);
-  const { connectMeta, userLogout } = useContext(Web3Context);
+  const { authUser, setAuthUser, loginModalOpen, setLoginModalOpen } = useContext(AuthContext);
+  const { userLogout } = useContext(Web3Context);
+
+  const router = useRouter();
 
   const [mobileView, setMobileView] = useState(true)
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,14 +43,11 @@ const Navbar = () => {
       window.scrollY > 30 ? setIsScrolled(true) : setIsScrolled(false)
     })
 
-
-    // Get metamask
-    connectMeta();
   }, [])
 
 
   // Auth modals
-  const [openLogin, setOpenLogin] = useState(false);
+  // const [openLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
 
   // Profile Menu
@@ -60,6 +60,19 @@ const Navbar = () => {
 
   // Logout
   const logoutUser = () => {
+    if (authUser.isAdmin) {
+      router.push('/')
+      sessionStorage.removeItem("user")
+      setAuthUser({
+        name: "",
+        addr: "",
+        isLogIn: "",
+        isAdmin: false,
+      });
+      return
+    }
+
+    // Not for admin
     userLogout()
       .then(res => {
         sessionStorage.removeItem("user")
@@ -69,6 +82,7 @@ const Navbar = () => {
           isLogIn: "",
           isAdmin: false,
         });
+        router.push('/')
       })
   }
 
@@ -86,7 +100,6 @@ const Navbar = () => {
     },
     {
       name: 'Logout',
-      link: '/',
       itemOnClick: logoutUser
     }
   ];
@@ -128,7 +141,7 @@ const Navbar = () => {
     <Button
       text={'Login'}
       secondary
-      onClick={() => setOpenLogin(true)}
+      onClick={() => setLoginModalOpen(true)}
       style={!mobileView ? { padding: '0.75rem 1.5rem' } : {}}
       key={0}
     />,
@@ -193,10 +206,10 @@ const Navbar = () => {
 
       {/* To avoid unnecessary rendering of modals on page load */}
       {
-        openLogin &&
+        loginModalOpen &&
         <LoginModal
-          open={openLogin}
-          setOpen={setOpenLogin}
+          open={loginModalOpen}
+          setOpen={setLoginModalOpen}
         />
       }
       {

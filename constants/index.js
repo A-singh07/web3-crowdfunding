@@ -473,19 +473,6 @@ export const CONTRACT_ABI = [
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "noOfFunds",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -573,7 +560,7 @@ export const CONTRACT_ABI = [
   }
 ]
 
-export const CONTRACT_ADDRESS = "0x4F53eF38b6cd25fE8fa5A14239B8E46c1494C173"
+export const CONTRACT_ADDRESS = "0xFD14A0d29A86e9c447975b4f09C6969A2ea43BE4"
 
 
 export const CONTRACT_ABI_TEST = [

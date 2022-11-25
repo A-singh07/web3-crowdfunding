@@ -16,6 +16,7 @@ const CustomButton = ({
   rightIcon,
   link,
   onClick,
+  disableBtn,
   type
 }) => {
 
@@ -30,8 +31,12 @@ const CustomButton = ({
   return (
     <button
       className={styles.buttonWrapper +
-        ` ${secondary ? styles.secondaryBtn : errorBtn ? styles.errorBtn : styles.primaryBtn}`}
-      onClick={handleClick}
+        ` ${secondary ? styles.secondaryBtn
+          : errorBtn ? styles.errorBtn
+            : styles.primaryBtn
+        } ${disableBtn && styles.disableBtn}`
+      }
+      onClick={!disableBtn ? handleClick : () => { }}
       style={style}
       type={type ? type : 'button'}
     >

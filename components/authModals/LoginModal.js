@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import CustomDialog from '../customDialog/CustomDialog';
 
@@ -18,9 +18,11 @@ import styles from './authModal.module.css';
 const LoginModal = ({ open, setOpen }) => {
 
   const { setAuthUser } = useContext(AuthContext);
-  const { walletAddress, loginUser, getUserInfo } = useContext(Web3Context);
+  const { walletAddress, loginUser, getUserInfo, loginAdmin, getAdminInfo } = useContext(Web3Context);
 
   const router = useRouter();
+
+  const [IsAdminLogin, setIsAdminLogin] = useState(false);
 
   const [values, setValues] = useState({
     addr: '',
@@ -96,15 +98,47 @@ const LoginModal = ({ open, setOpen }) => {
     // }
   }
 
+  const adminLogin = () => {
+    const data = {
+      addr: walletAddress,
+      name: values.name,
+      password: values.password
+    }
+
+    loginAdmin(data)
+      .then(res => {
+        // get user info after login success
+        getAdminInfo(walletAddress)
+          .then(res => {
+            const userData = {
+              name: res.name,
+              isAdmin: true,
+              address: res.addr,
+              isLogIn: res.isLogIn
+            }
+            sessionStorage.setItem("user", JSON.stringify(userData))
+            setAuthUser(userData)
+            setOpen(false)
+            router.push('/admin/funds')
+          })
+      })
+      .catch(err => {
+        setOpen(false);
+        console.log(err)
+        alert('Something went wrong!')
+      })
+  }
+
 
   return (
     <CustomDialog
-      heading={'Login'}
+      heading={!IsAdminLogin ? 'Login' : 'Admin Login'}
       body={'Please log into your account!'}
       open={open}
       setOpen={setOpen}
-      primaryBtnClick={userLogin}
-      primaryBtnText="Login"
+      primaryBtnClick={!IsAdminLogin ? userLogin : adminLogin}
+      primaryBtnText={'Login'}
+      headerClass={IsAdminLogin && styles.adminModalHeader}
     >
       <p className={styles.walletAdd}>{walletAddress}</p>
       <p className={styles.inst}>Switch to desired wallet using MetaMask extension</p>
@@ -149,6 +183,9 @@ const LoginModal = ({ open, setOpen }) => {
           }}
         />
       </div>
+      <p className={styles.adminLogin} onClick={() => setIsAdminLogin(!IsAdminLogin)}>
+        Looking for {!IsAdminLogin ? 'Admin' : 'User'} login?
+      </p>
     </CustomDialog>
   )
 }

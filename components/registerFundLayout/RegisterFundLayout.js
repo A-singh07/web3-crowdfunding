@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 
-import { RegisterFundContext } from '../../context/AllContext';
+import { RegisterFundContext, AuthContext } from '../../context/AllContext';
+import { Web3Context } from '../../context/Web3Context'
 
 import CustomButton from '../customButton/CustomButton';
 import FundDetailsForm from './FundDetailsForm';
@@ -22,11 +23,43 @@ const steps = [
 
 const RegisterFundLayout = () => {
 
+  const { setLoginModalOpen, authUser } = useContext(AuthContext);
+  const { createFunding, walletAddress } = useContext(Web3Context);
   const router = useRouter();
 
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState([]);
   const [editFundData, setEditFundData] = useState({})
+
+  const [isFormFilled, setIsFormFilled] = useState(false)
+
+  const [formData, setFormData] = useState({
+    fundName: '',
+    category: '',
+    description: '',
+    targetAmount: '',
+    minContribution: '',
+    deadline: '',
+    rcpAddr: walletAddress,
+    document: []
+  })
+
+  // To check wheather all the fields are filled or not
+  useEffect(() => {
+    formData.name !== '' &&
+      formData.category !== '' &&
+      formData.description !== '' &&
+      formData.targetAmount !== '' &&
+      formData.minContribution !== '' &&
+      formData.deadline !== '' ? setIsFormFilled(true) : setIsFormFilled(false);
+  }, [formData])
+
+  // Date to seconds
+  const convertDate = (date) => {
+    const dt = new Date(date);
+    const seconds = dt.getTime() / 1000;
+    return seconds;
+  }
 
   // Make this a custom hook
   const scrollToTop = () => {
@@ -42,7 +75,18 @@ const RegisterFundLayout = () => {
     setActiveStep((step) => step + 1)
   }
 
+  const handleBack = () => {
+    setActiveStep((step) => step - 1)
+    scrollToTop();
+  }
+
   const handleComplete = () => {
+    // Allow only logged in user to proceed
+    if (!authUser.isLogIn) {
+      setLoginModalOpen(true)
+      return
+    }
+
     const newCompleted = completed;
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
@@ -50,17 +94,34 @@ const RegisterFundLayout = () => {
     scrollToTop();
   }
 
-  const handleBack = () => {
-    setActiveStep((step) => step - 1)
-    scrollToTop();
+  const createCrowdFunding = () => {
+    if (!authUser.isLogIn) return
+
+    const data = {
+      ...formData,
+      deadline: convertDate(formData.deadline)
+    }
+    createFunding(data)
+      .then(res => {
+        alert("Your crowdfunding has been submitted!")
+        router.push('/user/funds')
+      })
   }
 
   useEffect(() => {
     router.query.id && setEditFundData(router.query);
   }, [router])
 
+
+  // Check if user is not logged in. Open Login Modal
+  useEffect(() => {
+    !authUser.isLogIn ?
+      setLoginModalOpen(true)
+      : setLoginModalOpen(false)
+  }, [authUser])
+
   return (
-    <RegisterFundContext.Provider value={{ setEditFundData, editFundData }}>
+    <RegisterFundContext.Provider value={{ setFormData, formData, setEditFundData, editFundData }}>
       <section>
         <div className={styles.container}>
           <Stepper nonLinear alternativeLabel activeStep={activeStep}>
@@ -98,15 +159,15 @@ const RegisterFundLayout = () => {
               <CustomButton
                 text={activeStep === (steps.length - 1) ? "Submit" : "Next"}
                 primary
+                disableBtn={!isFormFilled ? true : false}
                 style={{
                   padding: '0.75rem 1.5rem',
                   marginLeft: 'auto'
                 }}
-                onClick={activeStep < (steps.length - 1) ? handleComplete : () => { }}
+                onClick={activeStep < (steps.length - 1) ? handleComplete : createCrowdFunding}
               />
             </div>
           </div>
-
         </div>
       </section>
     </RegisterFundContext.Provider>

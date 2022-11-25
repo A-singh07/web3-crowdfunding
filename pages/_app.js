@@ -31,6 +31,8 @@ function MyApp({ Component, pageProps }) {
     isAdmin: false,
   })
 
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+
   // Get user data from session in case of reload
   useEffect(() => {
     JSON.parse(sessionStorage.getItem("user")) &&
@@ -43,7 +45,7 @@ function MyApp({ Component, pageProps }) {
         <img src={bgImage.src} alt="background" className="bgImage" />
 
         <Web3Provider>
-          <AuthContext.Provider value={{ authUser, setAuthUser }}>
+          <AuthContext.Provider value={{ authUser, setAuthUser, loginModalOpen, setLoginModalOpen }}>
             <Navbar />
             <Component {...pageProps} />
             <Footer />

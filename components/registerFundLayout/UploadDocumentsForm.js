@@ -12,7 +12,6 @@ const UploadDocumentsForm = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
     })
   }
 
@@ -24,10 +23,10 @@ const UploadDocumentsForm = () => {
         <TextField
           className={styles.field}
           type="file"
-          id="fundName"
-          name="fundName"
+          id="document"
+          name="document"
           variant="outlined"
-          value={formData.fundName}
+          value={formData.document}
           onChange={handleChange}
           fullWidth
         />

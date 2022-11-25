@@ -1,5 +1,5 @@
 import { useEffect, useState, createContext } from 'react';
-import { CONTRACT_ABI, CONTRACT_ADDRESS, CONTRACT_ABI_TEST, CONTRACT_ADDRESS_TEST } from '../constants';
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from '../constants';
 import Web3 from 'web3';
 
 export const Web3Context = createContext();
@@ -13,7 +13,6 @@ const Web3Provider = ({ children }) => {
   // Get Meta Mask account
   const connectMeta = async () => {
     try {
-      // This can be removed for non-signed transactions. (Call())
       if (!provider) return alert("Please install MetaMask");
 
       const account = await provider.request({
@@ -28,12 +27,15 @@ const Web3Provider = ({ children }) => {
     }
   }
 
+  // Fetch contract
   const getContract = () => {
     const web3 = new Web3(provider);
     return new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS)
   }
 
-  // ---- Admin ---- //
+
+
+  // ---- ADMIN METHODS ---- //
 
   // Get list of all funds
   const getAllFundsList = async () => {
@@ -54,9 +56,54 @@ const Web3Provider = ({ children }) => {
 
       allFunds = [...allFunds, fund]
     }
-    // console.log("FUNDS: ", allFunds)
     return allFunds
   }
+
+  // Admin registration = selected wallet addr should be same as the addr from which contract is deployed
+  const RegisterAdmin = async (data) => {
+    const contract = getContract();
+    const response
+      = await contract.methods
+        .adminRegister(
+          data.addr,
+          data.password,
+          data.confirmPassword,
+          data.name
+        ).send({ from: walletAddress })
+
+    return response
+  }
+
+  // Admin login
+  const loginAdmin = async (data) => {
+    const contract = getContract();
+    const response
+      = await contract.methods
+        .adminLogin(
+          data.name,
+          data.password
+        ).send({ from: walletAddress })
+
+    return response
+  }
+
+  // Admin info
+  const getAdminInfo = async (addr) => {
+    const contract = getContract();
+
+    const response
+      = await contract.methods
+        .admin(addr)
+        .call()
+
+    return response
+  }
+
+
+  //  ----- GENERAL METHODS ----- //
+
+
+
 
 
   //  ----- User ----- //
@@ -91,18 +138,6 @@ const Web3Provider = ({ children }) => {
     return response
   }
 
-  // User logout
-  const userLogout = async () => {
-    const contract = getContract();
-
-    const res
-      = await contract.methods
-        .logout()
-        .send({ from: walletAddress })
-
-    return res;
-  }
-
   // User info
   const getUserInfo = async (addr) => {
     const contract = getContract();
@@ -115,17 +150,53 @@ const Web3Provider = ({ children }) => {
     return response
   }
 
+  // User logout
+  const userLogout = async () => {
+    const contract = getContract();
+
+    const res
+      = await contract.methods
+        .logout()
+        .send({ from: walletAddress })
+
+    return res;
+  }
+
+  // Create funding
+  const createFunding = async (data) => {
+    const contract = getContract();
+    const response
+      = await contract.methods
+        .createCrowdFunding(
+          data.fundName,
+          data.targetAmount,
+          data.minContribution,
+          data.deadline,
+          data.rcpAddr
+        ).send({ from: walletAddress })
+
+    return response;
+  }
+
+  // ---------------------- xxxxxx -------------------- //
+
+  useEffect(() => {
+    connectMeta()
+  }, [])
 
   return (
     <Web3Context.Provider
       value={{
-        connectMeta,
         walletAddress,
         getAllFundsList,
+        RegisterAdmin,
+        loginAdmin,
         registerUser,
         loginUser,
         userLogout,
-        getUserInfo
+        getUserInfo,
+        getAdminInfo,
+        createFunding
       }}
     >
       {children}

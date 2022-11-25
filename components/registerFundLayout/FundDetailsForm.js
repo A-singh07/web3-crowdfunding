@@ -26,28 +26,18 @@ const MenuProps = {
 
 const FundDetailsForm = () => {
 
-  const { editFundData } = useContext(RegisterFundContext);
-
-  const [formData, setFormData] = useState({
-    fundName: '',
-    category: '',
-    description: '',
-    targetAmount: '',
-    deadline: ''
-  })
+  const { setFormData, formData, editFundData } = useContext(RegisterFundContext);
 
   const handleChange = (e) => {
-
     // To allow only numbers as input. (Decimal allowed)
     const validAmount = new RegExp(/^\d*\.?\d*$/);
 
-    if (!e.target.name === 'targetAmount') {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value
-      })
+    if (e.target.name === 'targetAmount' || e.target.name === 'minContribution') {
+      validAmount.test(e.target.value) && setFormData({ ...formData, [e.target.name]: e.target.value })
+      return
     }
-    validAmount.test(e.target.value) && setFormData({ ...formData, targetAmount: e.target.value })
+
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   useEffect(() => {
@@ -117,13 +107,22 @@ const FundDetailsForm = () => {
       />
 
       <CustomInput
+        label={'Minimum Contribution'}
+        placeholder="Enter amount"
+        name="minContribution"
+        value={formData.minContribution}
+        onChange={handleChange}
+      />
+
+      <CustomInput
         label={'Deadline'}
         placeholder="Enter deadline"
         name="deadline"
-        type={'date'}
+        type={'datetime-local'}
         value={formData.deadline}
         onChange={handleChange}
       />
+      <p className={styles.message}>*Fill all the fields to proceed</p>
     </form>
   )
 }

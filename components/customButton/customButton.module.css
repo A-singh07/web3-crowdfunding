@@ -63,6 +63,11 @@
   /* margin-top: -0.5px; */
 }
 
+.disableBtn {
+  cursor: default;
+  opacity: 0.5;
+}
+
 @media screen and (max-width: 900px) {
   .buttonWrapper {
     padding: 0.75rem 1.25rem;

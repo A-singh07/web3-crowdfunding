@@ -16,3 +16,15 @@
   font-size: 0.75rem;
   color: var(--grey-darker);
 }
+
+.adminLogin {
+  font-size: 0.75rem;
+  color: var(--primary);
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.adminModalHeader {
+  background-color: var(--primary);
+  color: #fff;
+}

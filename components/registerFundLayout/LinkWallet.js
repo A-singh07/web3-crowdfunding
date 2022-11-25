@@ -1,16 +1,18 @@
-import React from 'react';
+import { useContext } from 'react';
+import { RegisterFundContext } from '../../context/AllContext';
 
 import styles from './registerFundLayout.module.css';
 
 const LinkWallet = () => {
+  const { formData } = useContext(RegisterFundContext);
 
   return (
-
-    // TODO: Link Meta Mask and other crypto wallets.
-
     <div className={styles.walletContainer}>
-      <p className={styles.message}>
-        *Link Meta Mask or other crypto wallet here
+      <p className={styles.info}>
+        Collected funds will be transfered to the following wallet:
+      </p>
+      <p className={styles.walletAddr}>
+        Address: <span>{formData.rcpAddr}</span>
       </p>
     </div>
   )

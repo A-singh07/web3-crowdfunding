@@ -19,19 +19,28 @@ const CustomDialog = ({
   secondaryBtnText,
   secondaryBtnClick,
   secondaryErrorBtn, // error style secondary btn
+  headerClass,  // header class
   children
 }) => {
+
+  // Ref for MUI dialog: https://stackoverflow.com/questions/57329278/how-to-handle-outside-click-on-dialog-modal
+  const handleClose = (e, reason) => {
+    // if (reason && reason == 'backdropClick') return
+    setOpen(false)
+  }
 
   return (
     <Dialog
       open={open}
-      onClose={() => setOpen(false)}
+      onClose={handleClose}
       className={styles.wrapper}
       PaperProps={{
         className: styles.wrapperPaper
       }}
     >
-      <DialogTitle className={styles.heading}>{heading}</DialogTitle>
+      <DialogTitle className={styles.heading + ` ${headerClass && headerClass}`}>
+        {heading}
+      </DialogTitle>
       <DialogContent className={styles.contentContainer}>
         <DialogContentText className={styles.dialogContent}>{body}</DialogContentText>
         {children}
