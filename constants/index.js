@@ -456,17 +456,12 @@ export const CONTRACT_ABI = [
   },
   {
     "inputs": [],
-    "name": "ListedFunds",
+    "name": "noOfFunds",
     "outputs": [
       {
-        "internalType": "uint256[]",
+        "internalType": "uint256",
         "name": "",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "string[]",
-        "name": "",
-        "type": "string[]"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -560,7 +555,7 @@ export const CONTRACT_ABI = [
   }
 ]
 
-export const CONTRACT_ADDRESS = "0xFD14A0d29A86e9c447975b4f09C6969A2ea43BE4"
+export const CONTRACT_ADDRESS = "0xF16C011ec36c7ce0b2a347BC66fcaD4f1028f6eB"
 
 
 export const CONTRACT_ABI_TEST = [

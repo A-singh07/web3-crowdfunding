@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import HeaderLight from '../header/HeaderLight';
 import CustomInput from '../customInput/CustomInput';
 import CustomButton from '../customButton/CustomButton';
@@ -14,6 +14,13 @@ const ProfileLayout = ({ data }) => {
     gender: '',
     age: ''
   });
+
+  useEffect(() => {
+    setProfileData({
+      ...profileData,
+      name: data ? data.name : '',
+    })
+  }, [data])
 
   const handleChange = (e) => {
     setProfileData({

@@ -42,8 +42,6 @@ const Web3Provider = ({ children }) => {
     const contract = getContract();
     let allFunds = [];
 
-    // ToDo: Check if admin is logged in or not.
-
     const totalFundsCount = await contract.methods
       .noOfFunds()
       .call()
@@ -54,7 +52,12 @@ const Web3Provider = ({ children }) => {
           .crowdFundingTypes(i)
           .call()
 
-      allFunds = [...allFunds, fund]
+      // Adding fundId
+      const temp = {
+        ...fund,
+        fundId: i
+      }
+      allFunds = [...allFunds, temp]
     }
     return allFunds
   }
@@ -101,7 +104,19 @@ const Web3Provider = ({ children }) => {
 
 
   //  ----- GENERAL METHODS ----- //
+  const getFundDetails = async (id) => {
+    const contract = getContract();
+    const fundData
+      = await contract.methods
+        .crowdFundingTypes(id)
+        .call()
 
+    const res = {
+      ...fundData,
+      fundId: Number(id)
+    }
+    return res;
+  }
 
 
 
@@ -169,13 +184,39 @@ const Web3Provider = ({ children }) => {
       = await contract.methods
         .createCrowdFunding(
           data.fundName,
-          data.targetAmount,
+          data.target,
           data.minContribution,
           data.deadline,
           data.rcpAddr
         ).send({ from: walletAddress })
 
     return response;
+  }
+
+  // Edit funding
+  const editFunding = async (data) => {
+    const contract = getContract();
+    const response
+      = await contract.methods
+        .edit_crowdfunding(
+          data.fundId,
+          data.fundName,
+          data.target,
+          data.minContribution,
+          data.deadline,
+          data.rcpAddr
+        ).send({ from: walletAddress })
+
+    return response
+  }
+
+  // User fundraiser history
+  const fundraiserHistory = async (addr) => {
+    let funds;
+    await getAllFundsList().then(res => {
+      funds = res.filter(fund => fund.receipent.toLowerCase() === addr.toLowerCase())
+    })
+    return funds;
   }
 
   // ---------------------- xxxxxx -------------------- //
@@ -196,7 +237,10 @@ const Web3Provider = ({ children }) => {
         userLogout,
         getUserInfo,
         getAdminInfo,
-        createFunding
+        createFunding,
+        editFunding,
+        fundraiserHistory,
+        getFundDetails
       }}
     >
       {children}

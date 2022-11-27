@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }) {
   const [authUser, setAuthUser] = useState({
     name: "",
     addr: "",
-    isLogIn: "",
+    isLogIn: false,
     isAdmin: false,
   })
 

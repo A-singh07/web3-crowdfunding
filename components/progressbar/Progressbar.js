@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './progressbar.module.css';
 
 const Progressbar = ({ height, raisedAmount, targetAmount, progress }) => {
@@ -8,6 +8,12 @@ const Progressbar = ({ height, raisedAmount, targetAmount, progress }) => {
     currency: 'INR',
     maximumSignificantDigits: 3
   })
+
+  const [calcProgress, setCalcProgress] = useState(0)
+
+  useEffect(() => {
+    setCalcProgress(raisedAmount / targetAmount * 100)
+  }, [raisedAmount, targetAmount])
 
 
   // useEffect(() => {
@@ -24,15 +30,17 @@ const Progressbar = ({ height, raisedAmount, targetAmount, progress }) => {
       <div className={styles.details}>
         <div className={styles.subDetails}>
           <p className={styles.detailsHeading}>Raised:</p>
-          <p className={styles.detailsAmount}>{currencyFormatter.format(raisedAmount)}</p>
+          <p className={styles.detailsAmount}>{raisedAmount}</p>
+          {/* <p className={styles.detailsAmount}>{currencyFormatter.format(raisedAmount)}</p> */}
         </div>
         <div className={styles.subDetails}>
           <p className={styles.detailsHeading}>Target:</p>
-          <p className={styles.detailsAmount}>{currencyFormatter.format(targetAmount)}</p>
+          <p className={styles.detailsAmount}>{targetAmount}&nbsp;<span className={styles.detailsHeading}>Wei</span></p>
+          {/* <p className={styles.detailsAmount}>{currencyFormatter.format(targetAmount)}</p> */}
         </div>
       </div>
       <div className={styles.progressBarContainer} style={{ height: `${height ? height : 8}px` }}>
-        <div className={styles.progress} style={{ width: `${progress ? progress : 0}%` }}></div>
+        <div className={styles.progress} style={{ width: `${calcProgress}%` }}></div>
       </div>
     </>
   )

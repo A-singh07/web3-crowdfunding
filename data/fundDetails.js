@@ -48,61 +48,61 @@ export const fundsData = [
   {
     id: 12345,
     category: "Medical",
-    status: "Pending",
+    Admin_status: "Pending",
     heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
-    raisedAmount: `25000`,
-    targetAmount: `100000`,
+    raiseAmount: `25000`,
+    target: `100000`,
     progress: '25'
   },
   {
     id: 12346,
     category: "Charity",
-    status: "Approved",
+    Admin_status: "Approved",
     heading: "cajnsjc na soci charity servie cporicna s o",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
-    raisedAmount: `10000`,
-    targetAmount: `50000`,
+    raiseAmount: `10000`,
+    target: `50000`,
     progress: '20'
   },
   {
     id: 12347,
     category: "Medical",
-    status: "In-process",
+    Admin_status: "In-process",
     heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
-    raisedAmount: `25000`,
-    targetAmount: `100000`,
+    raiseAmount: `25000`,
+    target: `100000`,
     progress: '25'
   },
   {
     id: 12348,
     category: "Medical",
-    status: "Rejected",
+    Admin_status: "Rejected",
     heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
-    raisedAmount: `25000`,
-    targetAmount: `100000`,
+    raiseAmount: `25000`,
+    target: `100000`,
     progress: '25'
   },
   {
     id: 12349,
     category: "Medical",
-    status: "Approved",
+    Admin_status: "Approved",
     heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
-    raisedAmount: `25000`,
-    targetAmount: `100000`,
+    raiseAmount: `25000`,
+    target: `100000`,
     progress: '25'
   },
   {
     id: 12340,
     category: "Medical",
-    status: "Pending",
+    Admin_status: "Pending",
     heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
-    raisedAmount: `25000`,
-    targetAmount: `100000`,
+    raiseAmount: `25000`,
+    target: `100000`,
     progress: '25'
   }
 ]
@@ -117,8 +117,8 @@ export const fundsPageData = [
         category: "Medical",
         heading: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
         description: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
-        raisedAmount: `25000`,
-        targetAmount: `50000`,
+        raiseAmount: `25000`,
+        target: `50000`,
         progress: '50'
       },
       {
@@ -126,8 +126,8 @@ export const fundsPageData = [
         category: "Medical",
         heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
         description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
-        raisedAmount: `13400`,
-        targetAmount: `80000`,
+        raiseAmount: `13400`,
+        target: `80000`,
         progress: '40'
       },
       {
@@ -135,8 +135,8 @@ export const fundsPageData = [
         category: "Medical",
         heading: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta conguen ivascaoi caskn oic acav",
-        raisedAmount: `25000`,
-        targetAmount: `100000`,
+        raiseAmount: `25000`,
+        target: `100000`,
         progress: '25'
       },
       {
@@ -144,8 +144,8 @@ export const fundsPageData = [
         category: "Medical",
         heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
         description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
-        raisedAmount: `25000`,
-        targetAmount: `100000`,
+        raiseAmount: `25000`,
+        target: `100000`,
         progress: '25'
       },
       {
@@ -153,8 +153,8 @@ export const fundsPageData = [
         category: "Medical",
         heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
         description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
-        raisedAmount: `25000`,
-        targetAmount: `100000`,
+        raiseAmount: `25000`,
+        target: `100000`,
         progress: '25'
       }
     ]
@@ -168,8 +168,8 @@ export const fundsPageData = [
         category: "Community",
         heading: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
         description: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
-        raisedAmount: `65000`,
-        targetAmount: `100000`,
+        raiseAmount: `65000`,
+        target: `100000`,
         progress: '65'
       },
       {
@@ -177,8 +177,8 @@ export const fundsPageData = [
         category: "Community",
         heading: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta conguen ivascaoi caskn oic acav",
-        raisedAmount: `80000`,
-        targetAmount: `100000`,
+        raiseAmount: `80000`,
+        target: `100000`,
         progress: '80'
       },
       {
@@ -186,8 +186,8 @@ export const fundsPageData = [
         category: "Community",
         heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
         description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
-        raisedAmount: `80000`,
-        targetAmount: `100000`,
+        raiseAmount: `80000`,
+        target: `100000`,
         progress: '80'
       },
       {
@@ -195,8 +195,8 @@ export const fundsPageData = [
         category: "Community",
         heading: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
         description: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
-        raisedAmount: `65000`,
-        targetAmount: `100000`,
+        raiseAmount: `65000`,
+        target: `100000`,
         progress: '65'
       },
     ]
@@ -210,8 +210,8 @@ export const fundsPageData = [
         category: "Education",
         heading: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
         description: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
-        raisedAmount: `65000`,
-        targetAmount: `100000`,
+        raiseAmount: `65000`,
+        target: `100000`,
         progress: '65'
       },
       {
@@ -219,8 +219,8 @@ export const fundsPageData = [
         category: "Education",
         heading: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta conguen ivascaoi caskn oic acav",
-        raisedAmount: `80000`,
-        targetAmount: `100000`,
+        raiseAmount: `80000`,
+        target: `100000`,
         progress: '80'
       },
       {
@@ -228,8 +228,8 @@ export const fundsPageData = [
         category: "Education",
         heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
         description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
-        raisedAmount: `80000`,
-        targetAmount: `100000`,
+        raiseAmount: `80000`,
+        target: `100000`,
         progress: '80'
       }
     ]
@@ -270,8 +270,8 @@ export const fundDetails = {
   Curabitur elementum diam at libero vulputate, at`,
   document: '',
   minAmount: 500,
-  raisedAmount: 60000,
-  targetAmount: 100000,
+  raiseAmount: 60000,
+  target: 100000,
   supporters: '12,86,700',
   deadline: '15th October 2022',
   campaignerInfo: {

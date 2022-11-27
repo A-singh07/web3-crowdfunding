@@ -9,21 +9,23 @@ import styles from './fundCard.module.css';
 const FundCard = ({ data, baseUrl, isCampaigner }) => {
 
   const {
-    id,
+    fundId,
     category,
-    status,
-    heading,
-    description,
-    raisedAmount,
-    targetAmount,
+    Admin_status,
+    // heading,
+    description, // fund name
+    raiseAmount,
+    target,
     progress,
-  } = data
+  } = data;
+
+  const fundDesc = "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav"
 
   // Different Chip's style for different status
   const getChipProps = (status) => {
-    if (status === "In-process") {
+    if (status === "In Progress") {
       return {
-        label: status,
+        label: "In Process",
         style: {
           borderColor: "#e2b93b",
           color: "#e2b93b"
@@ -68,21 +70,21 @@ const FundCard = ({ data, baseUrl, isCampaigner }) => {
             <Chip
               variant="outlined"
               size="small"
-              {...getChipProps(status)}
+              {...getChipProps(Admin_status)}
             />
           }
         </div>
-        <p className={styles.cardHeading}>FundID: {id} {heading}</p>
-        <p className={styles.cardDesc}>{description}</p>
+        <p className={styles.cardHeading}>{description}</p>
+        <p className={styles.cardDesc}>{fundDesc}</p>
         <Progressbar
           height={8}
-          raisedAmount={raisedAmount}
-          targetAmount={targetAmount}
+          raisedAmount={raiseAmount}
+          targetAmount={target}
           progress={progress}
         />
         <CustomButton
           text={'View More'}
-          link={baseUrl + `/${id}`}
+          link={baseUrl + `/${fundId}`}
           style={{ width: '100%', padding: '0.75rem 1.5rem' }}
         />
       </div>

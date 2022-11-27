@@ -1,25 +1,33 @@
-import { useState, useEffect } from 'react';
-import { FundsContext } from '../../../context/AllContext';
+import { useState, useEffect, useContext } from 'react';
+import { Web3Context } from '../../../context/Web3Context';
 
-// import FundsListLayout from '../../../components/fundsListLayout/FundsListLayout';
 import CardSection from '../../../components/section/CardSection';
 
 // Data
-import { fundsData } from '../../../data/fundDetails';
+// import { fundsData } from '../../../data/fundDetails';
 
 
-// Funds that this user has registered
+// Funds that current user has registered
 const Funds = () => {
-  // return (
-  //   <FundsListLayout isAdmin={false} />
-  // )
+  const { fundraiserHistory, walletAddress } = useContext(Web3Context);
+  const [fundsList, setFundsList] = useState([])
+
+  useEffect(() => {
+    walletAddress &&
+      fundraiserHistory(walletAddress)
+        .then(res => {
+          setFundsList(res)
+          // console.log("HISTORY:", res)
+        })
+        .catch(err => console.log(err))
+  }, [walletAddress])
 
   return (
     <>
       <CardSection
         showAll
-        heading={"Registered Funds"}
-        fundsData={fundsData}
+        heading={"Your Registered Funds"}
+        fundsData={fundsList}
         baseUrl={'/user/funds'}
       />
     </>

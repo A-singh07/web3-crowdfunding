@@ -29,10 +29,10 @@ const FundDetailsForm = () => {
   const { setFormData, formData, editFundData } = useContext(RegisterFundContext);
 
   const handleChange = (e) => {
-    // To allow only numbers as input. (Decimal allowed)
-    const validAmount = new RegExp(/^\d*\.?\d*$/);
+    // To allow only numbers as input. No decimal
+    const validAmount = new RegExp(/^[0-9]*$/);
 
-    if (e.target.name === 'targetAmount' || e.target.name === 'minContribution') {
+    if (e.target.name === 'target' || e.target.name === 'minContribution') {
       validAmount.test(e.target.value) && setFormData({ ...formData, [e.target.name]: e.target.value })
       return
     }
@@ -41,12 +41,14 @@ const FundDetailsForm = () => {
   }
 
   useEffect(() => {
-    editFundData.id && setFormData({
-      fundName: editFundData.name ? editFundData.name : '',
-      category: editFundData.category ? editFundData.category : '',
-      description: editFundData.description ? editFundData.description : '',
-      targetAmount: editFundData.targetAmount ? editFundData.targetAmount : '',
-      deadline: editFundData.deadline ? editFundData.deadline : ''
+    editFundData.fundId && setFormData({
+      ...formData,
+      fundName: editFundData.description ? editFundData.description : '',
+      // category: editFundData.category ? editFundData.category : '',
+      description: '',
+      target: editFundData.target ? editFundData.target : '',
+      minContribution: editFundData.minContribution ? editFundData.minContribution : '',
+      // deadline: editFundData.deadline ? editFundData.deadline : ''
     })
   }, [editFundData])
 
@@ -61,7 +63,7 @@ const FundDetailsForm = () => {
       />
 
       {/* CATEGORY */}
-      <div className={styles.fieldContainer}>
+      {/* <div className={styles.fieldContainer}>
         <InputLabel className={styles.label}>Category</InputLabel>
         <Select
           fullWidth
@@ -87,7 +89,7 @@ const FundDetailsForm = () => {
             </MenuItem>
           ))}
         </Select>
-      </div>
+      </div> */}
 
       <CustomInput
         label={'Description'}
@@ -99,10 +101,10 @@ const FundDetailsForm = () => {
       />
 
       <CustomInput
-        label={'Target Amount'}
+        label={'Target Amount (Wei)'}
         placeholder="Enter amount"
-        name="targetAmount"
-        value={formData.targetAmount}
+        name="target"
+        value={formData.target}
         onChange={handleChange}
       />
 

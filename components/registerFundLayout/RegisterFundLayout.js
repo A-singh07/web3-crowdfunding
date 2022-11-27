@@ -24,20 +24,21 @@ const steps = [
 const RegisterFundLayout = () => {
 
   const { setLoginModalOpen, authUser } = useContext(AuthContext);
-  const { createFunding, walletAddress } = useContext(Web3Context);
+  const { createFunding, editFunding, walletAddress } = useContext(Web3Context);
+
   const router = useRouter();
 
   const [activeStep, setActiveStep] = useState(0);
   const [completed, setCompleted] = useState([]);
-  const [editFundData, setEditFundData] = useState({})
+  const [editFundData, setEditFundData] = useState({}) // Getting fundId along with other data
 
   const [isFormFilled, setIsFormFilled] = useState(false)
 
   const [formData, setFormData] = useState({
     fundName: '',
-    category: '',
+    // category: '',
     description: '',
-    targetAmount: '',
+    target: '',
     minContribution: '',
     deadline: '',
     rcpAddr: walletAddress,
@@ -46,10 +47,8 @@ const RegisterFundLayout = () => {
 
   // To check wheather all the fields are filled or not
   useEffect(() => {
-    formData.name !== '' &&
-      formData.category !== '' &&
-      formData.description !== '' &&
-      formData.targetAmount !== '' &&
+    formData.fundName !== '' &&
+      formData.target !== '' &&
       formData.minContribution !== '' &&
       formData.deadline !== '' ? setIsFormFilled(true) : setIsFormFilled(false);
   }, [formData])
@@ -94,6 +93,11 @@ const RegisterFundLayout = () => {
     scrollToTop();
   }
 
+  useEffect(() => {
+    router.query.fundId && setEditFundData(router.query);
+  }, [router])
+
+
   const createCrowdFunding = () => {
     if (!authUser.isLogIn) return
 
@@ -108,9 +112,22 @@ const RegisterFundLayout = () => {
       })
   }
 
-  useEffect(() => {
-    router.query.id && setEditFundData(router.query);
-  }, [router])
+
+  const editCrowdFunding = () => {
+    if (!authUser.isLogIn) return
+
+    const data = {
+      ...formData,
+      deadline: convertDate(formData.deadline),
+      fundId: editFundData.fundId
+    }
+    editFunding(data)
+      .then(res => {
+        alert("Changes have been submitted!")
+        router.push('/user/funds')
+        setEditFundData({})
+      })
+  }
 
 
   // Check if user is not logged in. Open Login Modal
@@ -157,14 +174,19 @@ const RegisterFundLayout = () => {
                 />
               }
               <CustomButton
-                text={activeStep === (steps.length - 1) ? "Submit" : "Next"}
+                text={
+                  activeStep === (steps.length - 1) ? "Submit" : "Next"}
                 primary
                 disableBtn={!isFormFilled ? true : false}
                 style={{
                   padding: '0.75rem 1.5rem',
                   marginLeft: 'auto'
                 }}
-                onClick={activeStep < (steps.length - 1) ? handleComplete : createCrowdFunding}
+                onClick={
+                  activeStep < (steps.length - 1) ?
+                    handleComplete :
+                    !editFundData.fundId ? createCrowdFunding : editCrowdFunding
+                }
               />
             </div>
           </div>

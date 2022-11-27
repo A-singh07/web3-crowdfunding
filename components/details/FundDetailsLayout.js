@@ -11,6 +11,14 @@ import { AuthContext } from '../../context/AllContext';
 
 import styles from './fundDetailsLayout.module.css';
 
+const FundDesc = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor commodo diam, et condimentum risus pharetra in. In lobortis viverra augue, vitae finibus ipsum. Duis pretium ornare libero. Curabitur elementum diam at libero vulputate, at lobortis risus lobortis. lobortis erat facilisis. Nullam semper sagittis lobortis. Maecenas lacinia felis sit amet aliqu
+  Curabitur elementum diam at libero vulputate, at lobortis risus lobortis. Maecenas consectetur elementum vehicula. Praesent mollis sem.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor commodo diam, et condimentum risus pharetra in. In lobortis viverra augue, vitae finibus ipsum. Duis pretium ornare libero. Curabitur elementum diam at libero vulputate, at lobortis risus lobortis. lobortis erat facilisis. Nullam semper sagittis lobortis. Maecenas lacinia felis sit amet aliqu
+  Curabitur elementum diam at libero vulputate, at lobortis risus lobortis. Maecenas consectetur elementum vehicula. Praesent mollis sem.
+  diam at libero vulputate, at lobortis risus lobortis. Maecenas consectetur elementum vehicula. Praesent mollis sem.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor commodo diam, et condimentum risus pharetra in. In lobortis viverra augue, vitae finibus ipsum. Duis pretium ornare libero. Curabitur elementum diam at libero vulputate, at lobortis risus lobortis. lobortis erat facilisis. Nullam semper sagittis lobortis. Maecenas lacinia felis sit amet aliqu
+  Curabitur elementum diam at libero vulputate, at`;
+
 const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
   // TODO: remove isAdmin prop, get this from authContext
 
@@ -22,10 +30,9 @@ const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
   const [openApprove, setOpenApprove] = useState(false);
   const [approveType, setApproveType] = useState(''); // 'approve', 'reqEdit', 'reject'
 
-  const router = useRouter()
-  const { id } = router.query
+  const router = useRouter();
 
-  // TODO: Fetch fund details based on id
+  // // TODO: Fetch fund details based on id
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -82,99 +89,110 @@ const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
 
   // Edit fund (for Campaigner)
   const editFund = () => {
+    if (fundDetails.Admin_status === "Approved")
+      return alert("Fund cannot be edited!")
+
     router.push({
       pathname: '/registerfund',
-      query: fundDetails,
+      query: fundDetails
     }, '/registerfund');
   }
 
   return (
     <>
-      <section className={styles.wrapper}>
-        <h2 className={styles.fundHeading}>
-          FundId: {id} {fundDetails.name}
-        </h2>
-        <div className={styles.mainContainer}>
-          <div className={styles.leftSection}>
-            <div className={styles.imageContainer}></div>
-            <article className={styles.fundDetailsContainer}>
-              <h4 className={styles.detailsHeading}>About</h4>
-              <div className={styles.detailsContent}>
-                <p>
-                  {fundDetails.description}
-                </p>
-              </div>
-            </article>
-          </div>
+      {
+        !fundDetails ?
+          <div>Loading data...</div> :
+          <>
+            <section className={styles.wrapper}>
+              <h2 className={styles.fundHeading}>
+                {fundDetails.description} {/* Fund Name */}
+              </h2>
+              <div className={styles.mainContainer}>
+                <div className={styles.leftSection}>
+                  <div className={styles.imageContainer}></div>
+                  <article className={styles.fundDetailsContainer}>
+                    <h4 className={styles.detailsHeading}>About</h4>
+                    <div className={styles.detailsContent}>
+                      <p>
+                        {FundDesc}
+                      </p>
+                    </div>
+                  </article>
+                </div>
 
-          <div className={styles.rightSection + ` ${isScrolled ? styles.rightSectionScrolled : ''}`}>
-            <CustomButton
-              primary
-              text={isAdmin ? 'Take Action' : isCampaigner ? 'Edit Fund' : 'Contribute Now'}
-              style={{ width: '100%' }}
-              onClick={isAdmin ? handleOpenMenu : isCampaigner ? editFund : donateFund}
-            />
-            <div className={styles.deadlineContainer}>
-              <p className={styles.deadlineHeading}>Deadline:</p>
-              <p className={styles.deadlineDate}>{fundDetails.deadline}</p>
-            </div>
-            <div className={styles.daysLeft}>
-              (20 Days left)
-            </div>
-
-            <div className={styles.progressContainer}>
-              {
-                !isAdmin &&
-                <>
-                  <Progressbar
-                    height={10}
-                    raisedAmount={fundDetails.raisedAmount}
-                    targetAmount={fundDetails.targetAmount}
-                    progress={60}
+                <div className={styles.rightSection + ` ${isScrolled ? styles.rightSectionScrolled : ''}`}>
+                  <CustomButton
+                    secondary={fundDetails.Admin_status === "Approved" || fundDetails.Admin_status === "Pending"}
+                    text={
+                      isAdmin ? 'Take Action' :
+                        isCampaigner ? fundDetails.Admin_status === "Approved" ? "Fund already approved"
+                          : fundDetails.Admin_status === "In Progress" ? 'Edit Fund' : "Waiting for Admin's response"
+                          : 'Contribute Now'
+                    }
+                    style={{ width: '100%' }}
+                    onClick={isAdmin ? handleOpenMenu : isCampaigner ? editFund : donateFund}
+                    disableBtn={isCampaigner && (fundDetails.Admin_status === "Approved" || fundDetails.Admin_status === "Pending")}
                   />
-                  <div className={styles.progressBottom}>
-                    <p className={styles.supporters}>{fundDetails.supporters ? fundDetails.supporters : 0}</p>
-                    <p className={styles.supportersHeading}>Supporters</p>
+                  <div className={styles.deadlineContainer}>
+                    <p className={styles.deadlineHeading}>Deadline:</p>
+                    <p className={styles.deadlineDate}>{fundDetails.deadline}</p>
                   </div>
-                </>
-              }
-              <div className={styles.cardWrapper}>
-                <InfoCard
-                  heading={'Campaigner Info'}
-                  name={fundDetails.campaignerInfo.name}
-                  mobile={fundDetails.campaignerInfo.mobile}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {
-        isAdmin ?
-          <ApproveModal
-            open={openApprove}
-            setOpen={setOpenApprove}
-            fundId={fundDetails.id}
-            fundName={fundDetails.name}
-            approveType={approveType}
-          />
-          : <DonateModal
-            open={openDonate}
-            setOpen={setOpenDonate}
-            fundId={fundDetails.id}
-            minAmount={fundDetails.minAmount}
-            fundName={fundDetails.name}
-          />
-      }
-      {
-        openMenu &&
-        <CustomMenu
-          open={openMenu}
-          anchorEl={anchorEl}
-          setAnchorEl={setAnchorEl}
-          menuItems={menuItems}
-        />
+                  <div className={styles.progressContainer}>
+                    {
+                      fundDetails.Admin_status === 'Approved' &&
+                      <>
+                        <Progressbar
+                          height={10}
+                          raisedAmount={fundDetails.raiseAmount}
+                          targetAmount={fundDetails.target}
+                          progress={60}
+                        />
+                        <div className={styles.progressBottom}>
+                          <p className={styles.supporters}>{fundDetails.noOfContributors ? fundDetails.noOfContributors : 0}</p>
+                          <p className={styles.supportersHeading}>Supporter(s)</p>
+                        </div>
+                      </>
+                    }
+                    <div className={styles.cardWrapper}>
+                      <InfoCard
+                        heading={'Recipient Address'}
+                        recipient={fundDetails.receipent}
+                      // mobile={fundDetails.campaignerInfo.mobile}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            {
+              isAdmin ?
+                <ApproveModal
+                  open={openApprove}
+                  setOpen={setOpenApprove}
+                  fundId={fundDetails.fundId}
+                  fundName={fundDetails.name}
+                  approveType={approveType}
+                />
+                : <DonateModal
+                  open={openDonate}
+                  setOpen={setOpenDonate}
+                  fundId={fundDetails.fundId}
+                  minAmount={fundDetails.minAmount}
+                  fundName={fundDetails.name}
+                />
+            }
+            {
+              openMenu &&
+              <CustomMenu
+                open={openMenu}
+                anchorEl={anchorEl}
+                setAnchorEl={setAnchorEl}
+                menuItems={menuItems}
+              />
+            }
+          </>
       }
     </>
   )
