@@ -166,19 +166,22 @@ const FundDetailsLayout = ({ fundDetails }) => {
                     }
                     disableBtn={
                       (fundState.isCampaigner && (fundDetails.Admin_status === "Approved" || fundDetails.Admin_status === "Pending"))
+                      || (fundState.isAdmin && fundDetails.Admin_status === "Rejected")
                       || fundDetails.fundClosed
                     }
                   />
                   {
-                    fundDetails.Voting_Enabled &&
+                    !fundState.isAdmin && fundDetails.Voting_Enabled &&
+                    (
                       !fundDetails.fundClosed ?
-                      <p className={styles.fundStatus}>
-                        Fund could not reach atleast 50% of the target amount within deadline. <br />
-                        You can opt to get a refund.
-                      </p>
-                      : <p className={styles.fundStatus}>
-                        Voting phase for this fund is over!
-                      </p>
+                        <p className={styles.fundStatus}>
+                          Fund could not reach atleast 50% of the target amount within deadline. <br />
+                          You can opt to get a refund.
+                        </p>
+                        : <p className={styles.fundStatus}>
+                          Voting phase for this fund is over!
+                        </p>
+                    )
                   }
                   <div className={styles.deadlineContainer}>
                     <p className={styles.deadlineHeading}>Deadline:</p>

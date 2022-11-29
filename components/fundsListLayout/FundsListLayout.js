@@ -1,25 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import HeaderLight from '../header/HeaderLight';
 import CustomTable from '../customTable/CustomTable';
-import Chip from '@mui/material/Chip'
+import Chip from '@mui/material/Chip';
+import { Web3Context } from '../../context/Web3Context';
 
 // data
-import { allFundsList } from '../../data/adminFundsData';
+// import { allFundsList } from '../../data/adminFundsData';
 
 import styles from './fundsListLayout.module.css';
 
 const FundsListLayout = ({ isAdmin }) => {
+  const { getAllFundsList } = useContext(Web3Context);
 
   const getChipProps = (params) => {
-    if (params.value === "In-process") {
+    if (params.value === "In Progress") {
       return {
-        label: params.value,
+        label: "In Process",
         style: {
           borderColor: "#e2b93b",
           color: "#e2b93b"
         }
       }
-    } else if (params.value === "Approved") {
+    } else if (params.value === "Approved" || params.value === "Voting") {
       return {
         label: params.value,
         style: {
@@ -27,7 +29,7 @@ const FundsListLayout = ({ isAdmin }) => {
           color: "#3aab9f"
         }
       }
-    } else if (params.value === "Rejected") {
+    } else if (params.value === "Rejected" || params.value === "Closed") {
       return {
         label: params.value,
         style: {
@@ -47,23 +49,18 @@ const FundsListLayout = ({ isAdmin }) => {
 
   const [colData, setColData] = useState([
     {
-      field: 'id',
-      headerName: 'ID',
+      field: 'fundId',
+      headerName: 'Fund ID',
       width: 90
-    },
-    {
-      field: 'category',
-      headerName: 'Category',
-      width: 150
     },
     {
       field: 'name',
       headerName: 'Name',
-      width: 300
+      width: 480
     },
     {
-      field: 'targetAmount',
-      headerName: 'Target',
+      field: 'target',
+      headerName: 'Target Amount',
       width: 180
     },
     {
@@ -72,7 +69,7 @@ const FundsListLayout = ({ isAdmin }) => {
       width: 200
     },
     {
-      field: 'status',
+      field: 'Admin_status',
       headerName: 'Status',
       width: 200,
       renderCell: (params) => {
@@ -84,8 +81,23 @@ const FundsListLayout = ({ isAdmin }) => {
   const [rowData, setRowData] = useState([]);
 
   useEffect(() => {
-    setRowData(allFundsList)
-  }, [allFundsList])
+    getAllFundsList()
+      .then(res => {
+        const funds = [];
+        res.forEach(item => {
+          const rowData = {
+            fundId: item.fundId,
+            name: item.description,
+            target: item.target,
+            deadline: item.deadline,
+            Admin_status: item.fundClosed ? "Closed" : item.Voting_Enabled ? "Voting" : item.Admin_status
+          }
+          funds = [...funds, rowData];
+        })
+        setRowData(funds);
+      })
+  }, [])
+
 
   return (
     <section>
@@ -93,7 +105,7 @@ const FundsListLayout = ({ isAdmin }) => {
       <CustomTable
         tableColumns={colData}
         tableRows={rowData}
-        baseUrl={'/admin/funds'}
+        baseUrl={'/funds'}
       />
     </section>
   )

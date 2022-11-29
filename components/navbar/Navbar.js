@@ -90,7 +90,7 @@ const Navbar = () => {
   const menuItems = [
     {
       name: 'Profile',
-      link: `${!authUser.isAdmin ? '/user' : '/admin'}`,
+      link: `/user`,
       itemOnClick: () => { }
     },
     {

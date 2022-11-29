@@ -1,106 +1,106 @@
 export const allFundsList = [
   {
-    id: 1200,
+    fundId: 1200,
     category: 'Medical',
-    name: `Need Medical Support `,
-    targetAmount: 600000,
+    description: `Need Medical Support `,
+    target: 600000,
     deadline: '28/12/2022',
-    status: 'Approved'
+    Admin_status: 'Approved'
   },
   {
-    id: 1201,
+    fundId: 1201,
     category: 'Charity',
-    name: `New oldage home`,
-    targetAmount: 230000,
+    description: `New oldage home`,
+    target: 230000,
     deadline: '24/01/2023',
-    status: 'Pending'
+    Admin_status: 'Pending'
   },
   {
-    id: 1202,
+    fundId: 1202,
     category: 'Other',
-    name: `Fundraiser for new startup`,
-    targetAmount: 100000,
+    description: `Fundraiser for new startup`,
+    target: 100000,
     deadline: '09/12/2022',
-    status: 'In-process'
+    Admin_status: 'In-process'
   },
   {
-    id: 1203,
+    fundId: 1203,
     category: 'Charity',
-    name: `Charity event`,
-    targetAmount: 60000,
+    description: `Charity event`,
+    target: 60000,
     deadline: '12/12/2022',
-    status: 'Pending'
+    Admin_status: 'Pending'
   },
   {
-    id: 1204,
+    fundId: 1204,
     category: 'Children',
-    name: `Orphanage`,
-    targetAmount: 230000,
+    description: `Orphanage`,
+    target: 230000,
     deadline: '24/01/2023',
-    status: 'Rejected'
+    Admin_status: 'Rejected'
   },
   {
-    id: 1205,
+    fundId: 1205,
     category: 'Children',
-    name: `Fundraiser for children education`,
-    targetAmount: 100000,
+    description: `Fundraiser for children education`,
+    target: 100000,
     deadline: '20/12/2022',
-    status: 'Approved'
+    Admin_status: 'Approved'
   },
   {
-    id: 1206,
+    fundId: 1206,
     category: 'Charity',
-    name: `Charity event`,
-    targetAmount: 60000,
+    description: `Charity event`,
+    target: 60000,
     deadline: '12/12/2022',
-    status: 'Approved'
+    Admin_status: 'Approved'
   },
   {
-    id: 1207,
+    fundId: 1207,
     category: 'Children',
-    name: `Orphanage`,
-    targetAmount: 230000,
+    description: `Orphanage`,
+    target: 230000,
     deadline: '24/01/2023',
-    status: 'Rejected'
+    Admin_status: 'Rejected'
   },
   {
-    id: 1208,
+    fundId: 1208,
     category: 'Other',
-    name: `New oldage home`,
-    targetAmount: 230000,
+    description: `New oldage home`,
+    target: 230000,
     deadline: '24/01/2023',
-    status: 'Pending'
+    Admin_status: 'Pending'
   },
   {
-    id: 1209,
+    fundId: 1209,
     category: 'Other',
-    name: `Fundraiser for new startup`,
-    targetAmount: 100000,
+    description: `Fundraiser for new startup`,
+    target: 100000,
     deadline: '09/12/2022',
-    status: 'In-process'
+    Admin_status: 'In-process'
   },
   {
-    id: 1210,
+    fundId: 1210,
     category: 'Children',
-    name: `Fundraiser for children education`,
-    targetAmount: 100000,
+    description: `Fundraiser for children education`,
+    target: 100000,
     deadline: '20/12/2022',
-    status: 'Approved'
+    Admin_status: 'Approved'
   },
   {
-    id: 1211,
+    fundId: 1211,
     category: 'Charity',
-    name: `Charity event`,
-    targetAmount: 60000,
+    description: `Charity event`,
+    target: 60000,
     deadline: '12/12/2022',
-    status: 'Pending'
+    Admin_status: 'Pending'
   },
   {
-    id: 1212,
+    fundId: 1212,
     category: 'Children',
-    name: `Orphanage`,
-    targetAmount: 230000,
+    description: `Orphanage`,
+    target: 230000,
     deadline: '24/01/2023',
-    status: 'Rejected'
+    Admin_status: 'Rejected'
   },
 ]
