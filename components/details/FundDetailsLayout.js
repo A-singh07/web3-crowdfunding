@@ -6,8 +6,8 @@ import InfoCard from '../card/InfoCard';
 import DonateModal from '../confirmModal/DonateModal';
 import ApproveModal from '../confirmModal/ApproveModal';
 import CustomMenu from '../customMenu/CustomMenu';
-
 import { AuthContext } from '../../context/AllContext';
+import { Web3Context } from '../../context/Web3Context'
 
 import styles from './fundDetailsLayout.module.css';
 
@@ -19,10 +19,24 @@ const FundDesc = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras 
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor commodo diam, et condimentum risus pharetra in. In lobortis viverra augue, vitae finibus ipsum. Duis pretium ornare libero. Curabitur elementum diam at libero vulputate, at lobortis risus lobortis. lobortis erat facilisis. Nullam semper sagittis lobortis. Maecenas lacinia felis sit amet aliqu
   Curabitur elementum diam at libero vulputate, at`;
 
-const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
-  // TODO: remove isAdmin prop, get this from authContext
+const FundDetailsLayout = ({ fundDetails }) => {
 
-  // const { authUser } = useContext(AuthContext)
+  const { authUser, setLoginModalOpen } = useContext(AuthContext)
+  const { voteToRefund } = useContext(Web3Context)
+
+  const [fundState, setFundState] = useState({
+    isAdmin: false,
+    isCampaigner: false
+  })
+  useEffect(() => {
+    authUser && fundDetails &&
+      setFundState({
+        isAdmin: authUser.isAdmin,
+        isCampaigner: authUser.address === fundDetails.receipent
+      })
+
+    console.log("DETAILS", fundDetails)
+  }, [authUser, fundDetails])
 
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -84,7 +98,9 @@ const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
 
   // Contribute now (for Gen. User)
   const donateFund = () => {
-    setOpenDonate(true)
+    authUser.isLogIn ?
+      setOpenDonate(true)
+      : setLoginModalOpen(true)
   }
 
   // Edit fund (for Campaigner)
@@ -98,13 +114,21 @@ const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
     }, '/registerfund');
   }
 
+  // To vote out a contributor during voting phase
+  const voteNow = () => {
+    voteToRefund(fundDetails.fundId)
+      .then(res => {
+        alert("Your vote has been submitted!")
+      })
+  }
+
   return (
     <>
-      {
-        !fundDetails ?
-          <div>Loading data...</div> :
-          <>
-            <section className={styles.wrapper}>
+      <section className={styles.wrapper}>
+        {
+          !fundDetails ?
+            <h2 className={styles.fundHeading}>Loading data...</h2> :
+            <>
               <h2 className={styles.fundHeading}>
                 {fundDetails.description} {/* Fund Name */}
               </h2>
@@ -123,17 +147,39 @@ const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
 
                 <div className={styles.rightSection + ` ${isScrolled ? styles.rightSectionScrolled : ''}`}>
                   <CustomButton
-                    secondary={fundDetails.Admin_status === "Approved" || fundDetails.Admin_status === "Pending"}
+                    secondary={fundState.isCampaigner && (fundDetails.Admin_status === "Approved" || fundDetails.Admin_status === "Pending")}
+                    errorBtn={fundDetails.Voting_Enabled}
                     text={
-                      isAdmin ? 'Take Action' :
-                        isCampaigner ? fundDetails.Admin_status === "Approved" ? "Fund already approved"
-                          : fundDetails.Admin_status === "In Progress" ? 'Edit Fund' : "Waiting for Admin's response"
-                          : 'Contribute Now'
+                      fundDetails.fundClosed ? "Fund has been closed"
+                        : fundState.isAdmin ? 'Take Action' :
+                          fundState.isCampaigner ? fundDetails.Admin_status === "Approved" ? "Fund already approved"
+                            : fundDetails.Admin_status === "In Progress" ? 'Edit Fund' : "Waiting for Admin's response"
+                            : fundDetails.Voting_Enabled ? "Get a refund"
+                              : 'Contribute Now'
                     }
                     style={{ width: '100%' }}
-                    onClick={isAdmin ? handleOpenMenu : isCampaigner ? editFund : donateFund}
-                    disableBtn={isCampaigner && (fundDetails.Admin_status === "Approved" || fundDetails.Admin_status === "Pending")}
+                    onClick={
+                      fundState.isAdmin ? handleOpenMenu
+                        : fundState.isCampaigner ? editFund
+                          : fundDetails.Voting_Enabled ? voteNow
+                            : donateFund
+                    }
+                    disableBtn={
+                      (fundState.isCampaigner && (fundDetails.Admin_status === "Approved" || fundDetails.Admin_status === "Pending"))
+                      || fundDetails.fundClosed
+                    }
                   />
+                  {
+                    fundDetails.Voting_Enabled &&
+                      !fundDetails.fundClosed ?
+                      <p className={styles.fundStatus}>
+                        Fund could not reach atleast 50% of the target amount within deadline. <br />
+                        You can opt to get a refund.
+                      </p>
+                      : <p className={styles.fundStatus}>
+                        Voting phase for this fund is over!
+                      </p>
+                  }
                   <div className={styles.deadlineContainer}>
                     <p className={styles.deadlineHeading}>Deadline:</p>
                     <p className={styles.deadlineDate}>{fundDetails.deadline}</p>
@@ -165,34 +211,40 @@ const FundDetailsLayout = ({ fundDetails, isAdmin, isCampaigner }) => {
                   </div>
                 </div>
               </div>
-            </section>
-            {
-              isAdmin ?
-                <ApproveModal
-                  open={openApprove}
-                  setOpen={setOpenApprove}
-                  fundId={fundDetails.fundId}
-                  fundName={fundDetails.name}
-                  approveType={approveType}
-                />
-                : <DonateModal
-                  open={openDonate}
-                  setOpen={setOpenDonate}
-                  fundId={fundDetails.fundId}
-                  minAmount={fundDetails.minAmount}
-                  fundName={fundDetails.name}
-                />
-            }
-            {
-              openMenu &&
-              <CustomMenu
-                open={openMenu}
-                anchorEl={anchorEl}
-                setAnchorEl={setAnchorEl}
-                menuItems={menuItems}
+            </>
+        }
+      </section>
+      {
+        fundDetails &&
+        <>
+          {
+            fundState.isAdmin ?
+              <ApproveModal
+                open={openApprove}
+                setOpen={setOpenApprove}
+                fundId={fundDetails.fundId}
+                fundName={fundDetails.description}
+                approveType={approveType}
               />
-            }
-          </>
+              : <DonateModal
+                open={openDonate}
+                setOpen={setOpenDonate}
+                fundId={fundDetails.fundId}
+                minAmount={Number(fundDetails.minContribution)}
+                targetAmount={Number(fundDetails.target)}
+                fundName={fundDetails.description}
+              />
+          }
+          {
+            openMenu &&
+            <CustomMenu
+              open={openMenu}
+              anchorEl={anchorEl}
+              setAnchorEl={setAnchorEl}
+              menuItems={menuItems}
+            />
+          }
+        </>
       }
     </>
   )

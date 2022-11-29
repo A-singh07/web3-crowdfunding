@@ -555,7 +555,7 @@ export const CONTRACT_ABI = [
   }
 ]
 
-export const CONTRACT_ADDRESS = "0xF16C011ec36c7ce0b2a347BC66fcaD4f1028f6eB"
+export const CONTRACT_ADDRESS = "0x920e8d9D0C5D8E0672B37De812c4C892bf1708f2"
 
 
 export const CONTRACT_ABI_TEST = [

@@ -44,13 +44,13 @@ export const fundCategories = [
   }
 ]
 
+// For Fund Cards
 export const fundsData = [
   {
     id: 12345,
     category: "Medical",
     Admin_status: "Pending",
-    heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
-    description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
+    description: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     raiseAmount: `25000`,
     target: `100000`,
     progress: '25'
@@ -59,8 +59,7 @@ export const fundsData = [
     id: 12346,
     category: "Charity",
     Admin_status: "Approved",
-    heading: "cajnsjc na soci charity servie cporicna s o",
-    description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
+    description: "cajnsjc na soci charity servie cporicna s o",
     raiseAmount: `10000`,
     target: `50000`,
     progress: '20'
@@ -69,8 +68,7 @@ export const fundsData = [
     id: 12347,
     category: "Medical",
     Admin_status: "In-process",
-    heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
-    description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
+    description: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     raiseAmount: `25000`,
     target: `100000`,
     progress: '25'
@@ -79,8 +77,7 @@ export const fundsData = [
     id: 12348,
     category: "Medical",
     Admin_status: "Rejected",
-    heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
-    description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
+    description: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     raiseAmount: `25000`,
     target: `100000`,
     progress: '25'
@@ -89,8 +86,7 @@ export const fundsData = [
     id: 12349,
     category: "Medical",
     Admin_status: "Approved",
-    heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
-    description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
+    description: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     raiseAmount: `25000`,
     target: `100000`,
     progress: '25'
@@ -99,14 +95,14 @@ export const fundsData = [
     id: 12340,
     category: "Medical",
     Admin_status: "Pending",
-    heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
-    description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
+    description: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
     raiseAmount: `25000`,
     target: `100000`,
     progress: '25'
   }
 ]
 
+// All Funds page
 export const fundsPageData = [
   {
     categoryId: 1235,
@@ -115,8 +111,7 @@ export const fundsPageData = [
       {
         id: 12345,
         category: "Medical",
-        heading: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
-        description: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
         raiseAmount: `25000`,
         target: `50000`,
         progress: '50'
@@ -124,8 +119,7 @@ export const fundsPageData = [
       {
         id: 12347,
         category: "Medical",
-        heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
-        description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
+        description: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
         raiseAmount: `13400`,
         target: `80000`,
         progress: '40'
@@ -133,8 +127,7 @@ export const fundsPageData = [
       {
         id: 12348,
         category: "Medical",
-        heading: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta conguen ivascaoi caskn oic acav",
+        description: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
         raiseAmount: `25000`,
         target: `100000`,
         progress: '25'
@@ -142,8 +135,7 @@ export const fundsPageData = [
       {
         id: 12349,
         category: "Medical",
-        heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
-        description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
+        description: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
         raiseAmount: `25000`,
         target: `100000`,
         progress: '25'
@@ -151,8 +143,7 @@ export const fundsPageData = [
       {
         id: 12630,
         category: "Medical",
-        heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
-        description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
+        description: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
         raiseAmount: `25000`,
         target: `100000`,
         progress: '25'
@@ -166,8 +157,7 @@ export const fundsPageData = [
       {
         id: 12365,
         category: "Community",
-        heading: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
-        description: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
         raiseAmount: `65000`,
         target: `100000`,
         progress: '65'
@@ -175,8 +165,7 @@ export const fundsPageData = [
       {
         id: 12368,
         category: "Community",
-        heading: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta conguen ivascaoi caskn oic acav",
+        description: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
         raiseAmount: `80000`,
         target: `100000`,
         progress: '80'
@@ -184,8 +173,7 @@ export const fundsPageData = [
       {
         id: 12660,
         category: "Community",
-        heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
-        description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
+        description: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
         raiseAmount: `80000`,
         target: `100000`,
         progress: '80'
@@ -193,8 +181,7 @@ export const fundsPageData = [
       {
         id: 12395,
         category: "Community",
-        heading: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
-        description: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
         raiseAmount: `65000`,
         target: `100000`,
         progress: '65'
@@ -208,8 +195,7 @@ export const fundsPageData = [
       {
         id: 12365,
         category: "Education",
-        heading: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
-        description: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta congue.",
         raiseAmount: `65000`,
         target: `100000`,
         progress: '65'
@@ -217,8 +203,7 @@ export const fundsPageData = [
       {
         id: 12368,
         category: "Education",
-        heading: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada risus non porta conguen ivascaoi caskn oic acav",
+        description: "Aenean non lorem hendrerit, vehicula libero mollis, dapibus sapien.",
         raiseAmount: `80000`,
         target: `100000`,
         progress: '80'
@@ -226,8 +211,7 @@ export const fundsPageData = [
       {
         id: 12660,
         category: "Education",
-        heading: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
-        description: "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav",
+        description: "Heart Transplant ackjn u aiuh rof 1982e rfjn asidn caknsd lcas",
         raiseAmount: `80000`,
         target: `100000`,
         progress: '80'
@@ -258,10 +242,10 @@ export const fundsPageData = [
 
 export const fundDetails = {
   id: 1242,
-  name: `Fundraiser for Medical Support `,
+  description: `Fundraiser for Medical Support `,
   category: 'Medical',
   image: '',
-  description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor commodo diam, et condimentum risus pharetra in. In lobortis viverra augue, vitae finibus ipsum. Duis pretium ornare libero. Curabitur elementum diam at libero vulputate, at lobortis risus lobortis. lobortis erat facilisis. Nullam semper sagittis lobortis. Maecenas lacinia felis sit amet aliqu
+  desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor commodo diam, et condimentum risus pharetra in. In lobortis viverra augue, vitae finibus ipsum. Duis pretium ornare libero. Curabitur elementum diam at libero vulputate, at lobortis risus lobortis. lobortis erat facilisis. Nullam semper sagittis lobortis. Maecenas lacinia felis sit amet aliqu
   Curabitur elementum diam at libero vulputate, at lobortis risus lobortis. Maecenas consectetur elementum vehicula. Praesent mollis sem.
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor commodo diam, et condimentum risus pharetra in. In lobortis viverra augue, vitae finibus ipsum. Duis pretium ornare libero. Curabitur elementum diam at libero vulputate, at lobortis risus lobortis. lobortis erat facilisis. Nullam semper sagittis lobortis. Maecenas lacinia felis sit amet aliqu
   Curabitur elementum diam at libero vulputate, at lobortis risus lobortis. Maecenas consectetur elementum vehicula. Praesent mollis sem.
@@ -274,8 +258,5 @@ export const fundDetails = {
   target: 100000,
   supporters: '12,86,700',
   deadline: '15th October 2022',
-  campaignerInfo: {
-    name: 'Ankush Patra',
-    mobile: '+919678901234'
-  }
+  receipent: '0x12a1aC5d3a66fC330fD0685C024a919c8r5',
 }

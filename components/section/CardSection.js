@@ -4,7 +4,7 @@ import FundCard from '../card/FundCard';
 import CustomCarousel from '../customCarousel/CustomCarousel';
 import styles from './cardSection.module.css';
 
-const CardSection = ({ heading, fundsData, baseUrl, showAll, autoplay, style }) => {
+const CardSection = ({ heading, fundsData, baseUrl, showAll, isCampaigner, autoplay, style }) => {
 
   return (
     <section className={styles.wrapper} style={style}>
@@ -19,7 +19,7 @@ const CardSection = ({ heading, fundsData, baseUrl, showAll, autoplay, style }) 
                     key={i}
                     data={data}
                     baseUrl={baseUrl}
-                    isCampaigner
+                    isCampaigner={isCampaigner}
                   />
                 )
               }

@@ -61,7 +61,7 @@ const LoginModal = ({ open, setOpen }) => {
             sessionStorage.setItem("user", JSON.stringify(userData))
             setAuthUser(userData)
             setOpen(false)
-            router.push('/funds')
+            // router.push('/funds')
           })
       })
       .catch(err => {

@@ -52,7 +52,7 @@ const Web3Provider = ({ children }) => {
           .crowdFundingTypes(i)
           .call()
 
-      // Adding fundId
+      // Adding fundId (important to fetch details later)
       const temp = {
         ...fund,
         fundId: i
@@ -104,6 +104,18 @@ const Web3Provider = ({ children }) => {
 
 
   //  ----- GENERAL METHODS ----- //
+
+  // Get list of approved funds
+  const getApprovedFunds = async () => {
+    let funds = [];
+    await getAllFundsList().then(res => {
+      funds = res.filter(item => item.Admin_status === "Approved")
+    })
+
+    return funds;
+  }
+
+  // Get details of a fund
   const getFundDetails = async (id) => {
     const contract = getContract();
     const fundData
@@ -219,6 +231,28 @@ const Web3Provider = ({ children }) => {
     return funds;
   }
 
+  // Donate
+  const donate = async (id, value) => {
+    const contract = getContract();
+    const response
+      = await contract.methods
+        .donate(id)
+        .send({ from: walletAddress, value: value })
+
+    return response;
+  }
+
+  // Vote to refund
+  const voteToRefund = async (id) => {
+    const contract = getContract();
+    const response
+      = await contract.methods
+        .DoNotDonate(id)
+        .send({ from: walletAddress })
+
+    return response;
+  }
+
   // ---------------------- xxxxxx -------------------- //
 
   useEffect(() => {
@@ -230,6 +264,7 @@ const Web3Provider = ({ children }) => {
       value={{
         walletAddress,
         getAllFundsList,
+        getApprovedFunds,
         RegisterAdmin,
         loginAdmin,
         registerUser,
@@ -240,7 +275,9 @@ const Web3Provider = ({ children }) => {
         createFunding,
         editFunding,
         fundraiserHistory,
-        getFundDetails
+        getFundDetails,
+        donate,
+        voteToRefund
       }}
     >
       {children}

@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import CustomDialog from '../customDialog/CustomDialog';
+import { Web3Context } from '../../context/Web3Context';
 
 import styles from './donateModal.module.css';
 
-const DonateModal = ({ open, setOpen, fundId, minAmount, fundName }) => {
+const DonateModal = ({ open, setOpen, fundId, minAmount, targetAmount, fundName }) => {
+
+  const { donate } = useContext(Web3Context);
 
   const [fundDetails, setFundDetails] = useState({
     fundId: fundId,
@@ -26,13 +29,15 @@ const DonateModal = ({ open, setOpen, fundId, minAmount, fundName }) => {
   // Request call for donation
   const donateFunc = () => {
 
-    // TODO: Check for login status
-
-    if (fundDetails.amount >= minAmount) {
-      alert(`${fundDetails.amount} donated to fund: ${fundName}`)
-      setOpen(false)
+    if ((fundDetails.amount >= minAmount) && (fundDetails.amount <= targetAmount)) {
+      donate(fundId, Number(fundDetails.amount))
+        .then(res => {
+          alert(`${fundDetails.amount} Wei donated successfully!`)
+          setOpen(false)
+          location.reload()
+        })
     } else {
-      setError(`Entered amount should be greater than or equal to ${minAmount}`)
+      setError(`Entered amount should be between ${minAmount} and ${targetAmount}`)
     }
   }
 

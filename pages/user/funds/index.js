@@ -23,14 +23,15 @@ const Funds = () => {
   }, [walletAddress])
 
   return (
-    <>
+    <main style={{ minHeight: '55vh' }}>
       <CardSection
         showAll
         heading={"Your Registered Funds"}
         fundsData={fundsList}
         baseUrl={'/user/funds'}
+        isCampaigner
       />
-    </>
+    </main>
   )
 }
 

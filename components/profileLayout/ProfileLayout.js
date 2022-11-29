@@ -11,14 +11,13 @@ const ProfileLayout = ({ data }) => {
 
   const [profileData, setProfileData] = useState({
     name: '',
-    gender: '',
-    age: ''
+    wallet: '87'
   });
 
   useEffect(() => {
     setProfileData({
-      ...profileData,
       name: data ? data.name : '',
+      wallet: data ? data.address : '',
     })
   }, [data])
 
@@ -62,17 +61,10 @@ const ProfileLayout = ({ data }) => {
             onChange={handleChange}
           />
           <CustomInput
-            label={'Gender'}
-            name="gender"
-            placeholder="Gender"
-            value={profileData.gender}
-            onChange={handleChange}
-          />
-          <CustomInput
-            label={'Age'}
-            name="age"
-            placeholder="Age"
-            value={profileData.age}
+            label={'Wallet'}
+            name="wallet"
+            placeholder="wallet"
+            value={profileData.wallet}
             onChange={handleChange}
           />
           <CustomButton

@@ -24,14 +24,11 @@ const ApproveModal = ({ open, setOpen, fundId, fundName, approveType }) => {
 
   // Request call to approve fund
   const approveFund = () => {
-
-    // TODO: Check for login status
     alert(`"${fundName}" is approved`)
     setOpen(false)
   }
 
   const requestEdit = () => {
-    // TODO: Check for login status
     if (fundDetails.message) {
       alert(`"${fundName}" is in process now`)
       setOpen(false)
@@ -42,8 +39,6 @@ const ApproveModal = ({ open, setOpen, fundId, fundName, approveType }) => {
 
   // Request call to approve fund
   const rejectFund = () => {
-    // TODO: Check for login status
-
     if (fundDetails.message) {
       alert(`"${fundName}" is rejected`)
       setOpen(false)

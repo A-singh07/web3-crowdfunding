@@ -1,5 +1,7 @@
-import React from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { Web3Context } from '../../context/Web3Context';
+
 // data
 import { fundDetails, fundsData } from '../../data/fundDetails';
 
@@ -11,11 +13,21 @@ const FundDetails = () => {
   const router = useRouter()
   const { id } = router.query
 
-  // API call here, using fundID, pass details to child component
+  const { getFundDetails, walletAddress } = useContext(Web3Context);
+  const [fundData, setFundData] = useState();
+
+  useEffect(() => {
+    id && walletAddress &&
+      getFundDetails(id)
+        .then(res => {
+          setFundData(res)
+        })
+        .catch(err => console.log("Error: ", err))
+  }, [id, walletAddress])
 
   return (
-    <main>
-      <FundDetailsLayout fundDetails={fundDetails} />
+    <main style={{ minHeight: '50vh' }}>
+      <FundDetailsLayout fundDetails={fundData} />
       <CardSection heading={'Related Funds'} fundsData={fundsData} baseUrl={'/funds'} />
     </main>
   )

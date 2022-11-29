@@ -16,7 +16,6 @@ const FundCard = ({ data, baseUrl, isCampaigner }) => {
     description, // fund name
     raiseAmount,
     target,
-    progress,
   } = data;
 
   const fundDesc = "cans cakjsn oais d aciuns ib oviw eu van socc aksn ivascaoi caskn oic acav"
@@ -64,7 +63,7 @@ const FundCard = ({ data, baseUrl, isCampaigner }) => {
       </div>
       <div className={styles.cardContent}>
         <div className={styles.subContainer}>
-          <p className={styles.category}>{category}</p>
+          {/* <p className={styles.category}>{category}</p> */}
           {
             isCampaigner &&
             <Chip
@@ -80,7 +79,6 @@ const FundCard = ({ data, baseUrl, isCampaigner }) => {
           height={8}
           raisedAmount={raiseAmount}
           targetAmount={target}
-          progress={progress}
         />
         <CustomButton
           text={'View More'}

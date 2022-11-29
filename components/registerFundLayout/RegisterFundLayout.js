@@ -55,9 +55,12 @@ const RegisterFundLayout = () => {
 
   // Date to seconds
   const convertDate = (date) => {
-    const dt = new Date(date);
-    const seconds = dt.getTime() / 1000;
-    return seconds;
+    const current = new Date().getTime();
+    const dt = new Date(date).getTime();
+
+    const diff = ((dt - current) / 1000);  // in seconds
+    // console.log("Diff", diff);
+    return Math.round(diff);
   }
 
   // Make this a custom hook
