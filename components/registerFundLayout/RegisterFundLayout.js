@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
+import moment from 'moment';
 
 import { RegisterFundContext, AuthContext } from '../../context/AllContext';
 import { Web3Context } from '../../context/Web3Context'
@@ -55,12 +56,9 @@ const RegisterFundLayout = () => {
 
   // Date to seconds
   const convertDate = (date) => {
-    const current = new Date().getTime();
-    const dt = new Date(date).getTime();
-
-    const diff = ((dt - current) / 1000);  // in seconds
-    // console.log("Diff", diff);
-    return Math.round(diff);
+    if (moment(date) < moment()) return alert("select future date as deadline");
+    const diff = moment.duration(moment(date).diff()).asSeconds()
+    return diff
   }
 
   // Make this a custom hook

@@ -39,6 +39,7 @@ const CustomButton = ({
       onClick={!disableBtn ? handleClick : () => { }}
       style={style}
       type={type ? type : 'button'}
+      disabled={disableBtn}
     >
       {
         leftIcon &&

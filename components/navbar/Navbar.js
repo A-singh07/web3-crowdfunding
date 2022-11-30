@@ -22,7 +22,7 @@ const Navbar = () => {
 
   // Auth Context
   const { authUser, setAuthUser, loginModalOpen, setLoginModalOpen } = useContext(AuthContext);
-  const { userLogout } = useContext(Web3Context);
+  const { userLogout, adminLogout } = useContext(Web3Context);
 
   const router = useRouter();
 
@@ -60,15 +60,20 @@ const Navbar = () => {
 
   // Logout
   const logoutUser = () => {
+    // for admin
     if (authUser.isAdmin) {
-      router.push('/')
-      sessionStorage.removeItem("user")
-      setAuthUser({
-        name: "",
-        addr: "",
-        isLogIn: "",
-        isAdmin: false,
-      });
+      adminLogout().then(res => {
+        router.push('/').then(() => {
+          setAuthUser({
+            name: "",
+            addr: "",
+            isLogIn: false,
+            isAdmin: false,
+          })
+          sessionStorage.removeItem("user")
+        })
+
+      })
       return
     }
 
@@ -79,7 +84,7 @@ const Navbar = () => {
         setAuthUser({
           name: "",
           addr: "",
-          isLogIn: "",
+          isLogIn: false,
           isAdmin: false,
         });
         router.push('/')

@@ -23,8 +23,8 @@
   background-color: var(--primary);
   color: #ffffff;
 }
-.primaryBtn:hover,
-.primaryBtn:focus {
+.primaryBtn:not(.disableBtn):hover,
+.primaryBtn:not(.disableBtn):focus {
   background-color: var(--primary-dark);
 }
 
@@ -34,8 +34,8 @@
   color: var(--primary);
 }
 
-.secondaryBtn:hover,
-.secondaryBtn:focus {
+.secondaryBtn:not(.disableBtn):hover,
+.secondaryBtn:not(.disableBtn):focus {
   background-color: var(--primary-30);
 }
 
@@ -45,8 +45,8 @@
   color: var(--state-error);
 }
 
-.errorBtn:hover,
-.errorBtn:focus {
+.errorBtn:not(.disableBtn):hover,
+.errorBtn:not(.disableBtn):focus {
   background-color: var(--state-error);
   border-color: var(--state-error);
   color: #fff;

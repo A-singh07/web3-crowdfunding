@@ -90,6 +90,17 @@ const Web3Provider = ({ children }) => {
     return response
   }
 
+  // Admin logout
+  const adminLogout = async () => {
+    const contract = getContract();
+    const response
+      = await contract.methods
+        .adminLogout()
+        .send({ from: walletAddress })
+
+    return response
+  }
+
   // Admin info
   const getAdminInfo = async (addr) => {
     const contract = getContract();
@@ -100,6 +111,27 @@ const Web3Provider = ({ children }) => {
         .call()
 
     return response
+  }
+
+  // Approve, reject or request edit for a fund
+  const fundStatusAuth = async (data) => {
+    const contract = getContract();
+
+    const response
+      = await contract.methods
+        .crowdFundingAuth_Accepted(
+          data.fundId,
+          data.message,
+          data.status
+        )
+        .send({ from: walletAddress })
+
+    return response;
+  }
+
+  // Transfer Amount
+  const transferAmount = async () => {
+
   }
 
 
@@ -129,8 +161,6 @@ const Web3Provider = ({ children }) => {
     }
     return res;
   }
-
-
 
 
   //  ----- User ----- //
@@ -253,10 +283,18 @@ const Web3Provider = ({ children }) => {
     return response;
   }
 
+  // Get refund amount
+  const getRefundAmount = async () => {
+
+  }
+
   // ---------------------- xxxxxx -------------------- //
 
   useEffect(() => {
-    connectMeta()
+    connectMeta();
+    provider.on("accountsChanged", () => {
+      connectMeta();
+    })
   }, [])
 
   return (
@@ -267,6 +305,9 @@ const Web3Provider = ({ children }) => {
         getApprovedFunds,
         RegisterAdmin,
         loginAdmin,
+        adminLogout,
+        fundStatusAuth,
+        transferAmount,
         registerUser,
         loginUser,
         userLogout,
@@ -277,7 +318,8 @@ const Web3Provider = ({ children }) => {
         fundraiserHistory,
         getFundDetails,
         donate,
-        voteToRefund
+        voteToRefund,
+        getRefundAmount
       }}
     >
       {children}

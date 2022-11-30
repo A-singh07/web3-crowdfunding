@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import HeaderLight from '../header/HeaderLight';
 import CustomInput from '../customInput/CustomInput';
 import CustomButton from '../customButton/CustomButton';
+import { AuthContext } from '../../context/AllContext';
 
 import Avatar from '@mui/material/Avatar';
 
 import styles from './profileLayout.module.css';
 
 const ProfileLayout = ({ data }) => {
+  const { authUser } = useContext(AuthContext);
 
   const [profileData, setProfileData] = useState({
     name: '',
@@ -41,14 +43,17 @@ const ProfileLayout = ({ data }) => {
         <div className={styles.leftSection}>
           <Avatar alt="" src="" className={styles.avatar} />
 
-          <CustomButton
-            secondary
-            text={"Check your fundraisers"}
-            link={'/user/funds'}
-            style={{
-              padding: '0.75rem 1.5rem',
-            }}
-          />
+          {
+            !authUser.isAdmin &&
+            <CustomButton
+              secondary
+              text={"Check your fundraisers"}
+              link={'/user/funds'}
+              style={{
+                padding: '0.75rem 1.5rem',
+              }}
+            />
+          }
         </div>
 
         {/* Info container */}

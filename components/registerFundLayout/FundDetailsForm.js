@@ -48,7 +48,7 @@ const FundDetailsForm = () => {
       description: '',
       target: editFundData.target ? editFundData.target : '',
       minContribution: editFundData.minContribution ? editFundData.minContribution : '',
-      // deadline: editFundData.deadline ? editFundData.deadline : ''
+      deadline: editFundData.deadline ? moment.unix(editFundData.deadline).format("YYYY-MM-DDTHH:mm") : ''
     })
   }, [editFundData])
 

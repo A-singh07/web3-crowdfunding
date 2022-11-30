@@ -16,18 +16,22 @@ const FundDetails = () => {
   const { getFundDetails, walletAddress } = useContext(Web3Context);
   const [fundData, setFundData] = useState();
 
-  useEffect(() => {
+  const getDetailsCall = () => {
     id && walletAddress &&
       getFundDetails(id)
         .then(res => {
           setFundData(res)
         })
         .catch(err => console.log("Error: ", err))
+  }
+
+  useEffect(() => {
+    getDetailsCall();
   }, [id, walletAddress])
 
   return (
     <main style={{ minHeight: '50vh' }}>
-      <FundDetailsLayout fundDetails={fundData} />
+      <FundDetailsLayout fundDetails={fundData} getDetailsCall={getDetailsCall} />
       <CardSection heading={'Related Funds'} fundsData={fundsData} baseUrl={'/funds'} />
     </main>
   )
