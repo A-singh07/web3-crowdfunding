@@ -356,14 +356,6 @@ const FundDetailsLayout = ({ fundDetails, getDetailsCall }) => {
                 </div>
 
                 <div className={styles.rightSection + ` ${isScrolled ? styles.rightSectionScrolled : ''}`}>
-                  {/* {
-                    fundState.isCampaigner ?
-                    <CustomButton 
-                      text={fundDetails.fundClosed ? "Fund has been closed"}
-                    />
-                  } */}
-
-
                   <CustomButton
                     secondary={fundState.isCampaigner && (fundDetails.Admin_status === "Approved" || fundDetails.Admin_status === "Pending")}
                     errorBtn={fundDetails.Voting_Enabled}
