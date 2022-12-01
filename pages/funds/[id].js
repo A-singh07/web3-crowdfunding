@@ -32,7 +32,7 @@ const FundDetails = () => {
   return (
     <main style={{ minHeight: '50vh' }}>
       <FundDetailsLayout fundDetails={fundData} getDetailsCall={getDetailsCall} />
-      <CardSection heading={'Related Funds'} fundsData={fundsData} baseUrl={'/funds'} />
+      {/* <CardSection heading={'Related Funds'} fundsData={fundsData} baseUrl={'/funds'} /> */}
     </main>
   )
 }

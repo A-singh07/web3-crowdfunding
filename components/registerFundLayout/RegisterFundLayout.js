@@ -58,7 +58,9 @@ const RegisterFundLayout = () => {
   const convertDate = (date) => {
     if (moment(date) < moment()) return alert("select future date as deadline");
     const diff = moment.duration(moment(date).diff()).asSeconds()
-    return diff
+
+    // deadline argument type is uint256 in SC
+    return Math.round(diff)
   }
 
   // Make this a custom hook

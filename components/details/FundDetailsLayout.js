@@ -23,24 +23,36 @@ const FundDesc = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras 
 const FundDetailsLayout = ({ fundDetails, getDetailsCall }) => {
 
   const { authUser, setLoginModalOpen } = useContext(AuthContext)
-  const { voteToRefund, transferAmount, getRefundAmount } = useContext(Web3Context)
+  const { voteToRefund, transferAmount, getRefundAmount, checkContributor } = useContext(Web3Context)
 
   // Total 3 Types of user: Admin, Campaigner and Donor
   const [fundState, setFundState] = useState({
     isAdmin: false,
-    isCampaigner: false
+    isCampaigner: false,
+    isDonor: 0
   })
   useEffect(() => {
     authUser && fundDetails &&
       setFundState({
         isAdmin: authUser.isAdmin,
-        isCampaigner: authUser.address === fundDetails.receipent
+        isCampaigner: authUser.address === fundDetails.receipent,
       })
 
-    console.log("DETAILS", fundDetails)
-    // fundDetails &&
-    //   console.log("Deadline", moment.unix(fundDetails.deadline).format("YYYY-MM-DDTHH:mm"))
+    // console.log("DETAILS", fundDetails)
   }, [authUser, fundDetails])
+
+  useEffect(() => {
+    fundDetails &&
+      !(authUser.isAdmin || authUser.address === fundDetails.receipent) &&
+      checkContributor(fundDetails.fundId)
+        .then(res => {
+          setFundState({
+            ...fundState,
+            isDonor: res
+          })
+        })
+        .catch(err => { console.log("not donor", err) })
+  }, [fundDetails])
 
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -101,18 +113,19 @@ const FundDetailsLayout = ({ fundDetails, getDetailsCall }) => {
       .then(res => {
         alert("Your vote has been submitted!")
       })
+      .catch(err => alert("You can't vote!"))
   }
 
   // Transfer amount to campaigner (Admin only)
   const transferNow = () => {
-    transferAmount().then(res => {
-      getDetailsCall()
+    transferAmount(fundDetails.fundId).then(() => {
+      getDetailsCall();
     })
   }
 
   // Get refund amount
   const getRefund = () => {
-    getRefundAmount().then(res => {
+    getRefundAmount(fundDetails.fundId).then(() => {
       getDetailsCall()
     })
   }
@@ -133,22 +146,22 @@ const FundDetailsLayout = ({ fundDetails, getDetailsCall }) => {
         ( // ---- When voting happened before fund is closed. ---- //
           fundDetails.Voting_Enabled ?
             (
-              (fundState.isAdmin || fundState.isCampaigner) ?
+              // --- Contributor && Voter --- //
+              fundState.isDonor > 0 ?
                 setButtonState({
-                  text: "Fund has been closed",
-                  onClick: () => { },
-                  disable: true,
-                  secondary: true,
-                  errorBtn: false,
-                  helperText: "Voting phase for this fund is over!"
-                })
-                // --- Donor will get refund amount --- //
-                : setButtonState({
                   text: "Collect fund",
                   onClick: getRefund,
                   disable: false,
                   secondary: true,
                   errorBtn: false,
+                  helperText: "Voting phase for this fund is over!"
+                })
+                : setButtonState({
+                  text: "Fund has been closed",
+                  onClick: () => { },
+                  disable: true,
+                  secondary: false,
+                  errorBtn: true,
                   helperText: "Voting phase for this fund is over!"
                 })
             )
@@ -157,8 +170,8 @@ const FundDetailsLayout = ({ fundDetails, getDetailsCall }) => {
               text: "Fund has been closed",
               onClick: () => { },
               disable: true,
-              secondary: true,
-              errorBtn: false,
+              secondary: false,
+              errorBtn: true,
             })
         )
         : fundDetails.Admin_status === "Approved" ?
@@ -166,24 +179,45 @@ const FundDetailsLayout = ({ fundDetails, getDetailsCall }) => {
             // --- Voting phase states --- //
             fundDetails.Voting_Enabled ?
               (
-                fundState.isCampaigner || fundState.isAdmin ?
-                  setButtonState({
-                    text: "Voting phase",
-                    onClick: () => { },
-                    disable: true,
-                    secondary: true,
-                    errorBtn: false
-                  })
-                  : setButtonState({
-                    text: "Get a refund",
-                    onClick: voteNow,
-                    disable: false,
-                    secondary: true,
-                    errorBtn: false,
-                    helperText: "Fund could not reach atleast 50% of the target amount within deadline. You can opt to get a refund."
-                  })
+                moment.unix(fundDetails.Voting_Deadline) < moment() ?
+                  (
+                    fundState.isAdmin ?
+                      setButtonState({
+                        text: "Transfer Amount",
+                        onClick: transferNow,
+                        disable: false,
+                        secondary: false,
+                        errorBtn: false,
+                        helperText: "Voting phase over!"
+                      })
+                      : setButtonState({
+                        text: "Voting phase over!",
+                        onClick: () => { },
+                        disable: true,
+                        secondary: true,
+                        errorBtn: false,
+                        helperText: "Voting phase over for this fundraiser, waiting for admin's response"
+                      })
+                  )
+                  // --- Only donor can vote
+                  : fundState.isDonor > 0 ?
+                    setButtonState({
+                      text: "Get a refund",
+                      onClick: voteNow,
+                      disable: false,
+                      secondary: false,
+                      errorBtn: false,
+                      helperText: "Fund could not reach atleast 50% of the target amount within deadline. You can opt to get a refund."
+                    })
+                    : setButtonState({
+                      text: "Voting phase",
+                      onClick: () => { },
+                      disable: true,
+                      secondary: true,
+                      errorBtn: false
+                    })
               )
-              : moment.unix(fundDetails.deadline) > moment() ?
+              : moment.unix(fundDetails.deadline) < moment() ?
                 (
                   fundState.isCampaigner ? setButtonState({
                     text: "Waiting for Admin",
@@ -357,43 +391,18 @@ const FundDetailsLayout = ({ fundDetails, getDetailsCall }) => {
 
                 <div className={styles.rightSection + ` ${isScrolled ? styles.rightSectionScrolled : ''}`}>
                   <CustomButton
-                    secondary={fundState.isCampaigner && (fundDetails.Admin_status === "Approved" || fundDetails.Admin_status === "Pending")}
-                    errorBtn={fundDetails.Voting_Enabled}
-                    text={
-                      fundDetails.fundClosed ? "Fund has been closed"
-                        : fundState.isAdmin ? 'Take Action' :
-                          fundState.isCampaigner ?
-                            fundDetails.Admin_status === "Approved" ? "Fund already approved"
-                              : fundDetails.Admin_status === "In Progress" ? 'Edit Fund'
-                                : fundDetails.Admin_status === "Rejected" ? "Fund has been rejected!" : "Waiting for Admin's response"
-                            : fundDetails.Voting_Enabled ? "Get a refund"
-                              : 'Contribute Now'
-                    }
+                    secondary={buttonState.secondary}
+                    errorBtn={buttonState.errorBtn}
+                    text={buttonState.text}
                     style={{ width: '100%' }}
-                    onClick={
-                      fundState.isAdmin ? handleOpenMenu
-                        : fundState.isCampaigner ? editFund
-                          : fundDetails.Voting_Enabled ? voteNow
-                            : donateFund
-                    }
-                    disableBtn={
-                      (fundState.isCampaigner && (fundDetails.Admin_status === "Approved" || fundDetails.Admin_status === "Pending"))
-                      || (fundState.isAdmin && fundDetails.Admin_status === "Rejected")
-                      || fundDetails.fundClosed
-                    }
+                    onClick={buttonState.onClick}
+                    disableBtn={buttonState.disable}
                   />
                   {
-                    !fundState.isAdmin && fundDetails.Voting_Enabled &&
-                    (
-                      !fundDetails.fundClosed ?
-                        <p className={styles.fundStatus}>
-                          Fund could not reach atleast 50% of the target amount within deadline. <br />
-                          You can opt to get a refund.
-                        </p>
-                        : <p className={styles.fundStatus}>
-                          Voting phase for this fund is over!
-                        </p>
-                    )
+                    buttonState.helperText &&
+                    <p className={styles.fundStatus}>
+                      {buttonState.helperText}
+                    </p>
                   }
                   <div className={styles.deadlineContainer}>
                     <p className={styles.deadlineHeading}>Deadline:</p>

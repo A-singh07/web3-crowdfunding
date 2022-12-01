@@ -130,8 +130,13 @@ const Web3Provider = ({ children }) => {
   }
 
   // Transfer Amount
-  const transferAmount = async () => {
-
+  const transferAmount = async (fundId) => {
+    const contract = getContract();
+    const response
+      = await contract.methods
+        .transferAmount(fundId)
+        .send({ from: walletAddress })
+    return response
   }
 
 
@@ -284,8 +289,23 @@ const Web3Provider = ({ children }) => {
   }
 
   // Get refund amount
-  const getRefundAmount = async () => {
+  const getRefundAmount = async (fundId) => {
+    const contract = getContract();
+    const response
+      = await contract.methods
+        .refund(fundId)
+        .send({ from: walletAddress })
+  }
 
+  // Check contributor
+  const checkContributor = async (fundId) => {
+    const contract = getContract();
+    const response
+      = await contract.methods
+        .getDonationAmount(fundId)
+        .call({ from: walletAddress })
+
+    return response
   }
 
   // ---------------------- xxxxxx -------------------- //
@@ -319,7 +339,8 @@ const Web3Provider = ({ children }) => {
         getFundDetails,
         donate,
         voteToRefund,
-        getRefundAmount
+        getRefundAmount,
+        checkContributor
       }}
     >
       {children}

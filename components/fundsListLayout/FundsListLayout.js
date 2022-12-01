@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import HeaderLight from '../header/HeaderLight';
 import CustomTable from '../customTable/CustomTable';
 import Chip from '@mui/material/Chip';
+import moment from 'moment';
 import { Web3Context } from '../../context/Web3Context';
 
 // data
@@ -13,15 +14,15 @@ const FundsListLayout = ({ isAdmin }) => {
   const { getAllFundsList } = useContext(Web3Context);
 
   const getChipProps = (params) => {
-    if (params.value === "In Progress") {
+    if (params.value === "In Progress" || params.value === "Voting") {
       return {
-        label: "In Process",
+        label: params.value,
         style: {
           borderColor: "#e2b93b",
           color: "#e2b93b"
         }
       }
-    } else if (params.value === "Approved" || params.value === "Voting") {
+    } else if (params.value === "Approved") {
       return {
         label: params.value,
         style: {
@@ -51,7 +52,7 @@ const FundsListLayout = ({ isAdmin }) => {
     {
       field: 'fundId',
       headerName: 'Fund ID',
-      width: 90
+      width: 70
     },
     {
       field: 'name',
@@ -66,12 +67,14 @@ const FundsListLayout = ({ isAdmin }) => {
     {
       field: 'deadline',
       headerName: 'Deadline',
-      width: 200
+      width: 220
     },
     {
       field: 'Admin_status',
       headerName: 'Status',
-      width: 200,
+      width: 150,
+      align: 'center',
+      headerAlign: 'center',
       renderCell: (params) => {
         return <Chip variant="outlined" {...getChipProps(params)} />
       }
@@ -89,7 +92,7 @@ const FundsListLayout = ({ isAdmin }) => {
             fundId: item.fundId,
             name: item.description,
             target: item.target,
-            deadline: item.deadline,
+            deadline: moment.unix(item.deadline).format("DD-MM-YYYY || HH:mm a"),
             Admin_status: item.fundClosed ? "Closed" : item.Voting_Enabled ? "Voting" : item.Admin_status
           }
           funds = [...funds, rowData];

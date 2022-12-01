@@ -34,7 +34,6 @@ const DonateModal = ({ open, setOpen, fundId, minAmount, targetAmount, fundName 
         .then(res => {
           alert(`${fundDetails.amount} Wei donated successfully!`)
           setOpen(false)
-          location.reload()
         })
     } else {
       setError(`Entered amount should be between ${minAmount} and ${targetAmount}`)
