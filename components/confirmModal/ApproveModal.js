@@ -38,7 +38,7 @@ const ApproveModal = ({ open, setOpen, fundId, fundName, approveType }) => {
   }
 
   const requestEdit = () => {
-    if (!fundDetails.message) setError("Enter a message!");
+    if (!fundDetails.message) return setError("Enter a message!");
 
     fundStatusAuth({
       ...fundDetails,
@@ -51,7 +51,7 @@ const ApproveModal = ({ open, setOpen, fundId, fundName, approveType }) => {
 
   // Request call to approve fund
   const rejectFund = () => {
-    if (!fundDetails.message) setError("Enter a message!");
+    if (!fundDetails.message) return setError("Enter a message!");
 
     fundStatusAuth({
       ...fundDetails,

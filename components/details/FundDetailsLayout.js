@@ -91,9 +91,11 @@ const FundDetailsLayout = ({ fundDetails, getDetailsCall }) => {
   const donateFund = () => {
     if (!authUser.isLogIn) return setLoginModalOpen(true)
 
-    if (fundDetails.raiseAmount < fundDetails.target) return setOpenDonate(true)
-
-    alert("Target amount reached!")
+    if (fundDetails.raiseAmount < fundDetails.target) {
+      setOpenDonate(true)
+    } else {
+      alert("Target amount reached!")
+    }
   }
 
   // Edit fund (for Campaigner)
