@@ -25,6 +25,7 @@ const Funds = () => {
       .then(res => {
         setFundsData(res)
       })
+      .catch(err => console.error(err))
   }, [])
 
 

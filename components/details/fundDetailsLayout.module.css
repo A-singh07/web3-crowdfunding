@@ -109,12 +109,12 @@
   color: var(--black);
 }
 
-.daysLeft {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 21px;
-  text-align: center;
-  margin-top: 0.5rem;
+.contribution {
+  margin-top: 1.5rem;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-width: 1px;
+  border-color: var(--grey-dark);
 }
 
 .progressContainer {

@@ -29,7 +29,7 @@ const FundDetailsLayout = ({ fundDetails, getDetailsCall }) => {
   const [fundState, setFundState] = useState({
     isAdmin: false,
     isCampaigner: false,
-    isDonor: 0
+    isDonor: 0  // donation amount
   })
   useEffect(() => {
     authUser && fundDetails &&
@@ -412,6 +412,16 @@ const FundDetailsLayout = ({ fundDetails, getDetailsCall }) => {
                       {moment.unix(fundDetails.deadline).format("DD-MM-YYYY || HH:mm a")}
                     </p>
                   </div>
+
+                  {
+                    fundState.isDonor > 0 &&
+                    <div className={styles.contribution}>
+                      <p className={styles.fundStatus}>
+                        Your total contributions in this fund: <br />
+                        <span className={styles.deadlineDate}>{fundState.isDonor}</span> Wei
+                      </p>
+                    </div>
+                  }
 
                   <div className={styles.progressContainer}>
                     {
