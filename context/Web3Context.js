@@ -311,8 +311,9 @@ const Web3Provider = ({ children }) => {
   // ---------------------- xxxxxx -------------------- //
 
   useEffect(() => {
-    connectMeta();
-    provider.on("accountsChanged", () => {
+    connectMeta()
+
+    provider && provider.on("accountsChanged", () => {
       connectMeta();
     })
   }, [])
