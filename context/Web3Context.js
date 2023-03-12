@@ -1,5 +1,5 @@
 import { useEffect, useState, createContext } from 'react';
-import { CONTRACT_ABI, CONTRACT_ADDRESS } from '../constants';
+import { CONTRACT_ABI, CONTRACT_ADDRESS, ADMIN_ADDRESS } from '../constants';
 import Web3 from 'web3';
 
 export const Web3Context = createContext();
@@ -19,11 +19,20 @@ const Web3Provider = ({ children }) => {
         method: "eth_requestAccounts",
       }).then(res => {
         setWalletAddress(res[0])
-        console.log(res[0])
       })
 
     } catch (err) {
-      console.log(err);
+      console.log("Error on wallet connect", err);
+    }
+  }
+
+  const connectOnChange = async () => {
+    try {
+      provider && provider.on("accountsChanged", () => {
+        connectMeta();
+      })
+    } catch (err) {
+      console.log("Error on wallet change", err)
     }
   }
 
@@ -63,7 +72,7 @@ const Web3Provider = ({ children }) => {
   }
 
   // Admin registration = selected wallet addr should be same as the addr from which contract is deployed
-  const RegisterAdmin = async (data) => {
+  const registerAdmin = async (data) => {
     const contract = getContract();
     const response
       = await contract.methods
@@ -312,10 +321,7 @@ const Web3Provider = ({ children }) => {
 
   useEffect(() => {
     connectMeta()
-
-    provider && provider.on("accountsChanged", () => {
-      connectMeta();
-    })
+    connectOnChange()
   }, [])
 
   return (
@@ -324,7 +330,7 @@ const Web3Provider = ({ children }) => {
         walletAddress,
         getAllFundsList,
         getApprovedFunds,
-        RegisterAdmin,
+        registerAdmin,
         loginAdmin,
         adminLogout,
         fundStatusAuth,

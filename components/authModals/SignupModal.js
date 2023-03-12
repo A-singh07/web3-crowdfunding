@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import CustomDialog from '../customDialog/CustomDialog';
 
 import { Web3Context } from '../../context/Web3Context';
+import { ADMIN_ADDRESS } from '../../constants';
 
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
@@ -14,7 +15,8 @@ import styles from './authModal.module.css';
 
 const SignupModal = ({ open, setOpen }) => {
 
-  const { walletAddress, registerUser } = useContext(Web3Context);
+  const { walletAddress, registerUser, registerAdmin } = useContext(Web3Context);
+  const [IsAdminSignup, setIsAdminSignup] = useState(false)
 
   const [values, setValues] = useState({
     addr: '',
@@ -61,15 +63,47 @@ const SignupModal = ({ open, setOpen }) => {
       })
   }
 
+  const adminSignup = () => {
+    if (values.password !== values.confirmPassword) {
+      setError(true);
+      return
+    }
+    setError(false)
+
+    const data = {
+      addr: walletAddress,
+      name: values.name,
+      password: values.password,
+      confirmPassword: values.confirmPassword,
+    }
+
+    registerAdmin(data)
+      .then(res => {
+        setOpen(false)
+        alert(`Admin registered successfully, please login.`)
+      })
+      .catch(err => {
+        alert('Something went wrong!')
+        setOpen(false)
+        console.log(err)
+      })
+  }
+
+  useEffect(() => {
+    if (walletAddress === ADMIN_ADDRESS) setIsAdminSignup(true)
+    else setIsAdminSignup(false)
+  }, [walletAddress])
+
 
   return (
     <CustomDialog
-      heading={'Signup'}
+      heading={!IsAdminSignup ? 'Signup' : 'Admin Signup'}
       body={`Selected wallet address:`}
       open={open}
       setOpen={setOpen}
-      primaryBtnClick={userSignup}
-      primaryBtnText="Signup"
+      primaryBtnClick={!IsAdminSignup ? userSignup : adminSignup}
+      primaryBtnText={'Signup'}
+      headerClass={IsAdminSignup && styles.adminModalHeader}
     >
       <p className={styles.walletAdd}>{walletAddress}</p>
       <p className={styles.inst}>Switch to desired wallet using MetaMask extension</p>

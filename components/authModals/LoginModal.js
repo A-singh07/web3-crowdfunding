@@ -1,14 +1,16 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import CustomDialog from '../customDialog/CustomDialog';
 
 import { AuthContext } from '../../context/AllContext';
 import { Web3Context } from '../../context/Web3Context';
 
-
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
+
+import { ADMIN_ADDRESS } from '../../constants';
+
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -69,33 +71,6 @@ const LoginModal = ({ open, setOpen }) => {
         console.log(err)
         alert('Something went wrong!')
       })
-
-
-    // Dummy User login
-    // if (values.email === "user@gmail.com" && values.password === '123') {
-    //   const userData = {
-    //     name: "General User 001",
-    //     id: "GU001",
-    //     token: "qwerty0123456789",
-    //     isAdmin: false
-    //   }
-    //   sessionStorage.setItem("user", JSON.stringify(userData))
-    //   setAuthUser(userData);
-    //   setOpen(false);
-    //   router.push('/funds')
-
-    // } else if (values.email === "admin@gmail.com" && values.password === '123') {
-    //   const userData = {
-    //     name: "Admin 001",
-    //     id: "A001",
-    //     token: "qwerty0123456789",
-    //     isAdmin: true
-    //   }
-    //   sessionStorage.setItem("user", JSON.stringify(userData))
-    //   setAuthUser(userData);
-    //   setOpen(false);
-    //   router.push('/admin/funds');
-    // }
   }
 
   const adminLogin = () => {
@@ -128,6 +103,11 @@ const LoginModal = ({ open, setOpen }) => {
         alert('Something went wrong!')
       })
   }
+
+  useEffect(() => {
+    if (walletAddress === ADMIN_ADDRESS) setIsAdminLogin(true)
+    else setIsAdminLogin(false)
+  }, [walletAddress])
 
 
   return (
@@ -183,9 +163,9 @@ const LoginModal = ({ open, setOpen }) => {
           }}
         />
       </div>
-      <p className={styles.adminLogin} onClick={() => setIsAdminLogin(!IsAdminLogin)}>
+      {/* <p className={styles.adminLogin} onClick={() => setIsAdminLogin(!IsAdminLogin)}>
         Looking for {!IsAdminLogin ? 'Admin' : 'User'} login?
-      </p>
+      </p> */}
     </CustomDialog>
   )
 }
