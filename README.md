@@ -63,6 +63,7 @@ yarn install
 3. Configure the smart contract:
    - Update the `CONTRACT_ADDRESS` in `constants/index.js` with your deployed contract address
    - Update the `ADMIN_ADDRESS` with your administrator wallet address
+   - **Important**: For production, use environment variables to store sensitive addresses and never commit private keys to version control
 
 4. Run the development server:
 ```bash
@@ -77,7 +78,7 @@ yarn dev
 
 1. Install the [MetaMask browser extension](https://metamask.io/download/)
 2. Create or import an Ethereum wallet
-3. Connect to the appropriate network (e.g., Ethereum Mainnet, Goerli testnet, or local testnet)
+3. Connect to the appropriate network (e.g., Ethereum Mainnet, Sepolia testnet, or local testnet)
 4. Ensure you have sufficient ETH for transactions
 
 ## 📁 Project Structure
